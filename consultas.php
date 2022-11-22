@@ -5,8 +5,8 @@ function datoCentroCostoIngresado($item){
 	$con = conectar();
 	if($con != 'No conectado'){
 		$sql = "SELECT COUNT(*) 'CANTIDAD'
-            FROM CENTROS_DE_COSTO
-            WHERE CODIGO = '{$item}'";
+            FROM ESTRUCTURA_OPERACION
+            WHERE NOMENCLATURA = '{$item}'";
 		if ($row = $con->query($sql)) {
 			while($array = $row->fetch_array(MYSQLI_BOTH)){
 				$return[] = $array;
@@ -22,12 +22,12 @@ function datoCentroCostoIngresado($item){
 	}
 }
 
-function ingresaCentroCosto($item,$nombre,$datoAdic){
+function ingresaCentroCosto($item,$nombre){
     $con = conectar();
     $con->query("START TRANSACTION");
     if($con != 'No conectado'){
-      $sql = "INSERT INTO CENTROS_DE_COSTO(CODIGO, NOMBRE, DESCRIPCION)
-              VALUES('{$item}','{$nombre}','{$datoAdic}')";
+      $sql = "INSERT INTO ESTRUCTURA_OPERACION(NOMENCLATURA, NOMBRE)
+              VALUES('{$item}','{$nombre}')";
       if ($con->query($sql)) {
         $con->query("COMMIT");
         return "Ok";

@@ -344,7 +344,7 @@
     $sel[0]['CANTIDAD'];
 
     if($sel[0]['CANTIDAD'] == '0'){
-      $ins = ingresaCentroCosto($item,$nombre,$datoAdic);
+      $ins = ingresaCentroCosto($item,$nombre);
       if($ins == "Ok"){
         echo "Centro de costo ingresado: " . $item . "\n";
       }
