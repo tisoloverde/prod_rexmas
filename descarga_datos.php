@@ -317,7 +317,7 @@
     $id = $arreglo[$j][0];
     $lista = $arreglo[$j][1];
     $item = $arreglo[$j][2];
-    $nombre = $arreglo[$j][3];
+    $nombre = str_replace("'","",$arreglo[$j][3]);
     $valora = $arreglo[$j][4];
     $valorb = $arreglo[$j][5];
     $valorc = $arreglo[$j][6];
