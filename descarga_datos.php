@@ -32,11 +32,11 @@
 
   curl_close($ch);
 
+  sleep(5);
+
   $linea = "";
 
   echo "Obteniendo token\n";
-
-  echo $ruta . 'cookieRR.txt' . "\n";
 
   $fp = fopen($ruta . 'cookieRR.txt', "r");
   while (!feof($fp)){
