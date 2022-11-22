@@ -32,7 +32,7 @@
 
   curl_close($ch);
 
-  sleep(2);
+  sleep(5);
 
   $linea = "";
 
@@ -99,7 +99,7 @@
 
   curl_close($ch);
 
-  sleep(2);
+  sleep(5);
 
   echo "Obteniendo token e identificador de sesion\n";
 
@@ -193,7 +193,7 @@
 
     curl_close($ch);
 
-    sleep(2);
+    sleep(5);
 
     $file = fopen($ruta . "descargas/" . $informe[$i] . '.xlsx', 'w+');
     fwrite($file, $respuesta);
@@ -244,7 +244,7 @@
 
     curl_close($ch);
 
-    sleep(2);
+    sleep(5);
 
     echo "Obteniendo token e identificador de sesion\n";
 
