@@ -36,6 +36,8 @@
 
   echo "Obteniendo token\n";
 
+  echo $ruta . 'cookieRR.txt' . "\n";
+
   $fp = fopen($ruta . 'cookieRR.txt', "r");
   while (!feof($fp)){
       $linea = fgets($fp);
