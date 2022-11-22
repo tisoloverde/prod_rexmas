@@ -97,6 +97,10 @@
 
   $respuesta = curl_exec($ch);
 
+  $file = fopen($ruta . 'login.html', 'w+');
+  fwrite($file, $respuesta);
+  fclose($file);
+
   curl_close($ch);
 
   sleep(5);
@@ -134,6 +138,8 @@
   fclose($fp);
 
   $array = explode("sessionid",$linea);
+
+  // var_dump($array);
 
   $sessionid = trim($array[1]);
 
@@ -329,7 +335,7 @@
     $valora = $arreglo[$j][4];
     $valorb = $arreglo[$j][5];
     $valorc = $arreglo[$j][6];
-    $datoAdic = $arreglo[$j][7];
+    $datoAdic = str_replace("'","",$arreglo[$j][7]);
     $sincronizado_externos = $arreglo[$j][8];
     $habilitado = $arreglo[$j][9];
     $reservado = $arreglo[$j][10];
