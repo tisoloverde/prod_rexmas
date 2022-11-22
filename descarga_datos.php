@@ -298,7 +298,7 @@
 
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
 
-  unlink($cookie);
+  // unlink($cookie);
 
   // Lectura de archivo de centro de costo
   $rutaArchivo = $ruta . "descargas/Centro_de_costos.xlsx";
