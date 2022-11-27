@@ -90,9 +90,9 @@
   curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
   curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
   curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0");
-  curl_setopt($ch, CURLOPT_HEADER, false);
+  curl_setopt($ch, CURLOPT_HEADER, true);
   curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config01"}');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config01"}');
   curl_setopt($ch, CURLOPT_ENCODING,"");
 
   $respuesta = curl_exec($ch);
@@ -102,6 +102,8 @@
   fclose($file);
 
   curl_close($ch);
+
+
 
   sleep(5);
 
