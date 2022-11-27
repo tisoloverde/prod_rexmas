@@ -210,49 +210,6 @@
 
     echo "Ruta de informe: " . $ruta . "descargas/" . $informe[$i] . ".xlsx\n";
 
-    // Re Login
-
-    $request = [];
-
-    // $request[] = 'POST /remuneraciones/es-CL/login HTTP/1.1';
-    // $request[] = 'Host: soloverde.rexmas.cl';
-    // $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
-    // $request[] = 'Accept: application/json, text/plain, */*';
-    // $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
-    // $request[] = 'Accept-Encoding: gzip, deflate, br';
-    $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/login';
-    $request[] = 'Content-Type: application/json';
-    $request[] = 'X-XSRF-TOKEN: ' . $csrftoken;
-    $request[] = 'X-CSRFTOKEN: ' . $csrftoken;
-    // $request[] = 'Content-Length: 46';
-    // $request[] = 'Origin: https://soloverde.rexmas.cl';
-    // $request[] = 'DNT: 1';
-    // $request[] = 'Connection: keep-alive';
-    // $request[] = 'Cookie: csrftoken=' . $csrftoken;
-    // $request[] = 'Sec-Fetch-Dest: empty';
-    // $request[] = 'Sec-Fetch-Mode: cors';
-    // $request[] = 'Sec-Fetch-Site: same-origin';
-    // $request[] = 'Pragma: no-cache';
-    // $request[] = 'Cache-Control: no-cache';
-
-    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/login');
-
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0");
-    curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config01"}');
-    curl_setopt($ch, CURLOPT_ENCODING,"");
-
-    $respuesta = curl_exec($ch);
-
-    curl_close($ch);
-
     sleep(20);
   }
 
