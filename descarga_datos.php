@@ -344,9 +344,14 @@
     $sel[0]['CANTIDAD'];
 
     if($sel[0]['CANTIDAD'] == '0'){
-      $ins = ingresaCentroCosto($item,$nombre);
-      if($ins == "Ok"){
-        echo "Centro de costo ingresado: " . $item . "\n";
+      if($item != ""){
+        $ins = ingresaCentroCosto($item,$nombre);
+        if($ins == "Ok"){
+          echo "Centro de costo ingresado: " . $item . "\n";
+        }
+        else{
+          echo "Centro de costo error: " . $item . "\n";
+        }
       }
       else{
         echo "Centro de costo error: " . $item . "\n";
