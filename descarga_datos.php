@@ -251,55 +251,7 @@
 
     $respuesta = curl_exec($ch);
 
-    $file = fopen($ruta . 'login.html', 'w+');
-    fwrite($file, $respuesta);
-    fclose($file);
-
     curl_close($ch);
-
-    sleep(5);
-
-    echo "Obteniendo token e identificador de sesion\n";
-
-    $linea = "";
-
-    $fp = fopen($ruta . 'cookieRR.txt', "r");
-    while (!feof($fp)){
-        $linea = fgets($fp);
-        if(strpos($linea, "csrftoken"))
-        {
-            // echo $linea;
-            break;
-        }
-    }
-    fclose($fp);
-
-    $array = explode("csrftoken",$linea);
-
-    $csrftoken = trim($array[1]);
-
-    $linea = "";
-
-    $fp = fopen($ruta . 'login.html', "r");
-    while (!feof($fp)){
-        $linea = fgets($fp);
-        if(strpos($linea, "sessionid"))
-        {
-            // echo $linea;
-            break;
-        }
-    }
-    fclose($fp);
-
-    $array = explode("sessionid=",$linea);
-    $array2 = explode(";",$array[1]);
-
-    // var_dump($array);
-
-    $sessionid = trim($array2[0]);
-
-    echo "Token2: " . $csrftoken . "\n";
-    echo "Sessionid1: " . $sessionid . "\n";
 
     sleep(20);
   }
