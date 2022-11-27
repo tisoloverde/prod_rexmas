@@ -128,7 +128,7 @@
 
   $linea = "";
 
-  $fp = fopen($ruta . 'cookieRR.txt', "r");
+  $fp = fopen($ruta . 'login.html', "r");
   while (!feof($fp)){
       $linea = fgets($fp);
       if(strpos($linea, "sessionid"))
@@ -139,11 +139,12 @@
   }
   fclose($fp);
 
-  $array = explode("sessionid",$linea);
+  $array = explode("sessionid=",$linea);
+  $array2 = explode(";",$array[1]);
 
   // var_dump($array);
 
-  $sessionid = trim($array[1]);
+  $sessionid = trim($array2[0]);
 
   echo "Token2: " . $csrftoken . "\n";
   echo "Sessionid1: " . $sessionid . "\n";
@@ -250,6 +251,10 @@
 
     $respuesta = curl_exec($ch);
 
+    $file = fopen($ruta . 'login.html', 'w+');
+    fwrite($file, $respuesta);
+    fclose($file);
+
     curl_close($ch);
 
     sleep(5);
@@ -275,7 +280,7 @@
 
     $linea = "";
 
-    $fp = fopen($ruta . 'cookieRR.txt', "r");
+    $fp = fopen($ruta . 'login.html', "r");
     while (!feof($fp)){
         $linea = fgets($fp);
         if(strpos($linea, "sessionid"))
@@ -286,9 +291,12 @@
     }
     fclose($fp);
 
-    $array = explode("sessionid",$linea);
+    $array = explode("sessionid=",$linea);
+    $array2 = explode(";",$array[1]);
 
-    $sessionid = trim($array[1]);
+    // var_dump($array);
+
+    $sessionid = trim($array2[0]);
 
     echo "Token2: " . $csrftoken . "\n";
     echo "Sessionid1: " . $sessionid . "\n";
