@@ -146,6 +146,30 @@
   echo "Token2: " . $csrftoken . "\n";
   echo "Sessionid1: " . $sessionid . "\n";
 
+  if($sessionid == ""){
+    $linea = "";
+
+    $fp = fopen($ruta . 'login.html', "r");
+    while (!feof($fp)){
+        $linea = fgets($fp);
+        if(strpos($linea, "sessionid"))
+        {
+            // echo $linea;
+            break;
+        }
+    }
+    fclose($fp);
+
+    $array = explode("sessionid=",$linea);
+    $array2 = explode(";",$array);
+
+    // var_dump($array);
+
+    $sessionid = trim($array2[0]);
+  }
+
+  echo "Sessionid1_head: " . $sessionid . "\n";
+
   $informes = [];
   $informe[1122] = 'Empleados';
   $informe[1123] = 'Contratos';
@@ -248,6 +272,10 @@
 
     $respuesta = curl_exec($ch);
 
+    $file = fopen($ruta . 'login.html', 'w+');
+    fwrite($file, $respuesta);
+    fclose($file);
+
     curl_close($ch);
 
     sleep(5);
@@ -290,6 +318,30 @@
 
     echo "Token2: " . $csrftoken . "\n";
     echo "Sessionid1: " . $sessionid . "\n";
+
+    if($sessionid == ""){
+      $linea = "";
+
+      $fp = fopen($ruta . 'login.html', "r");
+      while (!feof($fp)){
+          $linea = fgets($fp);
+          if(strpos($linea, "sessionid"))
+          {
+              // echo $linea;
+              break;
+          }
+      }
+      fclose($fp);
+
+      $array = explode("sessionid=",$linea);
+      $array2 = explode(";",$array);
+
+      // var_dump($array);
+
+      $sessionid = trim($array2[0]);
+    }
+
+    echo "Sessionid1_head: " . $sessionid . "\n";
 
     sleep(20);
   }
