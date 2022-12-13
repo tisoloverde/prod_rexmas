@@ -26,7 +26,7 @@ function ingresaCentroCosto($item,$nombre){
     $con = conectar();
     $con->query("START TRANSACTION");
     if($con != 'No conectado'){
-      $sql = "INSERT INTO ESTRUCTURA_OPERACION(DEFINICION, NOMENCLATURA, FECHA, USURARIO)
+      $sql = "INSERT INTO ESTRUCTURA_OPERACION(DEFINICION, NOMENCLATURA, FECHA, USUARIO)
               VALUES('{$item}','{$nombre}', NOW(), 'Automata')";
       if ($con->query($sql)) {
         $con->query("COMMIT");
