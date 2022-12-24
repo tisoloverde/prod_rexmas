@@ -179,4 +179,59 @@ require('conexion.php');
 	    return "Error";
 	  }
 	}
+
+	function cargoExistente($id){
+		$con = conectar();
+		if($con != 'No conectado'){
+			$sql = "SELECT COUNT(*) 'CANTIDAD'
+							FROM CARGO_LIQUIDACION
+							WHERE IDREXMAS = '{$id}'";
+			if ($row = $con->query($sql)) {
+				while($array = $row->fetch_array(MYSQLI_BOTH)){
+					$return[] = $array;
+				}
+				return $return;
+			}
+			else{
+				return "Error";
+			}
+		}
+		else{
+			return "Error";
+		}
+	}
+
+	function ingresaCargo($id,$cargo){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "INSERT INTO CARGO_LIQUIDACION
+							(
+								IDREXMAS,
+								CARGO
+							)
+							VALUES
+							(
+								'{$id}',
+								'{$cargo}'
+							)";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
+
+
+
 ?>
