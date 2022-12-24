@@ -498,7 +498,7 @@
     }
   }
 
-  Lectura de archivo de cargos
+  // Lectura de archivo de cargos
   $rutaArchivo = $ruta . "descargas/Cargos.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
