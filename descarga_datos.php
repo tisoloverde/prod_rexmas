@@ -414,5 +414,97 @@
     }
   }
 
+  // Lectura de archivo de centro de costo
+  $rutaArchivo = $ruta . "descargas/Empleados.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arreglo = [];
+  $f = 0;
+  foreach ($hojaActual->getRowIterator() as $fila) {
+    if($f > 1){
+      $flag = 0;
+      $datos = [];
+      foreach ($fila->getCellIterator() as $celda) {
+        if($flag > 56){
+          break;
+        }
+        $fila = $celda->getRow();
+        $columna = $celda->getColumn();
+
+        $datos[] = strval($celda->getValue());
+
+        $flag++;
+      }
+      $arreglo[] = $datos;
+      break;
+    }
+    $f++;
+  }
+
+  for($j = 0; $j < count($arreglo); $j++){
+    $DNI = $arreglo[$j][0];
+    $NOMBRES = ucwords(strtolower($arreglo[$j][1]));
+    $APELLIDOS = ucwords(strtolower($arreglo[$j][2] . " " . $arreglo[$j][3]));
+    if($arreglo[$j][4] == "M"){
+      $SEXO = "Hombre";
+    }
+    else{
+      $SEXO = "Mujer";
+    }
+    $FECHA_NACIMIENTO = convertDate($arreglo[$j][5]);
+    $NACIONALIDAD = ucwords(strtolower($arreglo[$j][7]));
+    $DOMICILIO = ucwords(strtolower($arreglo[$j][8] . ", " . $arreglo[$j][9] . ", " . $arreglo[$j][10]));
+    $TELEFONO = $arreglo[$j][11];
+    $EMAIL = strtolower($arreglo[$j][12]);
+    $BANCO = $arreglo[$j][13];
+    $BANCO_CUENTA = $arreglo[$j][14];
+    $BANCO_FORMA_PAGO = $arreglo[$j][15];
+    $IDAFP = $arreglo[$j][18];
+    $IDSALUD = $arreglo[$j][23];
+    $EMAIL_PERSONAL = strtolower($arreglo[$j][39]);
+
+    $sel = personalExistente($DNI);
+    $sel[0]['CANTIDAD'];
+
+    if($sel[0]['CANTIDAD'] == '0'){
+      if($DNI != ""){
+        $ins = ingresaPersonal($DNI,$NOMBRES,$APELLIDOS,$SEXO,$FECHA_NACIMIENTO,$NACIONALIDAD,$DOMICILIO,$TELEFONO,$EMAIL,$BANCO,$BANCO_CUENTA,$BANCO_FORMA_PAGO,$IDAFP,$IDSALUD,$EMAIL_PERSONAL);
+
+        if($ins == "Ok"){
+          echo "Personal ingresado: " . $DNI . "\n";
+        }
+        else{
+          echo "Personal error: " . $DNI . "\n";
+        }
+      }
+      else{
+        echo "Personal error: " . $DNI . "\n";
+      }
+    }
+    else{
+      if($DNI != ""){
+        $ins = actualizaPersonal($DNI,$NOMBRES,$APELLIDOS,$SEXO,$FECHA_NACIMIENTO,$NACIONALIDAD,$DOMICILIO,$TELEFONO,$EMAIL,$BANCO,$BANCO_CUENTA,$BANCO_FORMA_PAGO,$IDAFP,$IDSALUD,$EMAIL_PERSONAL);
+
+        if($ins == "Ok"){
+          echo "Personal actualizado: " . $DNI . "\n";
+        }
+        else{
+          echo "Personal error: " . $DNI . "\n";
+        }
+      }
+      else{
+        echo "Personal error: " . $DNI . "\n";
+      }
+    }
+
+    break;
+  }
+
+  function convertDate($dateValue) {
+    $unixDate = ($dateValue - 25569) * 86400;
+    return gmdate("Y-m-d", $unixDate);
+  }
+
   // echo count($arreglo) . "\n";
 ?>
