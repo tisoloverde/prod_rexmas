@@ -10,12 +10,12 @@
 
   echo "Hora de inicio: " . date('Y-m-d H:i:s') . "\n\n";
 
-  // echo "Seteando estructura y cookie\n";
-  //
-  // // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
-  // $ruta = '/var/www/html/generico/rexmas/';
-  // $cookie = $ruta . 'cookieRR.txt';
-  //
+  echo "Seteando estructura y cookie\n";
+
+  // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
+  $ruta = '/var/www/html/generico/rexmas/';
+  $cookie = $ruta . 'cookieRR.txt';
+
   // echo "Abriendo primer sitio\n";
   //
   // // Pagina 1
