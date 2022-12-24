@@ -557,7 +557,6 @@
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
-  $arreglo = [];
   $f = 0;
   foreach ($hojaActual->getRowIterator() as $fila) {
     if($f > 1){
@@ -574,56 +573,53 @@
 
         $flag++;
       }
-      $arreglo[] = $datos;
-    }
-    $f++;
-  }
 
-  for($j = 0; $j < count($arreglo); $j++){
-    $dni = $arreglo[$j][1];
-    $idempresa = $arreglo[$j][2];
-    $idcentrocosto = $arreglo[$j][12];
-    $idcargo = $arreglo[$j][82];
+      $dni = $datos[1];
+      $idempresa = $datos[2];
+      $idcentrocosto = $datos[12];
+      $idcargo = $datos[82];
 
-    $ins = actualizaCargoPersonal($dni,$idcargo);
+      $ins = actualizaCargoPersonal($dni,$idcargo);
 
-    if($ins == "Ok"){
-      echo "Cargo actualizado a personal: " . $dni . " - " . $idcargo . "\n";
-    }
-    else{
-      echo "Cargo error a personal: " . $dni . " - " . $idcargo . "\n";
-    }
+      if($ins == "Ok"){
+        echo "Cargo actualizado a personal: " . $dni . " - " . $idcargo . "\n";
+      }
+      else{
+        echo "Cargo error a personal: " . $dni . " - " . $idcargo . "\n";
+      }
 
-    $sel = ACTExistente($dni);
-    $sel[0]['CANTIDAD'];
+      $sel = ACTExistente($dni);
+      $sel[0]['CANTIDAD'];
 
-    if($sel[0]['CANTIDAD'] == '0'){
-      if($dni != ""){
-        $ins = ingresaACT($dni,$idcentrocosto);
+      if($sel[0]['CANTIDAD'] == '0'){
+        if($dni != ""){
+          $ins = ingresaACT($dni,$idcentrocosto);
 
-        if($ins == "Ok"){
-          echo "CECO ingresado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
+          if($ins == "Ok"){
+            echo "CECO ingresado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
+          }
+          else{
+            echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
+          }
         }
         else{
           echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
         }
       }
       else{
-        echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
-      }
-    }
-    else{
-      if($dni != ""){
-        $ins = actualizaACT($dni,$idcentrocosto);
+        if($dni != ""){
+          $ins = actualizaACT($dni,$idcentrocosto);
 
-        if($ins == "Ok"){
-          echo "CECO actualizado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
-        }
-        else{
-          echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
+          if($ins == "Ok"){
+            echo "CECO actualizado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
+          }
+          else{
+            echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
+          }
         }
       }
     }
+    $f++;
   }
 
   echo "Hora de fin: " . date('Y-m-d H:i:s') . "\n\n";
