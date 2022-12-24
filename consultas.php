@@ -232,6 +232,129 @@ require('conexion.php');
 	  }
 	}
 
+	function actualizaCargoPersonal($dni,$idcargo){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "UPDATE PERSONAL
+							SET CARGO =
+							(
+								SELECT CARGO
+								FROM CARGO_LIQUIDACION
+								WHERE IDREXMAS = '{$idcargo}'
+							)
+							WHERE DNI = '{$dni}'";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
 
+	function ACTExistente($dni){
+		$con = conectar();
+		if($con != 'No conectado'){
+			$sql = "SELECT COUNT(*) 'CANTIDAD'
+							FROM ACT
+							WHERE IDPERSONAL =
+							(
+								SELECT IDPERSONAL
+								FROM PERSONAL
+								WHERE DNI = '{$dni}'
+							)";
+			if ($row = $con->query($sql)) {
+				while($array = $row->fetch_array(MYSQLI_BOTH)){
+					$return[] = $array;
+				}
+				return $return;
+			}
+			else{
+				return "Error";
+			}
+		}
+		else{
+			return "Error";
+		}
+	}
 
+	function ingresaACT($dni,$idcentrocosto){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "INSERT INTO ACT
+							(
+								IDPERSONAL,
+								IDESTRUCTURA_OPERACION,
+								FECHA,
+								USUARIO
+							)
+							VALUES
+							(
+								(SELECT IDPERSONAL
+								FROM PERSONAL
+								WHERE DNI  = '{$dni}'),
+								(SELECT IDESTRUCTURA_OPERACION
+								FROM ESTRUCTURA_OPERACION
+								WHERE DEFINICION = '{$idcentrocosto}'),
+								NOW(),
+								'AUTOMATA'
+							)";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
+
+	function actualizaACT($dni,$idcentrocosto){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "UPDATE ACT
+							SET
+								IDESTRUCTURA_OPERACION = (SELECT IDESTRUCTURA_OPERACION
+								FROM ESTRUCTURA_OPERACION
+								WHERE DEFINICION = '{$idcentrocosto}'),
+								FECHA = NOW(),
+								USUARIO = 'AUTOMATA'
+							WHERE IDPERSONAL =
+								(SELECT IDPERSONAL
+								FROM PERSONAL
+								WHERE DNI  = '{$dni}')";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
 ?>
