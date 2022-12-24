@@ -100,7 +100,7 @@ require('conexion.php');
 								FROM NACIONALIDAD
 								WHERE PAIS LIKE '%{$NACIONALIDAD}%'),
 								'{$DOMICILIO}',
-								'{$TELEFONOS}',
+								'{$TELEFONO}',
 								'{$EMAIL}',
 								(SELECT IDBANCO
 								FROM BANCO
@@ -147,7 +147,7 @@ require('conexion.php');
 								FROM NACIONALIDAD
 								WHERE PAIS LIKE '%{$NACIONALIDAD}%'),
 								DOMICILIO = '{$DOMICILIO}',
-								TELEFONO = '{$TELEFONOS}',
+								TELEFONO = '{$TELEFONO}',
 								EMAIL = '{$EMAIL}',
 								IDBANCO = (SELECT IDBANCO
 								FROM BANCO
