@@ -357,4 +357,84 @@ require('conexion.php');
 	    return "Error";
 	  }
 	}
+
+	function datosCatalogoIngresado($codigo){
+		$con = conectar();
+		if($con != 'No conectado'){
+			$sql = "SELECT COUNT(*) 'CANTIDAD'
+							FROM CARGO_GENERICO_UNIFICADO
+							WHERE CODIGO = '{$codigo}'";
+			if ($row = $con->query($sql)) {
+				while($array = $row->fetch_array(MYSQLI_BOTH)){
+					$return[] = $array;
+				}
+				return $return;
+			}
+			else{
+				return "Error";
+			}
+		}
+		else{
+			return "Error";
+		}
+	}
+
+	function ingresaCatalogo($codigo,$nombre,$clasificacion){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "INSERT INTO CARGO_GENERICO_UNIFICADO
+							(
+								NOMBRE,
+								IDCLASIFICACION,
+								CODIGO
+							)
+							VALUES
+							(
+								'{$nombre}',
+								(SELECT IDCLASIFICACION
+								FROM CLASIFICACION
+								WHERE NOMBRE = '{$clasificacion}'),
+								'{$codigo}'
+							)";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
+
+	function actualizaCargoGenericoPersonal($dni,$codigo){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "UPDATE PERSONAL
+							SET CARGO_GENERICO_CODIGO = '{$codigo}'
+							WHERE DNI = '{$dni}'";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
 ?>

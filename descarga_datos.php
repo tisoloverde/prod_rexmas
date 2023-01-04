@@ -14,7 +14,7 @@
 
   // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
   $ruta = '/var/www/html/generico/rexmas/';
-  $cookie = $ruta . 'cookieRR.txt';
+  $cookie = $ruta . 'descargas\\cookieRR.txt';
 
   echo "Abriendo primer sitio\n";
 
@@ -26,7 +26,7 @@
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
   curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
   curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-  curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0");
+  curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
 
   $respuesta = curl_exec($ch);
 
@@ -38,7 +38,7 @@
 
   echo "Obteniendo token\n";
 
-  $fp = fopen($ruta . 'cookieRR.txt', "r");
+  $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
   while (!feof($fp)){
       $linea = fgets($fp);
       if(strpos($linea, "csrftoken"))
@@ -89,7 +89,7 @@
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
   curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
   curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-  curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0");
+  curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
   curl_setopt($ch, CURLOPT_HEADER, true);
   curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
   curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config01"}');
@@ -109,7 +109,7 @@
 
   $linea = "";
 
-  $fp = fopen($ruta . 'cookieRR.txt', "r");
+  $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
   while (!feof($fp)){
       $linea = fgets($fp);
       if(strpos($linea, "csrftoken"))
@@ -126,7 +126,7 @@
 
   $linea = "";
 
-  $fp = fopen($ruta . 'cookieRR.txt', "r");
+  $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
   while (!feof($fp)){
       $linea = fgets($fp);
       if(strpos($linea, "sessionid"))
@@ -171,16 +171,17 @@
   echo "Sessionid1_head: " . $sessionid . "\n";
 
   $informes = [];
-  $informe[1122] = 'Empleados';
-  $informe[1123] = 'Contratos';
-  $informe[1124] = 'Empresas';
-  $informe[1125] = 'Cargos';
-  $informe[1126] = 'Centro_de_costos';
-  $informe[1127] = 'Vacaciones';
-  $informe[1128] = 'Licencias';
+  $informes[0] = [1122,'Empleados'];
+  $informes[1] = [1123,'Contratos'];
+  $informes[2] = [1124,'Empresas'];
+  $informes[3] = [1125,'Cargos'];
+  $informes[4] = [1126,'Centro_de_costos'];
+  $informes[5] = [1127,'Vacaciones'];
+  $informes[6] = [1128,'Licencias'];
+  $informes[7] = [1221,'Catalogo'];
 
-  for($i = 1122; $i <= 1128; $i++){
-    echo "Descargando informe de $informe[$i]\n";
+  for($i = 0; $i < count($informes) ; $i++){
+    echo "Descargando informe de {$informes[$i][1]} \n";
 
     // Informe Empleados
     $request = [];
@@ -191,7 +192,7 @@
     $request[] = 'Accept: application/json, text/plain, */*';
     $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
     $request[] = 'Accept-Encoding: gzip, deflate, br';
-    $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $i . '/ejecutar';
+    $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar';
     $request[] = 'Content-Type: application/json;charset=utf-8';
     $request[] = 'X-CSRFToken: ' . $csrftoken;
     $request[] = 'Content-Length: 17';
@@ -199,13 +200,13 @@
     $request[] = 'DNT: 1';
     $request[] = 'Connection: keep-alive';
     $request[] = 'Cookie: csrftoken=' . $csrftoken . '; sessionid=' . $sessionid;
-    // $request[] = 'Sec-Fetch-Dest: empty';
-    // $request[] = 'Sec-Fetch-Mode: cors';
-    // $request[] = 'Sec-Fetch-Site: same-origin';
-    // $request[] = 'Pragma: no-cache';
-    // $request[] = 'Cache-Control: no-cache';
+    $request[] = 'Sec-Fetch-Dest: empty';
+    $request[] = 'Sec-Fetch-Mode: cors';
+    $request[] = 'Sec-Fetch-Site: same-origin';
+    $request[] = 'Pragma: no-cache';
+    $request[] = 'Cache-Control: no-cache';
 
-    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $i . '/ejecutar');
+    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar');
 
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
@@ -213,7 +214,7 @@
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
     curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0");
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
     curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
     curl_setopt($ch, CURLOPT_POSTFIELDS, '{"parametros":""}');
@@ -225,11 +226,11 @@
 
     sleep(5);
 
-    $file = fopen($ruta . "descargas/" . $informe[$i] . '.xlsx', 'w+');
+    $file = fopen($ruta . "descargas/" . $informes[$i][1] . '.xlsx', 'w+');
     fwrite($file, $respuesta);
     fclose($file);
 
-    echo "Ruta de informe: " . $ruta . "descargas/" . $informe[$i] . ".xlsx\n";
+    echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . ".xlsx\n";
 
     // Re Login
 
@@ -264,7 +265,7 @@
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
     curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0");
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
     curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
     curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config01"}');
@@ -284,7 +285,7 @@
 
     $linea = "";
 
-    $fp = fopen($ruta . 'cookieRR.txt', "r");
+    $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
     while (!feof($fp)){
         $linea = fgets($fp);
         if(strpos($linea, "csrftoken"))
@@ -301,7 +302,7 @@
 
     $linea = "";
 
-    $fp = fopen($ruta . 'cookieRR.txt', "r");
+    $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
     while (!feof($fp)){
         $linea = fgets($fp);
         if(strpos($linea, "sessionid"))
@@ -584,6 +585,7 @@
     $idempresa = $arreglo[$j][2];
     $idcentrocosto = $arreglo[$j][12];
     $idcargo = $arreglo[$j][82];
+    $codigoCargoGenerico = $arreglo[$j][44];
 
     $ins = actualizaCargoPersonal($dni,$idcargo);
 
@@ -592,6 +594,15 @@
     }
     else{
       echo "Cargo error a personal: " . $dni . " - " . $idcargo . "\n";
+    }
+
+    $ins = actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico);
+
+    if($ins == "Ok"){
+      echo "Cargo generico actualizado a personal: " . $dni . " - " . $codigoCargoGenerico . "\n";
+    }
+    else{
+      echo "Cargo generico error a personal: " . $dni . " - " . $codigoCargoGenerico . "\n";
     }
 
     $sel = ACTExistente($dni);
@@ -626,7 +637,74 @@
     }
   }
 
-  echo "Hora de fin: " . date('Y-m-d H:i:s') . "\n\n";
+  // Lectura de archivo de centro de catalogo
+  $rutaArchivo = $ruta . "descargas/Catalogo.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arreglo = [];
+  $f = 0;
+  foreach ($hojaActual->getRowIterator() as $fila) {
+    if($f > 1){
+      $flag = 0;
+      $datos = [];
+      foreach ($fila->getCellIterator() as $celda) {
+        if($flag > 13){
+          break;
+        }
+        $fila = $celda->getRow();
+        $columna = $celda->getColumn();
+
+        $datos[] = strval($celda->getValue());
+
+        $flag++;
+      }
+      $arreglo[] = $datos;
+    }
+    $f++;
+  }
+
+  $JEAS = [];
+  $JEAS[1] = "J";
+  $JEAS[2] = 'E';
+  $JEAS[3] = 'A';
+  $JEAS[4] = 'S';
+  $JEAS[6] = 'G';
+
+  for($j = 0; $j < count($arreglo); $j++){
+    if($arreglo[$j][1] == "lta10"){
+      // echo $arreglo[$j][1] . "\n";
+      // echo $arreglo[$j][2] . "\n";
+      // echo $arreglo[$j][3] . "\n";
+      // echo trim(explode("-",explode(")",$arreglo[$j][7])[1])[0]) . "\n";
+      // echo $JEAS[trim(explode("-",explode(")",$arreglo[$j][7])[1])[0])] . "\n\n";
+
+      $codigo = $arreglo[$j][2];
+      $nombre = $arreglo[$j][3];
+      $clasificacion = $JEAS[trim(explode("-",explode(")",$arreglo[$j][7])[1])[0])];
+
+      $sel = datosCatalogoIngresado($codigo);
+      $sel[0]['CANTIDAD'];
+
+      if($sel[0]['CANTIDAD'] == '0'){
+        if($codigo != ""){
+          $ins = ingresaCatalogo($codigo,$nombre,$clasificacion);
+          if($ins == "Ok"){
+            echo "Catalogo ingresado: " . $codigo . "\n";
+          }
+          else{
+            echo "Catalogo error: " . $codigo . "\n";
+          }
+        }
+        else{
+          echo "Catalogo error: " . $codigo . "\n";
+        }
+      }
+      else{
+        echo "Catalogo error: " . $codigo . "\n";;
+      }
+    }
+  }
 
   //Funciones
   function convertDate($dateValue) {
