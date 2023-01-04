@@ -681,7 +681,12 @@
 
       $codigo = $arreglo[$j][2];
       $nombre = $arreglo[$j][3];
-      $clasificacion = $JEAS[trim(explode("-",explode(")",$arreglo[$j][7])[1])[0])];
+      if(trim(explode("-",explode(")",$arreglo[$j][7])[1])[0]) !== ""){
+        $clasificacion = $JEAS[trim(explode("-",explode(")",$arreglo[$j][7])[1])[0])];
+      }
+      else{
+        $clasificacion = "";
+      }
 
       $sel = datosCatalogoIngresado($codigo);
       $sel[0]['CANTIDAD'];
