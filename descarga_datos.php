@@ -681,7 +681,7 @@
 
       $codigo = $arreglo[$j][2];
       $nombre = $arreglo[$j][3];
-      if($arreglo[$j][7])[1])[0] !== ""){
+      if($arreglo[$j][7])[1] !== ""){
         $clasificacion = $JEAS[trim(explode("-",explode(")",$arreglo[$j][7])[1])[0])];
       }
       else{
