@@ -15,7 +15,7 @@
   // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
   $ruta = '/var/www/html/generico/rexmas/';
   $cookie = $ruta . 'descargas\\cookieRR.txt';
-
+  
   echo "Abriendo primer sitio\n";
 
   // Pagina 1
@@ -553,90 +553,6 @@
     }
   }
 
-  // Lectura de archivo de contratos
-  $rutaArchivo = $ruta . "descargas/Contratos.xlsx";
-  $documento = IOFactory::load($rutaArchivo);
-  $hojaActual = $documento->getSheet(0);
-
-  $arreglo = [];
-  $f = 0;
-  foreach ($hojaActual->getRowIterator() as $fila) {
-    if($f > 1){
-      $flag = 0;
-      $datos = [];
-      foreach ($fila->getCellIterator() as $celda) {
-        if($flag > 91){
-          break;
-        }
-        $fila = $celda->getRow();
-        $columna = $celda->getColumn();
-
-        $datos[] = strval($celda->getValue());
-
-        $flag++;
-      }
-      $arreglo[] = $datos;
-    }
-    $f++;
-  }
-
-  for($j = 0; $j < count($arreglo); $j++){
-    $dni = $arreglo[$j][1];
-    $idempresa = $arreglo[$j][2];
-    $idcentrocosto = $arreglo[$j][12];
-    $idcargo = $arreglo[$j][82];
-    $codigoCargoGenerico = $arreglo[$j][44];
-
-    $ins = actualizaCargoPersonal($dni,$idcargo);
-
-    if($ins == "Ok"){
-      echo "Cargo actualizado a personal: " . $dni . " - " . $idcargo . "\n";
-    }
-    else{
-      echo "Cargo error a personal: " . $dni . " - " . $idcargo . "\n";
-    }
-
-    $ins = actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico);
-
-    if($ins == "Ok"){
-      echo "Cargo generico actualizado a personal: " . $dni . " - " . $codigoCargoGenerico . "\n";
-    }
-    else{
-      echo "Cargo generico error a personal: " . $dni . " - " . $codigoCargoGenerico . "\n";
-    }
-
-    $sel = ACTExistente($dni);
-    $sel[0]['CANTIDAD'];
-
-    if($sel[0]['CANTIDAD'] == '0'){
-      if($dni != ""){
-        $ins = ingresaACT($dni,$idcentrocosto);
-
-        if($ins == "Ok"){
-          echo "CECO ingresado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
-        }
-        else{
-          echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
-        }
-      }
-      else{
-        echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
-      }
-    }
-    else{
-      if($dni != ""){
-        $ins = actualizaACT($dni,$idcentrocosto);
-
-        if($ins == "Ok"){
-          echo "CECO actualizado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
-        }
-        else{
-          echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
-        }
-      }
-    }
-  }
-
   // Lectura de archivo de centro de catalogo
   $rutaArchivo = $ruta . "descargas/Catalogo.xlsx";
   $documento = IOFactory::load($rutaArchivo);
@@ -687,13 +603,14 @@
       else{
         $clasificacion = "";
       }
+      $habilitado = trim($arreglo[$j][9]);
 
       $sel = datosCatalogoIngresado($codigo);
       $sel[0]['CANTIDAD'];
 
       if($sel[0]['CANTIDAD'] == '0'){
         if($codigo != ""){
-          $ins = ingresaCatalogo($codigo,$nombre,$clasificacion);
+          $ins = ingresaCatalogo($codigo,$nombre,$clasificacion, $habilitado);
           if($ins == "Ok"){
             echo "Catalogo ingresado: " . $codigo . "\n";
           }
@@ -707,6 +624,148 @@
       }
       else{
         echo "Catalogo error: " . $codigo . "\n";;
+      }
+    }
+
+    if($arreglo[$j][1] == "lta9"){
+      $codigo = $arreglo[$j][2];
+      $nombre = $arreglo[$j][3];
+      $detalle = trim($arreglo[$j][7]);
+      $habilitado = trim($arreglo[$j][9]);
+
+      $sel = datosCatalogoReferencia1($codigo);
+      $sel[0]['CANTIDAD'];
+
+      if($sel[0]['CANTIDAD'] == '0'){
+        if($codigo != ""){
+          $ins = ingresaCatalogoReferencia1($codigo,$nombre,$detalle,$habilitado);
+          if($ins == "Ok"){
+            echo "Referencia1 ingresado: " . $codigo . "\n";
+          }
+          else{
+            echo "Referencia1 error: " . $codigo . "\n";
+          }
+        }
+        else{
+          echo "Referencia1 error: " . $codigo . "\n";
+        }
+      }
+      else{
+        echo "Referencia1 error: " . $codigo . "\n";;
+      }
+    }
+
+    if($arreglo[$j][1] == "lta4"){
+      $codigo = $arreglo[$j][2];
+      $nombre = $arreglo[$j][3];
+      $detalle = trim($arreglo[$j][7]);
+      $habilitado = trim($arreglo[$j][9]);
+
+      $sel = datosCatalogoReferencia2($codigo);
+      $sel[0]['CANTIDAD'];
+
+      if($sel[0]['CANTIDAD'] == '0'){
+        if($codigo != ""){
+          $ins = ingresaCatalogoReferencia2($codigo,$nombre,$detalle,$habilitado);
+          if($ins == "Ok"){
+            echo "Referencia2 ingresado: " . $codigo . "\n";
+          }
+          else{
+            echo "Referencia2 error: " . $codigo . "\n";
+          }
+        }
+        else{
+          echo "Referencia2 error: " . $codigo . "\n";
+        }
+      }
+      else{
+        echo "Referencia2 error: " . $codigo . "\n";;
+      }
+    }
+  }
+
+  // Lectura de archivo de contratos
+  $rutaArchivo = $ruta . "descargas/Contratos.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arreglo = [];
+  $f = 0;
+  foreach ($hojaActual->getRowIterator() as $fila) {
+    if($f > 1){
+      $flag = 0;
+      $datos = [];
+      foreach ($fila->getCellIterator() as $celda) {
+        if($flag > 91){
+          break;
+        }
+        $fila = $celda->getRow();
+        $columna = $celda->getColumn();
+
+        $datos[] = strval($celda->getValue());
+
+        $flag++;
+      }
+      $arreglo[] = $datos;
+    }
+    $f++;
+  }
+
+  for($j = 0; $j < count($arreglo); $j++){
+    $dni = $arreglo[$j][1];
+    $idempresa = $arreglo[$j][2];
+    $idcentrocosto = $arreglo[$j][12];
+    $idcargo = $arreglo[$j][82];
+    $codigoCargoGenerico = $arreglo[$j][44];
+    $codigoRef1 = $arreglo[$j][43];
+    $codigoRef2 = $arreglo[$j][31];
+
+    $ins = actualizaCargoPersonal($dni,$idcargo);
+
+    if($ins == "Ok"){
+      echo "Cargo actualizado a personal: " . $dni . " - " . $idcargo . "\n";
+    }
+    else{
+      echo "Cargo error a personal: " . $dni . " - " . $idcargo . "\n";
+    }
+
+    $ins = actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico,$codigoRef1,$codigoRef2);
+
+    if($ins == "Ok"){
+      echo "Cargo generico actualizado a personal: " . $dni . " - " . $codigoCargoGenerico . "\n";
+    }
+    else{
+      echo "Cargo generico error a personal: " . $dni . " - " . $codigoCargoGenerico . "\n";
+    }
+
+    $sel = ACTExistente($dni);
+    $sel[0]['CANTIDAD'];
+
+    if($sel[0]['CANTIDAD'] == '0'){
+      if($dni != ""){
+        $ins = ingresaACT($dni,$idcentrocosto);
+
+        if($ins == "Ok"){
+          echo "CECO ingresado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
+        }
+        else{
+          echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
+        }
+      }
+      else{
+        echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
+      }
+    }
+    else{
+      if($dni != ""){
+        $ins = actualizaACT($dni,$idcentrocosto);
+
+        if($ins == "Ok"){
+          echo "CECO actualizado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
+        }
+        else{
+          echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
+        }
       }
     }
   }

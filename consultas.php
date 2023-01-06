@@ -379,7 +379,7 @@ require('conexion.php');
 		}
 	}
 
-	function ingresaCatalogo($codigo,$nombre,$clasificacion){
+	function ingresaCatalogo($codigo,$nombre,$clasificacion,$habilitado){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
@@ -387,7 +387,8 @@ require('conexion.php');
 							(
 								NOMBRE,
 								IDCLASIFICACION,
-								CODIGO
+								CODIGO,
+								HABILITADO
 							)
 							VALUES
 							(
@@ -395,7 +396,8 @@ require('conexion.php');
 								(SELECT IDCLASIFICACION
 								FROM CLASIFICACION
 								WHERE NOMBRE = '{$clasificacion}'),
-								'{$codigo}'
+								'{$codigo}',
+								'{$habilitado}'
 							)";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
@@ -414,13 +416,127 @@ require('conexion.php');
 	  }
 	}
 
-	function actualizaCargoGenericoPersonal($dni,$codigo){
+	function actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico,$codigoRef1,$codigoRef2){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
 	    $sql = "UPDATE PERSONAL
-							SET CARGO_GENERICO_CODIGO = '{$codigo}'
+							SET CARGO_GENERICO_CODIGO = '{$codigoCargoGenerico}',
+							REFERENCIA1 = '{$codigoRef1}',
+							REFERENCIA2 = '{$codigoRef2}'
 							WHERE DNI = '{$dni}'";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
+
+	function datosCatalogoReferencia1($codigo){
+		$con = conectar();
+		if($con != 'No conectado'){
+			$sql = "SELECT COUNT(*) 'CANTIDAD'
+							FROM REFERENCIA1
+							WHERE CODIGO = '{$codigo}'";
+			if ($row = $con->query($sql)) {
+				while($array = $row->fetch_array(MYSQLI_BOTH)){
+					$return[] = $array;
+				}
+				return $return;
+			}
+			else{
+				return "Error";
+			}
+		}
+		else{
+			return "Error";
+		}
+	}
+
+	function ingresaCatalogoReferencia1($codigo,$nombre,$detalle,$habilitado){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "INSERT INTO REFERENCIA1
+							(
+								CODIGO,
+								NOMBRE,
+								DETALLE,
+								HABILITADO
+							)
+							VALUES
+							(
+								'{$codigo}',
+								'{$nombre}',
+								'{$detalle}',
+								'{$habilitado}'
+							)";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
+
+	function datosCatalogoReferencia2($codigo){
+		$con = conectar();
+		if($con != 'No conectado'){
+			$sql = "SELECT COUNT(*) 'CANTIDAD'
+							FROM REFERENCIA2
+							WHERE CODIGO = '{$codigo}'";
+			if ($row = $con->query($sql)) {
+				while($array = $row->fetch_array(MYSQLI_BOTH)){
+					$return[] = $array;
+				}
+				return $return;
+			}
+			else{
+				return "Error";
+			}
+		}
+		else{
+			return "Error";
+		}
+	}
+
+	function ingresaCatalogoReferencia2($codigo,$nombre,$detalle,$habilitado){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "INSERT INTO REFERENCIA2
+							(
+								CODIGO,
+								NOMBRE,
+								DETALLE,
+								HABILITADO
+							)
+							VALUES
+							(
+								'{$codigo}',
+								'{$nombre}',
+								'{$detalle}',
+								'{$habilitado}'
+							)";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
 	      return "Ok";
