@@ -815,8 +815,6 @@
       else{
         echo "Vacación error: " . $dni . "\n";
       }
-
-      break;
     }
   }
 
