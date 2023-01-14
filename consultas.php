@@ -553,4 +553,26 @@ require('conexion.php');
 	    return "Error";
 	  }
 	}
+
+	function ingresaVacacionRexmas($dni,$fini,$fter){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "CALL INSERTAR_VACACIONES_RANGO('{$dni}','{$fini}','{$fter}')";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return $sql;
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
 ?>
