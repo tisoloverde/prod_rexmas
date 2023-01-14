@@ -799,12 +799,12 @@
   }
 
   for($j = 0; $j < count($arreglo); $j++){
-    $dni = $arreglo[$j][1];
-    $fini = convertDate($arreglo[$j][8]);
-    $fter = convertDate($arreglo[$j][9]);
     $firmado = $arreglo[$j][12];
 
-    if($firmado == "si"){
+    if($firmado == "si" && $arreglo[$j][8] != ""){
+      $dni = $arreglo[$j][1];
+      $fini = convertDate($arreglo[$j][8]);
+      $fter = convertDate($arreglo[$j][9]);
       $ins = ingresaVacacionRexmas($dni,$fini,$fter);
 
       var_dump($ins);
