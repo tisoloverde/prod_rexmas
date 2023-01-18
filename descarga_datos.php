@@ -816,6 +816,49 @@
     }
   }
 
+  // Lectura de archivo de cargos
+  $rutaArchivo = $ruta . "descargas/Licencias.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arreglo = [];
+  $f = 0;
+  foreach ($hojaActual->getRowIterator() as $fila) {
+    if($f > 1){
+      $flag = 0;
+      $datos = [];
+      foreach ($fila->getCellIterator() as $celda) {
+        if($flag > 20){
+          break;
+        }
+        $fila = $celda->getRow();
+        $columna = $celda->getColumn();
+
+        $datos[] = strval($celda->getValue());
+
+        $flag++;
+      }
+      $arreglo[] = $datos;
+    }
+    $f++;
+  }
+
+  for($j = 0; $j < count($arreglo); $j++){
+    $dni = $arreglo[$j][4];
+    $fini = explode("-",substr($arreglo[$j][19],0,10));
+    $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
+    $fter = explode("-",substr($arreglo[$j][19],10,10));
+    $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
+    $ins = ingresaLicenciaRexmas($dni,$fini,$fter);
+
+    if($ins == "Ok"){
+      echo "Licencia ingresada: " . $dni . "\n";
+    }
+    else{
+      echo "Licencia error: " . $dni . "\n";
+    }
+  }
+
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
 
   //Funciones
