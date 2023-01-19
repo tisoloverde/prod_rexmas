@@ -15,7 +15,7 @@
   // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
   $ruta = '/var/www/html/generico/rexmas/';
   // $cookie = $ruta . 'descargas\\cookieRR.txt';
-  // 
+  //
   // echo "Abriendo primer sitio\n";
   //
   // // Pagina 1
@@ -856,7 +856,7 @@
 
     if($diff->days <= 180){
       $ins = ingresaLicenciaRexmas($dni,$fini,$fter);
-
+      var_dump($ins);
       if($ins == "Ok"){
         echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
       }
