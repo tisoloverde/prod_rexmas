@@ -38,7 +38,7 @@
 
   echo "Obteniendo token\n";
 
-  $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
+  $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
   while (!feof($fp)){
       $linea = fgets($fp);
       if(strpos($linea, "csrftoken"))
@@ -109,7 +109,7 @@
 
   $linea = "";
 
-  $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
+  $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
   while (!feof($fp)){
       $linea = fgets($fp);
       if(strpos($linea, "csrftoken"))
@@ -126,7 +126,7 @@
 
   $linea = "";
 
-  $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
+  $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
   while (!feof($fp)){
       $linea = fgets($fp);
       if(strpos($linea, "sessionid"))
@@ -285,7 +285,7 @@
 
     $linea = "";
 
-    $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
+    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
     while (!feof($fp)){
         $linea = fgets($fp);
         if(strpos($linea, "csrftoken"))
@@ -302,7 +302,7 @@
 
     $linea = "";
 
-    $fp = fopen($ruta . 'descargas\\cookieRR.txt', "r");
+    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
     while (!feof($fp)){
         $linea = fgets($fp);
         if(strpos($linea, "sessionid"))
