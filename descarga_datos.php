@@ -14,6 +14,12 @@
 
   // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
   $ruta = '/var/www/html/generico/rexmas/';
+
+  // Creamos la cookie
+  $fp = fopen($ruta . 'descargas/cookieRR.txt', "w");
+  fwrite($fp, "");
+  fclose($fp);
+
   $cookie = $ruta . 'descargas/cookieRR.txt';
 
   echo "Abriendo primer sitio\n";
