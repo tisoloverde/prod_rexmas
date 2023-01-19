@@ -583,12 +583,12 @@ require('conexion.php');
 	    $sql = "CALL INSERTAR_LICENCIA_RANGO('{$dni}','{$fini}','{$fter}')";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
-	      return $sql;
+	      return "Ok";
 	    }
 	    else{
-	      // return $con->error;
+	      return $con->error;
 	      $con->query("ROLLBACK");
-	      return $sql;
+	      // return $sql;
 	      // return $sql;
 	    }
 	  }
