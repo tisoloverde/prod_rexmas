@@ -14,7 +14,7 @@
 
   // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
   $ruta = '/var/www/html/generico/rexmas/';
-  $cookie = $ruta . 'descargas\\cookieRR.txt';
+  $cookie = $ruta . 'descargas/cookieRR.txt';
 
   echo "Abriendo primer sitio\n";
 
@@ -349,7 +349,7 @@
 
   echo "Informe descargado se borrara la cookie para matar la sesion\n\n";
 
-  // unlink($cookie);
+  unlink($cookie);
 
   // Lectura de archivo de centro de costo
   $rutaArchivo = $ruta . "descargas/Centro_de_costos.xlsx";
