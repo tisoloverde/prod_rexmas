@@ -849,13 +849,16 @@
     $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
     $fter = explode("-",substr($arreglo[$j][19],10,10));
     $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
-    $ins = ingresaLicenciaRexmas($dni,$fini,$fter);
 
-    if($ins == "Ok"){
-      echo "Licencia ingresada: " . $dni . "\n";
-    }
-    else{
-      echo "Licencia error: " . $dni . "\n";
+    if($fter[0] >= 2021){
+      $ins = ingresaLicenciaRexmas($dni,$fini,$fter);
+
+      if($ins == "Ok"){
+        echo "Licencia ingresada: " . $dni . "\n";
+      }
+      else{
+        echo "Licencia error: " . $dni . "\n";
+      }
     }
   }
 
