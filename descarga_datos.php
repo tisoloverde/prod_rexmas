@@ -803,15 +803,22 @@
       $dni = $arreglo[$j][1];
       $fini = convertDate($arreglo[$j][8]);
       $fter = convertDate($arreglo[$j][9]);
-      $ins = ingresaVacacionRexmas($dni,$fini,$fter);
 
-      var_dump($ins);
+      $date1 = new DateTime();
+      $date2 = new DateTime($fini);
+      $diff = $date1->diff($date2);
 
-      if($ins == "Ok"){
-        echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
+      if($diff->days <= 180){
+        $ins = ingresaVacacionRexmas($dni,$fini,$fter);
+        if($ins == "Ok"){
+          echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
+        }
+        else{
+          echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+        }
       }
       else{
-        echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+        echo "Vacación antigua: " . $dni . " | " . $fini . " - " . $fter . "\n";
       }
     }
   }
