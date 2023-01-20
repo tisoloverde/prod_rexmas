@@ -778,7 +778,7 @@
   $arreglo = [];
 
   for($i = 2; $i < count($arregloIni); $i++){
-    $fini = convertDate($arreglo[$j][8]);
+    $fini = $arregloIni[$i][8];
 
     $date1 = new DateTime();
     $date2 = new DateTime($fini);
@@ -794,8 +794,8 @@
 
     if($firmado == "si" && $arreglo[$j][8] != ""){
       $dni = $arreglo[$j][1];
-      $fini = convertDate($arreglo[$j][8]);
-      $fter = convertDate($arreglo[$j][9]);
+      $fini = $arreglo[$j][8];
+      $fter = $arreglo[$j][9];
 
       $ins = ingresaVacacionRexmas($dni,$fini,$fter);
       if($ins == "Ok"){
