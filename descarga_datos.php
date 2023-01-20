@@ -785,7 +785,7 @@
     $diff = $date1->diff($date2);
 
     if($diff->days <= 180){
-      $arreglo[$i] = $arregloIni[$i];
+      $arreglo[] = $arregloIni[$i];
     }
   }
 
@@ -824,7 +824,7 @@
     $diff = $date1->diff($date2);
 
     if($diff->days <= 180){
-      $arreglo[$i] = $arregloIni[$i];
+      $arreglo[] = $arregloIni[$i];
     }
   }
 
@@ -836,13 +836,14 @@
     $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
 
     $ins = ingresaLicenciaRexmas($dni,$fini,$fter);
-    var_dump($ins);
     if($ins == "Ok"){
       echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
     }
     else{
       echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
     }
+
+    break;
   }
 
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
