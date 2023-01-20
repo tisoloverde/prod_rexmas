@@ -774,26 +774,19 @@
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
+  $arregloIni = $hojaActual->toArray();
   $arreglo = [];
-  $f = 0;
-  foreach ($hojaActual->getRowIterator() as $fila) {
-    if($f > 1){
-      $flag = 0;
-      $datos = [];
-      foreach ($fila->getCellIterator() as $celda) {
-        if($flag > 17){
-          break;
-        }
-        $fila = $celda->getRow();
-        $columna = $celda->getColumn();
 
-        $datos[] = strval($celda->getValue());
+  for($i = 2; $i < count($arregloIni); $i++){
+    $fini = convertDate($arreglo[$j][8]);
 
-        $flag++;
-      }
-      $arreglo[] = $datos;
+    $date1 = new DateTime();
+    $date2 = new DateTime($fini);
+    $diff = $date1->diff($date2);
+
+    if($diff->days <= 180){
+      $arreglo[$i] = $arregloIni[$i];
     }
-    $f++;
   }
 
   for($j = 0; $j < count($arreglo); $j++){
@@ -804,21 +797,12 @@
       $fini = convertDate($arreglo[$j][8]);
       $fter = convertDate($arreglo[$j][9]);
 
-      $date1 = new DateTime();
-      $date2 = new DateTime($fini);
-      $diff = $date1->diff($date2);
-
-      if($diff->days <= 180){
-        $ins = ingresaVacacionRexmas($dni,$fini,$fter);
-        if($ins == "Ok"){
-          echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
-        }
-        else{
-          echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
-        }
+      $ins = ingresaVacacionRexmas($dni,$fini,$fter);
+      if($ins == "Ok"){
+        echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
       }
       else{
-        echo "Vacación antigua: " . $dni . " | " . $fini . " - " . $fter . "\n";
+        echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
       }
     }
   }
@@ -828,26 +812,20 @@
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
+  $arregloIni = $hojaActual->toArray();
   $arreglo = [];
-  $f = 0;
-  foreach ($hojaActual->getRowIterator() as $fila) {
-    if($f > 1){
-      $flag = 0;
-      $datos = [];
-      foreach ($fila->getCellIterator() as $celda) {
-        if($flag > 20){
-          break;
-        }
-        $fila = $celda->getRow();
-        $columna = $celda->getColumn();
 
-        $datos[] = strval($celda->getValue());
+  for($i = 2; $i < count($arregloIni); $i++){
+    $fini = explode("-",substr($arregloIni[$i][19],0,10));
+    $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
 
-        $flag++;
-      }
-      $arreglo[] = $datos;
+    $date1 = new DateTime();
+    $date2 = new DateTime($fini);
+    $diff = $date1->diff($date2);
+
+    if($diff->days <= 180){
+      $arreglo[$i] = $arregloIni[$i];
     }
-    $f++;
   }
 
   for($j = 0; $j < count($arreglo); $j++){
@@ -857,22 +835,13 @@
     $fter = explode("-",substr($arreglo[$j][19],10,10));
     $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
 
-    $date1 = new DateTime();
-    $date2 = new DateTime($fini);
-    $diff = $date1->diff($date2);
-
-    if($diff->days <= 180){
-      $ins = ingresaLicenciaRexmas($dni,$fini,$fter);
-      var_dump($ins);
-      if($ins == "Ok"){
-        echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
-      }
-      else{
-        echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
-      }
+    $ins = ingresaLicenciaRexmas($dni,$fini,$fter);
+    var_dump($ins);
+    if($ins == "Ok"){
+      echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
     }
     else{
-      echo "Licencia antigua: " . $dni . " | " . $fini . " - " . $fter . "\n";
+      echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
     }
   }
 
