@@ -717,6 +717,27 @@
     $codigoCargoGenerico = $arreglo[$j][44];
     $codigoRef1 = $arreglo[$j][43];
     $codigoRef2 = $arreglo[$j][31];
+    $fechaTermino = convertDate($arreglo[$j][8]);
+    $causalTermino = $arreglo[$j][9];
+
+    $date1 = new DateTime();
+    $date2 = new DateTime($fechaTermino);
+    $diff = $date2->diff($date1);
+
+    if($diff->format("%r") . $diff->days >= 1){
+      echo "Aplica: \n";
+      echo $diff->format("%r") . $diff->days . "\n";
+      echo $date1->format('Y-m-d H:i:s') . "\n";
+      echo $date2->format('Y-m-d H:i:s') . "\n";
+
+      $ins = ingresaDesvinculacion($dni, $fechaTermino, $causalTermino);
+      if($ins == "Ok"){
+        echo "Desvinculacion ingresada: " . $dni . " | " .   $fechaTermino . "\n";
+      }
+      else{
+        echo "Desvinculacion error: " . $dni . " | " .   $fechaTermino . "\n";
+      }
+    }
 
     $ins = actualizaCargoPersonal($dni,$idcargo);
 
