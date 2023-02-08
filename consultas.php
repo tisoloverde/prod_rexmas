@@ -675,4 +675,67 @@ require('conexion.php');
 	    return "Error";
 	  }
 	}
+
+	function limpiaPeriodoProceso($periodo){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "DELETE PROCESOS_PERIODO
+							WHERE FECHAPROC = '{$periodo}'";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      return $con->error;
+	      $con->query("ROLLBACK");
+	      // return $sql;
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
+
+	function ingresaPeriodoProceso($fechaProc,$empresa,$cargo,$centroCost,$contrato,$tipoContrato,$empleado){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "INSERT INTO PROCESOS_PERIODO(
+								FECHAPROC,
+								EMPRESA,
+								CARGO,
+								CECO,
+								CONTRATO,
+								TIPOCONTRATO,
+								EMPLEADO
+							)
+							VALUES
+							(
+								'{$fechaProc}',
+								'{$empresa}',
+								'{$cargo}',
+								'{$centroCost}',
+								'{$contrato}',
+								'{$tipoContrato}',
+								'{$empleado}'
+							)";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      return $con->error;
+	      $con->query("ROLLBACK");
+	      // return $sql;
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
 ?>
