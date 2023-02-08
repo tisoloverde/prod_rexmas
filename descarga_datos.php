@@ -34,28 +34,7 @@
 
   sleep(5);
 
-  $linea = "";
-
-  echo "Obteniendo token\n";
-
-  $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
-  while (!feof($fp)){
-      $linea = fgets($fp);
-      if(strpos($linea, "csrftoken"))
-      {
-          // echo $linea;
-          break;
-      }
-  }
-  fclose($fp);
-
-  $array = explode("csrftoken",$linea);
-
-  $csrftoken = trim($array[1]);
-
-  echo "Token1: " . $csrftoken . "\n";
-
-  echo "Logueandonos en sistema\n";
+  $csrftoken = "";
 
   // Pagina 2
   $request = [];
@@ -98,6 +77,31 @@
   $respuesta = curl_exec($ch);
 
   curl_close($ch);
+
+  sleep(5);
+
+  $linea = "";
+
+  echo "Obteniendo token\n";
+
+  $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
+  while (!feof($fp)){
+      $linea = fgets($fp);
+      if(strpos($linea, "csrftoken"))
+      {
+          // echo $linea;
+          break;
+      }
+  }
+  fclose($fp);
+
+  $array = explode("csrftoken",$linea);
+
+  $csrftoken = trim($array[1]);
+
+  echo "Token1: " . $csrftoken . "\n";
+
+  echo "Logueandonos en sistema\n";
 
   // Pagina 2
   $request = [];
