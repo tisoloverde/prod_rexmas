@@ -182,7 +182,7 @@
   $informes[8] = [1254,'Resultado_proceso'];
 
   $Actual = date("d-m-Y");
-  $periodoAnterior = date("Y-m",strtotime($periodoActual."-1 month"));
+  $periodoAnterior = date("Y-m",strtotime($Actual."-1 month"));
   $periodoActual = date("Y-m",strtotime($Actual."-0 month"));
 
   $periodos = [];
