@@ -49,6 +49,21 @@
 
   sleep(5);
 
+  $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/login');
+  curl_setopt ($ch, CURLOPT_POST, false);
+  curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+  curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+  curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+  curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+
+  $respuesta = curl_exec($ch);
+
+  curl_close($ch);
+
+  sleep(5);
+
   $linea = "";
 
   echo "Obteniendo token\n";
