@@ -869,7 +869,7 @@
     $date2 = new DateTime($fini);
     $diff = $date1->diff($date2);
 
-    if($diff->days <= 60){
+    if($diff->days <= 15){
       $arreglo[] = $arregloIni[$i];
     }
   }
@@ -908,7 +908,7 @@
     $date2 = new DateTime($fini);
     $diff = $date1->diff($date2);
 
-    if($diff->days <= 60){
+    if($diff->days <= 15){
       $arreglo[] = $arregloIni[$i];
     }
   }
