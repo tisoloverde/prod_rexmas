@@ -428,7 +428,7 @@
       $arreglo[] = $arregloIni[$i];
     }
 
-    limpiaPeriodoProceso($periodos[$0]);
+    limpiaPeriodoProceso($periodos[$z]);
 
     for($j = 0; $j < count($arreglo); $j++){
       if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
