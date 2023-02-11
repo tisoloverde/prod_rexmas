@@ -680,7 +680,7 @@ require('conexion.php');
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
-	    $sql = "DELETE PROCESOS_PERIODO
+	    $sql = "DELETE FROM PROCESOS_PERIODO
 							WHERE FECHAPROC = '{$periodo}'";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");

@@ -942,11 +942,12 @@
       $arreglo[] = $arregloIni[$i];
     }
 
+    limpiaPeriodoProceso($periodos[$0]);
+
     for($j = 0; $j < count($arreglo); $j++){
       if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
         break;
       }
-      limpiaPeriodoProceso($periodos[$j]);
 
       $ins = ingresaPeriodoProceso($arreglo[$j][0],$arreglo[$j][1],$arreglo[$j][2],$arreglo[$j][3],$arreglo[$j][4],$arreglo[$j][5],$arreglo[$j][6]);
       if($ins == "Ok"){
