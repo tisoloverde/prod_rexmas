@@ -415,6 +415,36 @@
 
   unlink($cookie);
 
+  for($z = 0; $z < count($periodos); $z++){
+    // Lectura de archivo de proceso
+    $rutaArchivo = $ruta . "descargas/Resultado_proceso_" . $periodos[$z] . ".xlsx";
+    $documento = IOFactory::load($rutaArchivo);
+    $hojaActual = $documento->getSheet(0);
+
+    $arregloIni = $hojaActual->toArray();
+    $arreglo = [];
+
+    for($i = 2; $i < count($arregloIni); $i++){
+      $arreglo[] = $arregloIni[$i];
+    }
+
+    limpiaPeriodoProceso($periodos[$0]);
+
+    for($j = 0; $j < count($arreglo); $j++){
+      if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
+        break;
+      }
+
+      $ins = ingresaPeriodoProceso($arreglo[$j][0],$arreglo[$j][1],$arreglo[$j][2],$arreglo[$j][3],$arreglo[$j][4],$arreglo[$j][5],$arreglo[$j][6]);
+      if($ins == "Ok"){
+        echo "Proceso ingresado: " . $arreglo[$j][0] . "\n";
+      }
+      else{
+        echo "Proceso error: " . $arreglo[$j][0] . "\n";
+      }
+    }
+  }
+
   // Lectura de archivo de centro de costo
   $rutaArchivo = $ruta . "descargas/Centro_de_costos.xlsx";
   $documento = IOFactory::load($rutaArchivo);
@@ -926,36 +956,6 @@
     }
     else{
       echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
-    }
-  }
-
-  for($z = 0; $z < count($periodos); $z++){
-    // Lectura de archivo de proceso
-    $rutaArchivo = $ruta . "descargas/Resultado_proceso_" . $periodos[$z] . ".xlsx";
-    $documento = IOFactory::load($rutaArchivo);
-    $hojaActual = $documento->getSheet(0);
-
-    $arregloIni = $hojaActual->toArray();
-    $arreglo = [];
-
-    for($i = 2; $i < count($arregloIni); $i++){
-      $arreglo[] = $arregloIni[$i];
-    }
-
-    limpiaPeriodoProceso($periodos[$0]);
-
-    for($j = 0; $j < count($arreglo); $j++){
-      if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
-        break;
-      }
-
-      $ins = ingresaPeriodoProceso($arreglo[$j][0],$arreglo[$j][1],$arreglo[$j][2],$arreglo[$j][3],$arreglo[$j][4],$arreglo[$j][5],$arreglo[$j][6]);
-      if($ins == "Ok"){
-        echo "Proceso ingresado: " . $arreglo[$j][0] . "\n";
-      }
-      else{
-        echo "Proceso error: " . $arreglo[$j][0] . "\n";
-      }
     }
   }
 
