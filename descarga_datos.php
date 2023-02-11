@@ -293,6 +293,10 @@
         fclose($file);
 
         echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . "_" . $periodos[$j] . ".xlsx\n";
+
+        if(filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') < 200){
+          unlink($ruta . "descargas/" . $informes[$i][1] . '.xlsx');
+        }
       }
     }
 
@@ -418,29 +422,32 @@
   for($z = 0; $z < count($periodos); $z++){
     // Lectura de archivo de proceso
     $rutaArchivo = $ruta . "descargas/Resultado_proceso_" . $periodos[$z] . ".xlsx";
-    $documento = IOFactory::load($rutaArchivo);
-    $hojaActual = $documento->getSheet(0);
 
-    $arregloIni = $hojaActual->toArray();
-    $arreglo = [];
+    if(file_exists($rutaArchivo)){
+      $documento = IOFactory::load($rutaArchivo);
+      $hojaActual = $documento->getSheet(0);
 
-    for($i = 2; $i < count($arregloIni); $i++){
-      $arreglo[] = $arregloIni[$i];
-    }
+      $arregloIni = $hojaActual->toArray();
+      $arreglo = [];
 
-    limpiaPeriodoProceso($periodos[$z]);
-
-    for($j = 0; $j < count($arreglo); $j++){
-      if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
-        break;
+      for($i = 2; $i < count($arregloIni); $i++){
+        $arreglo[] = $arregloIni[$i];
       }
 
-      $ins = ingresaPeriodoProceso($arreglo[$j][0],$arreglo[$j][1],$arreglo[$j][2],$arreglo[$j][3],$arreglo[$j][4],$arreglo[$j][5],$arreglo[$j][6]);
-      if($ins == "Ok"){
-        echo "Proceso ingresado: " . $arreglo[$j][0] . "\n";
-      }
-      else{
-        echo "Proceso error: " . $arreglo[$j][0] . "\n";
+      limpiaPeriodoProceso($periodos[$z]);
+
+      for($j = 0; $j < count($arreglo); $j++){
+        if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
+          break;
+        }
+
+        $ins = ingresaPeriodoProceso($arreglo[$j][0],$arreglo[$j][1],$arreglo[$j][2],$arreglo[$j][3],$arreglo[$j][4],$arreglo[$j][5],$arreglo[$j][6]);
+        if($ins == "Ok"){
+          echo "Proceso ingresado: " . $arreglo[$j][0] . "\n";
+        }
+        else{
+          echo "Proceso error: " . $arreglo[$j][0] . "\n";
+        }
       }
     }
   }
