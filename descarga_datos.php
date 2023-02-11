@@ -417,7 +417,7 @@
 
   echo "Informe descargado se borrara la cookie para matar la sesion\n\n";
 
-  unlink($cookie);
+  // unlink($cookie);
 
   for($z = 0; $z < count($periodos); $z++){
     // Lectura de archivo de proceso
