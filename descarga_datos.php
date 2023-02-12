@@ -521,7 +521,7 @@
     else{
       $SEXO = "Mujer";
     }
-    $FECHA_NACIMIENTO = convertDate($arreglo[$j][5]);
+    $FECHA_NACIMIENTO = $arreglo[$j][5];
     $NACIONALIDAD = ucwords(strtolower($arreglo[$j][7]));
     $DOMICILIO = ucwords(strtolower($arreglo[$j][8] . ", " . $arreglo[$j][9] . ", " . $arreglo[$j][10]));
     $TELEFONO = $arreglo[$j][11];
