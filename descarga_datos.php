@@ -12,8 +12,8 @@
 
   echo "Seteando estructura y cookie\n";
 
-  $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
-  // $ruta = '/var/www/html/generico/rexmas/';
+  // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
+  $ruta = '/var/www/html/generico/rexmas/';
   // $cookie = $ruta . 'descargas/cookieRR.txt';
   //
   // echo "Abriendo primer sitio\n";
