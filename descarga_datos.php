@@ -294,8 +294,8 @@
 
         echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . "_" . $periodos[$j] . ".xlsx\n";
 
-        if(filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') < 200){
-          unlink($ruta . "descargas/" . $informes[$i][1] . '.xlsx');
+        if(filesize($ruta . "descargas/" . $informes[$i][1] . '_' . $periodos[$j] . '.xlsx') < 1040){
+          unlink($ruta . "descargas/" . $informes[$i][1] . '_' . $periodos[$j] . '.xlsx');
         }
       }
     }
