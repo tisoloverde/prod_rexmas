@@ -457,26 +457,11 @@
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
+  $arregloIni = $hojaActual->toArray();
   $arreglo = [];
-  $f = 0;
-  foreach ($hojaActual->getRowIterator() as $fila) {
-    if($f > 1){
-      $flag = 0;
-      $datos = [];
-      foreach ($fila->getCellIterator() as $celda) {
-        if($flag > 13){
-          break;
-        }
-        $fila = $celda->getRow();
-        $columna = $celda->getColumn();
 
-        $datos[] = strval($celda->getValue());
-
-        $flag++;
-      }
-      $arreglo[] = $datos;
-    }
-    $f++;
+  for($i = 2; $i < count($arregloIni); $i++){
+    $arreglo[] = $arregloIni[$i];
   }
 
   for($j = 0; $j < count($arreglo); $j++){
@@ -519,26 +504,11 @@
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
+  $arregloIni = $hojaActual->toArray();
   $arreglo = [];
-  $f = 0;
-  foreach ($hojaActual->getRowIterator() as $fila) {
-    if($f > 1){
-      $flag = 0;
-      $datos = [];
-      foreach ($fila->getCellIterator() as $celda) {
-        if($flag > 56){
-          break;
-        }
-        $fila = $celda->getRow();
-        $columna = $celda->getColumn();
 
-        $datos[] = strval($celda->getValue());
-
-        $flag++;
-      }
-      $arreglo[] = $datos;
-    }
-    $f++;
+  for($i = 2; $i < count($arregloIni); $i++){
+    $arreglo[] = $arregloIni[$i];
   }
 
   for($j = 0; $j < count($arreglo); $j++){
@@ -603,26 +573,11 @@
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
+  $arregloIni = $hojaActual->toArray();
   $arreglo = [];
-  $f = 0;
-  foreach ($hojaActual->getRowIterator() as $fila) {
-    if($f > 1){
-      $flag = 0;
-      $datos = [];
-      foreach ($fila->getCellIterator() as $celda) {
-        if($flag > 22){
-          break;
-        }
-        $fila = $celda->getRow();
-        $columna = $celda->getColumn();
 
-        $datos[] = strval($celda->getValue());
-
-        $flag++;
-      }
-      $arreglo[] = $datos;
-    }
-    $f++;
+  for($i = 2; $i < count($arregloIni); $i++){
+    $arreglo[] = $arregloIni[$i];
   }
 
   for($j = 0; $j < count($arreglo); $j++){
@@ -657,26 +612,11 @@
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
+  $arregloIni = $hojaActual->toArray();
   $arreglo = [];
-  $f = 0;
-  foreach ($hojaActual->getRowIterator() as $fila) {
-    if($f > 1){
-      $flag = 0;
-      $datos = [];
-      foreach ($fila->getCellIterator() as $celda) {
-        if($flag > 13){
-          break;
-        }
-        $fila = $celda->getRow();
-        $columna = $celda->getColumn();
 
-        $datos[] = strval($celda->getValue());
-
-        $flag++;
-      }
-      $arreglo[] = $datos;
-    }
-    $f++;
+  for($i = 2; $i < count($arregloIni); $i++){
+    $arreglo[] = $arregloIni[$i];
   }
 
   $JEAS = [];
@@ -788,26 +728,25 @@
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
+  $arregloIni = $hojaActual->toArray();
   $arreglo = [];
-  $f = 0;
-  foreach ($hojaActual->getRowIterator() as $fila) {
-    if($f > 1){
-      $flag = 0;
-      $datos = [];
-      foreach ($fila->getCellIterator() as $celda) {
-        if($flag > 91){
-          break;
-        }
-        $fila = $celda->getRow();
-        $columna = $celda->getColumn();
 
-        $datos[] = strval($celda->getValue());
+  for($i = 2; $i < count($arregloIni); $i++){
+    $fter = $arregloIni[$i][8];
+    $fini = $arregloIni[$i][7];
 
-        $flag++;
-      }
-      $arreglo[] = $datos;
+    $date1 = new DateTime();
+    $date2 = new DateTime($fter);
+    $date3 = new DateTime($fini);
+    $diff = $date1->diff($date2);
+    $diff2 = $date1->diff($date3);
+
+    if($diff->days <= 180 || $fter != '3000-01-01'){
+      $arreglo[] = $arregloIni[$i];
     }
-    $f++;
+    else if($fter == '3000-01-01' && $diff2->days <= 180){
+      $arreglo[] = $arregloIni[$i];
+    }
   }
 
   for($j = 0; $j < count($arreglo); $j++){
@@ -840,16 +779,7 @@
       }
     }
 
-    $ins = actualizaCargoPersonal($dni,$idcargo);
-
-    if($ins == "Ok"){
-      echo "Cargo actualizado a personal: " . $dni . " - " . $idcargo . "\n";
-    }
-    else{
-      echo "Cargo error a personal: " . $dni . " - " . $idcargo . "\n";
-    }
-
-    $ins = actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico,$codigoRef1,$codigoRef2);
+    $ins = actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico,$codigoRef1,$codigoRef2,$idcargo);
 
     if($ins == "Ok"){
       echo "Cargo generico actualizado a personal: " . $dni . " - " . $codigoCargoGenerico . "\n";

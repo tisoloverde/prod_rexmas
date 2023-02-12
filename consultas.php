@@ -416,14 +416,20 @@ require('conexion.php');
 	  }
 	}
 
-	function actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico,$codigoRef1,$codigoRef2){
+	function actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico,$codigoRef1,$codigoRef2,$idcargo){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
 	    $sql = "UPDATE PERSONAL
 							SET CARGO_GENERICO_CODIGO = '{$codigoCargoGenerico}',
 							REFERENCIA1 = '{$codigoRef1}',
-							REFERENCIA2 = '{$codigoRef2}'
+							REFERENCIA2 = '{$codigoRef2}',
+							CARGO =
+							(
+								SELECT CARGO
+								FROM CARGO_LIQUIDACION
+								WHERE IDREXMAS = '{$idcargo}'
+							)
 							WHERE DNI = '{$dni}'";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
