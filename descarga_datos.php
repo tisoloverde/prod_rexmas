@@ -764,11 +764,11 @@
     else{
       echo "Datos contrato no cargados: " . $dni . " - " . $fechaInicio . "\n";
     }
-
-    ingresaDesvinculacion();
-    actualizaCargoGenericoPersonal();
-    actualizaACT();
   }
+
+  ingresaDesvinculacion();
+  actualizaCargoGenericoPersonal();
+  actualizaACT();
   //
   //
   // // Lectura de archivo de cargos
