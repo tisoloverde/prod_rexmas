@@ -765,60 +765,9 @@
       echo "Datos contrato no cargados: " . $dni . " - " . $fechaInicio . "\n";
     }
 
-    // if($diff->format("%r") . $diff->days >= 1){
-    //   echo "Aplica: \n";
-    //   echo $diff->format("%r") . $diff->days . "\n";
-    //   echo $date1->format('Y-m-d H:i:s') . "\n";
-    //   echo $date2->format('Y-m-d H:i:s') . "\n";
-    //
-    //   $ins = ingresaDesvinculacion($dni, $fechaTermino, $causalTermino);
-    //   if($ins == "Ok"){
-    //     echo "Desvinculacion ingresada: " . $dni . " | " .   $fechaTermino . "\n";
-    //   }
-    //   else{
-    //     echo "Desvinculacion error: " . $dni . " | " .   $fechaTermino . "\n";
-    //   }
-    // }
-    //
-    // $ins = actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico,$codigoRef1,$codigoRef2,$idcargo);
-    //
-    // if($ins == "Ok"){
-    //   echo "Cargo generico actualizado a personal: " . $dni . " - " . $codigoCargoGenerico . "\n";
-    // }
-    // else{
-    //   echo "Cargo generico error a personal: " . $dni . " - " . $codigoCargoGenerico . "\n";
-    // }
-    //
-    // $sel = ACTExistente($dni);
-    // $sel[0]['CANTIDAD'];
-    //
-    // if($sel[0]['CANTIDAD'] == '0'){
-    //   if($dni != ""){
-    //     $ins = ingresaACT($dni,$idcentrocosto);
-    //
-    //     if($ins == "Ok"){
-    //       echo "CECO ingresado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
-    //     }
-    //     else{
-    //       echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
-    //     }
-    //   }
-    //   else{
-    //     echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
-    //   }
-    // }
-    // else{
-    //   if($dni != ""){
-    //     $ins = actualizaACT($dni,$idcentrocosto);
-    //
-    //     if($ins == "Ok"){
-    //       echo "CECO actualizado correctamente: " . $dni . " - " . $idcentrocosto . "\n";
-    //     }
-    //     else{
-    //       echo "CECO error: " . $dni . " - " . $idcentrocosto . "\n";
-    //     }
-    //   }
-    // }
+    ingresaDesvinculacion();
+    actualizaCargoGenericoPersonal();
+    actualizaACT();
   }
   //
   //

@@ -326,21 +326,11 @@ require('conexion.php');
 	  }
 	}
 
-	function actualizaACT($dni,$idcentrocosto){
+	function actualizaACT(){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
-	    $sql = "UPDATE ACT
-							SET
-								IDESTRUCTURA_OPERACION = (SELECT IDESTRUCTURA_OPERACION
-								FROM ESTRUCTURA_OPERACION
-								WHERE DEFINICION = '{$idcentrocosto}'),
-								FECHA = NOW(),
-								USUARIO = 'AUTOMATA'
-							WHERE IDPERSONAL =
-								(SELECT IDPERSONAL
-								FROM PERSONAL
-								WHERE DNI  = '{$dni}')";
+	    $sql = "CALL ACTUALIZAR_CENTRO_COSTO();";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
 	      return "Ok";
@@ -416,21 +406,11 @@ require('conexion.php');
 	  }
 	}
 
-	function actualizaCargoGenericoPersonal($dni,$codigoCargoGenerico,$codigoRef1,$codigoRef2,$idcargo){
+	function actualizaCargoGenericoPersonal(){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
-	    $sql = "UPDATE PERSONAL
-							SET CARGO_GENERICO_CODIGO = '{$codigoCargoGenerico}',
-							REFERENCIA1 = '{$codigoRef1}',
-							REFERENCIA2 = '{$codigoRef2}',
-							CARGO =
-							(
-								SELECT CARGO
-								FROM CARGO_LIQUIDACION
-								WHERE IDREXMAS = '{$idcargo}'
-							)
-							WHERE DNI = '{$dni}'";
+	    $sql = "CALL ACTUALIZAR_PERSONAL();";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
 	      return "Ok";
@@ -660,11 +640,11 @@ require('conexion.php');
 		}
 	}
 
-	function ingresaDesvinculacion($dni,$fini,$codigo){
+	function ingresaDesvinculacion(){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
-	    $sql = "CALL INSERTAR_DESVINCULACION('{$dni}','{$fini}','{$codigo}')";
+	    $sql = "CALL INSERTAR_DESVINCULACION();";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
 	      return "Ok";
