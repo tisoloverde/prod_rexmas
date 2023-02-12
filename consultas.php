@@ -744,4 +744,73 @@ require('conexion.php');
 	    return "Error";
 	  }
 	}
+
+	function ingresaDatosContrato($dni,$fechaTermino,$causalTermino,$codigoCargoGenerico,$codigoRef1,$codigoRef2,$idcargo,$idcentrocosto,$fechaInicio,$clasificacionContrato){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "INSERT INTO CONTRATO_TEMPORAL
+							(
+								DNI,
+								FECHA_TERMINO,
+								CAUSAL_TERMINO,
+								CODIGO_CARGO_GENERICO,
+								CODIGO_REF1,
+								CODIGO_REF2,
+								IDCARGO,
+								IDCENTRO_COSTO,
+								FECHA_INICIO,
+								CLASIFICACION_CONTRATO
+							)
+							VALUES
+							(
+								'{$dni}',
+								'{$fechaTermino}',
+								'{$causalTermino}',
+								'{$codigoCargoGenerico}',
+								'{$codigoRef1}',
+								'{$codigoRef2}',
+								'{$idcargo}',
+								'{$idcentrocosto}',
+								'{$fechaInicio}',
+								'{$clasificacionContrato}'
+							)";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
+
+	function limpiarDatosContrato(){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "DELETE FROM CONTRATO_TEMPORAL";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      return $con->error;
+	      $con->query("ROLLBACK");
+	      // return $sql;
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
 ?>
