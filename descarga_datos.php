@@ -176,7 +176,12 @@
     }
 
     echo "Sessionid1_head: " . $sessionid . "\n";
-  } catch (\Exception $e) {
+  }
+  catch (\Exception $e) {
+    echo "Error de captura de sesion id\n";
+    goto start;
+  }
+  catch (\Error $e) {
     echo "Error de captura de sesion id\n";
     goto start;
   }
