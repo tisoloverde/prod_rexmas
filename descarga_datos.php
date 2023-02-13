@@ -24,138 +24,116 @@
 
   echo "Abriendo primer sitio\n";
 
-  // Pagina 1
-  $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/login');
-  curl_setopt ($ch, CURLOPT_POST, false);
-  curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-  curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-  curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-  curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+  try {
+    // Pagina 1
+    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/login');
+    curl_setopt ($ch, CURLOPT_POST, false);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
 
-  $respuesta = curl_exec($ch);
+    $respuesta = curl_exec($ch);
 
-  curl_close($ch);
+    curl_close($ch);
 
-  sleep(5);
+    sleep(5);
 
-  $linea = "";
-
-  echo "Obteniendo token\n";
-
-  $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
-  while (!feof($fp)){
-      $linea = fgets($fp);
-      if(strpos($linea, "csrftoken"))
-      {
-          // echo $linea;
-          break;
-      }
-  }
-  fclose($fp);
-
-  $array = explode("csrftoken",$linea);
-
-  $csrftoken = trim($array[1]);
-
-  echo "Token1: " . $csrftoken . "\n";
-
-  echo "Logueandonos en sistema\n";
-
-  // Pagina 2
-  $request = [];
-
-  // $request[] = 'POST /remuneraciones/es-CL/login HTTP/1.1';
-  // $request[] = 'Host: soloverde.rexmas.cl';
-  // $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
-  // $request[] = 'Accept: application/json, text/plain, */*';
-  // $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
-  // $request[] = 'Accept-Encoding: gzip, deflate, br';
-  $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/login';
-  $request[] = 'Content-Type: application/json';
-  $request[] = 'X-XSRF-TOKEN: ' . $csrftoken;
-  $request[] = 'X-CSRFTOKEN: ' . $csrftoken;
-  // $request[] = 'Content-Length: 46';
-  // $request[] = 'Origin: https://soloverde.rexmas.cl';
-  // $request[] = 'DNT: 1';
-  // $request[] = 'Connection: keep-alive';
-  // $request[] = 'Cookie: csrftoken=' . $csrftoken;
-  // $request[] = 'Sec-Fetch-Dest: empty';
-  // $request[] = 'Sec-Fetch-Mode: cors';
-  // $request[] = 'Sec-Fetch-Site: same-origin';
-  // $request[] = 'Pragma: no-cache';
-  // $request[] = 'Cache-Control: no-cache';
-
-  $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/login');
-
-  curl_setopt($ch, CURLOPT_POST, true);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-  curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-  curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-  curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
-  curl_setopt($ch, CURLOPT_HEADER, true);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config02"}');
-  curl_setopt($ch, CURLOPT_ENCODING,"");
-
-  $respuesta = curl_exec($ch);
-
-  $file = fopen($ruta . 'login.html', 'w+');
-  fwrite($file, $respuesta);
-  fclose($file);
-
-  curl_close($ch);
-
-  sleep(5);
-
-  echo "Obteniendo token e identificador de sesion\n";
-
-  $linea = "";
-
-  $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
-  while (!feof($fp)){
-      $linea = fgets($fp);
-      if(strpos($linea, "csrftoken"))
-      {
-          // echo $linea;
-          break;
-      }
-  }
-  fclose($fp);
-
-  $array = explode("csrftoken",$linea);
-
-  $csrftoken = trim($array[1]);
-
-  $linea = "";
-
-  $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
-  while (!feof($fp)){
-      $linea = fgets($fp);
-      if(strpos($linea, "sessionid"))
-      {
-          // echo $linea;
-          break;
-      }
-  }
-  fclose($fp);
-
-  $array = explode("sessionid",$linea);
-
-  // var_dump($array);
-
-  $sessionid = trim($array[1]);
-
-  echo "Token2: " . $csrftoken . "\n";
-  echo "Sessionid1: " . $sessionid . "\n";
-
-  if($sessionid == ""){
     $linea = "";
 
-    $fp = fopen($ruta . 'login.html', "r");
+    echo "Obteniendo token\n";
+
+    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
+    while (!feof($fp)){
+        $linea = fgets($fp);
+        if(strpos($linea, "csrftoken"))
+        {
+            // echo $linea;
+            break;
+        }
+    }
+    fclose($fp);
+
+    $array = explode("csrftoken",$linea);
+
+    $csrftoken = trim($array[1]);
+
+    echo "Token1: " . $csrftoken . "\n";
+
+    echo "Logueandonos en sistema\n";
+
+    // Pagina 2
+    $request = [];
+
+    // $request[] = 'POST /remuneraciones/es-CL/login HTTP/1.1';
+    // $request[] = 'Host: soloverde.rexmas.cl';
+    // $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
+    // $request[] = 'Accept: application/json, text/plain, */*';
+    // $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
+    // $request[] = 'Accept-Encoding: gzip, deflate, br';
+    $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/login';
+    $request[] = 'Content-Type: application/json';
+    $request[] = 'X-XSRF-TOKEN: ' . $csrftoken;
+    $request[] = 'X-CSRFTOKEN: ' . $csrftoken;
+    // $request[] = 'Content-Length: 46';
+    // $request[] = 'Origin: https://soloverde.rexmas.cl';
+    // $request[] = 'DNT: 1';
+    // $request[] = 'Connection: keep-alive';
+    // $request[] = 'Cookie: csrftoken=' . $csrftoken;
+    // $request[] = 'Sec-Fetch-Dest: empty';
+    // $request[] = 'Sec-Fetch-Mode: cors';
+    // $request[] = 'Sec-Fetch-Site: same-origin';
+    // $request[] = 'Pragma: no-cache';
+    // $request[] = 'Cache-Control: no-cache';
+
+    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/login');
+
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+    curl_setopt($ch, CURLOPT_HEADER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config02"}');
+    curl_setopt($ch, CURLOPT_ENCODING,"");
+
+    $respuesta = curl_exec($ch);
+
+    $file = fopen($ruta . 'login.html', 'w+');
+    fwrite($file, $respuesta);
+    fclose($file);
+
+    curl_close($ch);
+
+    sleep(5);
+
+    echo "Obteniendo token e identificador de sesion\n";
+
+    $linea = "";
+
+    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
+    while (!feof($fp)){
+        $linea = fgets($fp);
+        if(strpos($linea, "csrftoken"))
+        {
+            // echo $linea;
+            break;
+        }
+    }
+    fclose($fp);
+
+    $array = explode("csrftoken",$linea);
+
+    $csrftoken = trim($array[1]);
+
+    $linea = "";
+
+    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
     while (!feof($fp)){
         $linea = fgets($fp);
         if(strpos($linea, "sessionid"))
@@ -166,15 +144,43 @@
     }
     fclose($fp);
 
-    $array = explode("sessionid=",$linea);
-    $array2 = explode(";",$array);
+    $array = explode("sessionid",$linea);
 
     // var_dump($array);
 
-    $sessionid = trim($array2[0]);
+    $sessionid = trim($array[1]);
+
+    echo "Token2: " . $csrftoken . "\n";
+    echo "Sessionid1: " . $sessionid . "\n";
+
+    if($sessionid == ""){
+      $linea = "";
+
+      $fp = fopen($ruta . 'login.html', "r");
+      while (!feof($fp)){
+          $linea = fgets($fp);
+          if(strpos($linea, "sessionid"))
+          {
+              // echo $linea;
+              break;
+          }
+      }
+      fclose($fp);
+
+      $array = explode("sessionid=",$linea);
+      $array2 = explode(";",$array);
+
+      // var_dump($array);
+
+      $sessionid = trim($array2[0]);
+    }
+
+    echo "Sessionid1_head: " . $sessionid . "\n";
+  } catch (\Exception $e) {
+    echo "Error de captura de sesion id\n";
+    goto start;
   }
 
-  echo "Sessionid1_head: " . $sessionid . "\n";
 
   $informes = [];
   $informes[0] = [1122,'Empleados'];
@@ -246,7 +252,7 @@
       fclose($file);
 
       echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . ".xlsx\n";
-
+      echo filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') . "\n";
       if(filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') < 2000){
         goto start;
       }
