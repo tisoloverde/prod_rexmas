@@ -20,7 +20,7 @@
 
   start:
   $ciclos++;
-  echo "Cilos de lectura: " . $ciclos;
+  echo "Cilos de lectura: " . $ciclos . "\n";
 
   echo "Abriendo primer sitio\n";
 
