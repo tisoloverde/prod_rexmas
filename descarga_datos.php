@@ -16,6 +16,12 @@
   $ruta = '/var/www/html/generico/rexmas/';
   $cookie = $ruta . 'descargas/cookieRR.txt';
 
+  $ciclos = 0;
+
+  start:
+  $ciclos++;
+  echo "Cilos de lectura: " . $ciclos;
+
   echo "Abriendo primer sitio\n";
 
   // Pagina 1
@@ -240,6 +246,10 @@
       fclose($file);
 
       echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . ".xlsx\n";
+
+      if(filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') < 2000){
+        goto start;
+      }
     }
     else{
       echo "Descargando informe de {$informes[$i][1]} \n";
