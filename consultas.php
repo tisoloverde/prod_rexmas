@@ -22,12 +22,12 @@ require('conexion.php');
 		}
 	}
 
-	function ingresaCentroCosto($item,$nombre){
+	function ingresaCentroCosto($item,$nombre, $hab_int){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
-	    $sql = "INSERT INTO ESTRUCTURA_OPERACION(DEFINICION, NOMENCLATURA, FECHA, USUARIO)
-	            VALUES('{$item}','{$nombre}', NOW(), 'Automata')";
+	    $sql = "INSERT INTO ESTRUCTURA_OPERACION(DEFINICION, NOMENCLATURA, FECHA, USUARIO, HABILITADO)
+	            VALUES('{$item}','{$nombre}', NOW(), 'Automata', '{$hab_int}')";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
 	      return "Ok";
@@ -785,6 +785,31 @@ require('conexion.php');
 	      return $con->error;
 	      $con->query("ROLLBACK");
 	      // return $sql;
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
+
+	function updateCentroCosto($item,$nombre, $hab_int){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "UPDATE ESTRUCTURA_OPERACION
+							SET NOMENCLATURA = '{$nombre}',
+							HABILITADO = '{$hab_int}'
+							WHERE DEFINICION = '{$item}'";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
 	      // return $sql;
 	    }
 	  }

@@ -485,7 +485,8 @@
     $arreglo[] = $arregloIni[$i];
   }
 
-  for($j = 0; $j < count($arreglo); $j++){
+  // for($j = 0; $j < count($arreglo); $j++){
+  for($j = 0; $j < 10; $j++){
     $id = $arreglo[$j][0];
     $lista = $arreglo[$j][1];
     $item = $arreglo[$j][2];
@@ -497,13 +498,17 @@
     $sincronizado_externos = $arreglo[$j][8];
     $habilitado = $arreglo[$j][9];
     $reservado = $arreglo[$j][10];
+    $hab_int = 0;
+    if($habilitado == true){
+      $hab_int = 1;
+    }
 
     $sel = datoCentroCostoIngresado($item);
     $sel[0]['CANTIDAD'];
 
     if($sel[0]['CANTIDAD'] == '0'){
       if($item != ""){
-        $ins = ingresaCentroCosto($item,$nombre);
+        $ins = ingresaCentroCosto($item,$nombre, $hab_int);
         if($ins == "Ok"){
           echo "Centro de costo ingresado: " . $item . "\n";
         }
@@ -516,7 +521,13 @@
       }
     }
     else{
-      echo "Centro de costo existente: " . $item . "\n";
+      $ins = updateCentroCosto($item,$nombre, $hab_int);
+      if($ins == "Ok"){
+        echo "Centro de costo actualizado: " . $item . "\n";
+      }
+      else{
+        echo "Centro de costo error actuaizacion: " . $item . "\n";
+      }
     }
   }
 
