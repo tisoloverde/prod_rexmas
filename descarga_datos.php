@@ -485,8 +485,7 @@
     $arreglo[] = $arregloIni[$i];
   }
 
-  // for($j = 0; $j < count($arreglo); $j++){
-  for($j = 0; $j < 10; $j++){
+  for($j = 0; $j < count($arreglo); $j++){
     $id = $arreglo[$j][0];
     $lista = $arreglo[$j][1];
     $item = $arreglo[$j][2];
