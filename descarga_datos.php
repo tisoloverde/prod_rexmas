@@ -10,7 +10,15 @@
 
   echo "Hora de inicio: " . date('Y-m-d H:i:s') . "\n\n";
 
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Hora de inicio") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
   echo "Seteando estructura y cookie\n";
+
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Seteando estructura y cookie") or die("Error escribiendo en el archivo");
+  fclose($logFile);
 
   // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
   $ruta = '/var/www/html/generico/rexmas/';
@@ -20,7 +28,7 @@
 
   start:
   $ciclos++;
-  echo "Cilos de lectura: " . $ciclos . "\n";
+  echo "Ciclos de lectura: " . $ciclos . "\n";
 
   echo "Abriendo primer sitio\n";
 
@@ -63,6 +71,10 @@
     echo "Token1: " . $csrftoken . "\n";
 
     echo "Logueandonos en sistema\n";
+
+    $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+    fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Logueandonos en sistema") or die("Error escribiendo en el archivo");
+    fclose($logFile);
 
     // Pagina 2
     $request = [];
@@ -210,6 +222,10 @@
     if($i != 8){
       echo "Descargando informe de {$informes[$i][1]} \n";
 
+      $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+      fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Descargando informe de {$informes[$i][1]}") or die("Error escribiendo en el archivo");
+      fclose($logFile);
+
       $request = [];
 
       $request[] = 'POST /remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar HTTP/1.1';
@@ -264,6 +280,10 @@
     }
     else{
       echo "Descargando informe de {$informes[$i][1]} \n";
+
+      $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+      fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Descargando informe de {$informes[$i][1]}") or die("Error escribiendo en el archivo");
+      fclose($logFile);
 
       for($j = 0; $j < count($periodos); $j++){
         // Informe Empleados
@@ -437,6 +457,10 @@
   }
 
   echo "Informe descargado se borrara la cookie para matar la sesion\n\n";
+
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Informes descargados se borrara la cookie para matar la sesion") or die("Error escribiendo en el archivo");
+  fclose($logFile)
 
   // unlink($cookie);
 
@@ -803,6 +827,10 @@
 
 
   // Lectura de archivo de cargos
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando vacaciones") or die("Error escribiendo en el archivo");
+  fclose($logFile)
+
   $rutaArchivo = $ruta . "descargas/Vacaciones.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
@@ -841,6 +869,10 @@
   }
 
   // Lectura de archivo de cargos
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando licencias") or die("Error escribiendo en el archivo");
+  fclose($logFile)
+
   $rutaArchivo = $ruta . "descargas/Licencias.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
@@ -878,6 +910,10 @@
   }
 
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
+
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Hora de termino") or die("Error escribiendo en el archivo");
+  fclose($logFile)
 
   //Funciones
   function convertDate($dateValue) {
