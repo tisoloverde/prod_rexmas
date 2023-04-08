@@ -460,7 +460,7 @@
 
   $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Informes descargados se borrara la cookie para matar la sesion") or die("Error escribiendo en el archivo");
-  fclose($logFile)
+  fclose($logFile);
 
   // unlink($cookie);
 
@@ -829,7 +829,7 @@
   // Lectura de archivo de cargos
   $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando vacaciones") or die("Error escribiendo en el archivo");
-  fclose($logFile)
+  fclose($logFile);
 
   $rutaArchivo = $ruta . "descargas/Vacaciones.xlsx";
   $documento = IOFactory::load($rutaArchivo);
@@ -871,7 +871,7 @@
   // Lectura de archivo de cargos
   $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando licencias") or die("Error escribiendo en el archivo");
-  fclose($logFile)
+  fclose($logFile);
 
   $rutaArchivo = $ruta . "descargas/Licencias.xlsx";
   $documento = IOFactory::load($rutaArchivo);
@@ -913,7 +913,7 @@
 
   $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Hora de termino") or die("Error escribiendo en el archivo");
-  fclose($logFile)
+  fclose($logFile);
 
   //Funciones
   function convertDate($dateValue) {
