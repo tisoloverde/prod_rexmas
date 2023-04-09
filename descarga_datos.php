@@ -463,6 +463,9 @@
   fclose($logFile);
 
   // unlink($cookie);
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando procesos") or die("Error escribiendo en el archivo");
+  fclose($logFile);
 
   for($z = 0; $z < count($periodos); $z++){
     // Lectura de archivo de proceso
@@ -498,6 +501,11 @@
   }
 
   // Lectura de archivo de centro de costo
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando centro costos") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+
   $rutaArchivo = $ruta . "descargas/Centro_de_costos.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
@@ -555,6 +563,10 @@
   }
 
   // Lectura de archivo de Empleados
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando personal") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
   $rutaArchivo = $ruta . "descargas/Empleados.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
@@ -624,6 +636,10 @@
   }
 
   // Lectura de archivo de cargos
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando cargos") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
   $rutaArchivo = $ruta . "descargas/Cargos.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
@@ -663,6 +679,10 @@
   }
 
   // Lectura de archivo de centro de catalogo
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando catalogo") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
   $rutaArchivo = $ruta . "descargas/Catalogo.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
@@ -779,6 +799,10 @@
   }
 
   // Lectura de archivo de contratos
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando contratos") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
   $rutaArchivo = $ruta . "descargas/Contratos.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
