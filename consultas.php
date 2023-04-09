@@ -562,11 +562,11 @@ require('conexion.php');
 	  }
 	}
 
-	function ingresaLicenciaRexmas($dni,$fini,$fter){
+	function ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
-	    $sql = "CALL INSERTAR_LICENCIA_RANGO('{$dni}','{$fini}','{$fter}')";
+	    $sql = "CALL INSERTAR_LICENCIA_RANGO('{$dni}','{$fini}','{$fter}','{$tipoLic}')";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
 	      return "Ok";
@@ -725,7 +725,7 @@ require('conexion.php');
 	  }
 	}
 
-	function ingresaDatosContrato($dni,$fechaTermino,$causalTermino,$codigoCargoGenerico,$codigoRef1,$codigoRef2,$idcargo,$idcentrocosto,$fechaInicio,$clasificacionContrato){
+	function ingresaDatosContrato($dni,$fechaTermino,$causalTermino,$codigoCargoGenerico,$codigoRef1,$codigoRef2,$idcargo,$idcentrocosto,$fechaInicio,$clasificacionContrato,$idempresa){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
@@ -740,7 +740,8 @@ require('conexion.php');
 								IDCARGO,
 								IDCENTRO_COSTO,
 								FECHA_INICIO,
-								CLASIFICACION_CONTRATO
+								CLASIFICACION_CONTRATO,
+								IDEMPRESA
 							)
 							VALUES
 							(
@@ -753,7 +754,8 @@ require('conexion.php');
 								'{$idcargo}',
 								'{$idcentrocosto}',
 								'{$fechaInicio}',
-								'{$clasificacionContrato}'
+								'{$clasificacionContrato}',
+								'{$idempresa}'
 							)";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
