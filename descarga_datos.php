@@ -11,6 +11,10 @@
   echo "Hora de inicio: " . date('Y-m-d H:i:s') . "\n\n";
 
   $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n================= " . date("d/m/Y")." =================") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Hora de inicio") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
