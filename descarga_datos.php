@@ -10,17 +10,17 @@
 
   echo "Hora de inicio: " . date('Y-m-d H:i:s') . "\n\n";
 
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n================= " . date("d/m/Y")." =================") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Hora de inicio") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
   echo "Seteando estructura y cookie\n";
 
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Seteando estructura y cookie") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -76,7 +76,7 @@
 
     echo "Logueandonos en sistema\n";
 
-    $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+    $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
     fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Logueandonos en sistema") or die("Error escribiendo en el archivo");
     fclose($logFile);
 
@@ -226,7 +226,7 @@
     if($i != 8){
       echo "Descargando informe de {$informes[$i][1]} \n";
 
-      $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+      $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
       fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Descargando informe de {$informes[$i][1]}") or die("Error escribiendo en el archivo");
       fclose($logFile);
 
@@ -285,7 +285,7 @@
     else{
       echo "Descargando informe de {$informes[$i][1]} \n";
 
-      $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+      $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
       fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Descargando informe de {$informes[$i][1]}") or die("Error escribiendo en el archivo");
       fclose($logFile);
 
@@ -462,12 +462,12 @@
 
   echo "Informe descargado se borrara la cookie para matar la sesion\n\n";
 
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Informes descargados se borrara la cookie para matar la sesion") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
   // unlink($cookie);
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando procesos") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -505,7 +505,7 @@
   }
 
   // Lectura de archivo de centro de costo
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando centro costos") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -567,7 +567,7 @@
   }
 
   // Lectura de archivo de Empleados
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando personal") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -640,7 +640,7 @@
   }
 
   // Lectura de archivo de cargos
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando cargos") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -683,7 +683,7 @@
   }
 
   // Lectura de archivo de centro de catalogo
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando catalogo") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -803,7 +803,7 @@
   }
 
   // Lectura de archivo de contratos
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando contratos") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -855,7 +855,7 @@
 
 
   // Lectura de archivo de cargos
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando vacaciones") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -897,7 +897,7 @@
   }
 
   // Lectura de archivo de cargos
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando licencias") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -940,7 +940,7 @@
 
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
 
-  $logFile = fopen("log.txt", 'a') or die("Error creando archivo");
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Hora de termino") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
