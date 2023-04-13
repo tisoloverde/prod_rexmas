@@ -14,20 +14,20 @@
   fwrite($logFile, "\n================= " . date("d/m/Y")." =================") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Hora de inicio") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  // echo "Seteando estructura y cookie\n";
-  //
-  // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Seteando estructura y cookie") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  // // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
-  // $ruta = '/var/www/html/generico/rexmas/';
-  // $cookie = $ruta . 'descargas/cookieRR.txt';
-  //
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Hora de inicio") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  echo "Seteando estructura y cookie\n";
+
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Seteando estructura y cookie") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
+  $ruta = '/var/www/html/generico/rexmas/';
+  $cookie = $ruta . 'descargas/cookieRR.txt';
+  
   // $ciclos = 0;
   //
   // start:
