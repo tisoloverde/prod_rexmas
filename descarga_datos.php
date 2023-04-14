@@ -220,7 +220,7 @@
   $periodoActual = date("Y-m",strtotime($Actual."-0 month"));
 
   $periodos = [];
-  $periodos[0] = $periodoAnterior;2
+  $periodos[0] = $periodoAnterior2;
   $periodos[1] = $periodoAnterior;
   $periodos[2] = $periodoActual;
 
