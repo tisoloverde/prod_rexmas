@@ -278,6 +278,8 @@
       fwrite($file, $respuesta);
       fclose($file);
 
+      sleep(5);
+
       echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . ".xlsx\n";
       echo filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') . "\n";
       if(filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') < 2000){
@@ -338,6 +340,8 @@
         $file = fopen($ruta . "descargas/" . $informes[$i][1] . '_' . $periodos[$j] . '.xlsx', 'w+');
         fwrite($file, $respuesta);
         fclose($file);
+
+        sleep(5);
 
         echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . "_" . $periodos[$j] . ".xlsx\n";
 
