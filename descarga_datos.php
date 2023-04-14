@@ -29,7 +29,7 @@
   $cookie = $ruta . 'descargas/cookieRR.txt';
 
   // $ciclos = 0;
-  // 
+  //
   // start:
   // $ciclos++;
   // echo "Ciclos de lectura: " . $ciclos . "\n";
@@ -854,62 +854,14 @@
   // ingresaDesvinculacion();
   // actualizaCargoGenericoPersonal();
   // actualizaACT();
-
-
-  // Lectura de archivo de cargos
-  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando vacaciones") or die("Error escribiendo en el archivo");
-  fclose($logFile);
-
-  $rutaArchivo = $ruta . "descargas/Vacaciones.xlsx";
-  $documento = IOFactory::load($rutaArchivo);
-  $hojaActual = $documento->getSheet(0);
-
-  $arregloIni = $hojaActual->toArray();
-  $arreglo = [];
-
-  for($i = 2; $i < count($arregloIni); $i++){
-    $fini = $arregloIni[$i][8];
-
-    $date1 = new DateTime();
-    $date2 = new DateTime($fini);
-    $diff = $date1->diff($date2);
-
-    if($diff->days <= 102){
-      $arreglo[] = $arregloIni[$i];
-    }
-  }
-
-  for($j = 0; $j < count($arreglo); $j++){
-    $firmado = $arreglo[$j][12];
-
-    if($firmado == "si" && $arreglo[$j][8] != ""){
-      $dni = $arreglo[$j][1];
-      $fini = $arreglo[$j][8];
-      $fter = $arreglo[$j][9];
-
-      $ins = ingresaVacacionRexmas($dni,$fini,$fter);
-      if($ins == "Ok"){
-        echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
-        $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-        fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter) or die("Error escribiendo en el archivo");
-        fclose($logFile);
-      }
-      else{
-        echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
-        $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-        fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Vacación error: " . $dni . " | " . $fini . " - " . $fter) or die("Error escribiendo en el archivo");
-        fclose($logFile);
-      }
-    }
-  }
-
+  //
+  //
   // // Lectura de archivo de cargos
   // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando licencias") or die("Error escribiendo en el archivo");
+  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando vacaciones") or die("Error escribiendo en el archivo");
   // fclose($logFile);
   //
-  // $rutaArchivo = $ruta . "descargas/Licencias.xlsx";
+  // $rutaArchivo = $ruta . "descargas/Vacaciones.xlsx";
   // $documento = IOFactory::load($rutaArchivo);
   // $hojaActual = $documento->getSheet(0);
   //
@@ -917,8 +869,7 @@
   // $arreglo = [];
   //
   // for($i = 2; $i < count($arregloIni); $i++){
-  //   $fini = explode("-",substr($arregloIni[$i][19],0,10));
-  //   $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
+  //   $fini = $arregloIni[$i][8];
   //
   //   $date1 = new DateTime();
   //   $date2 = new DateTime($fini);
@@ -930,21 +881,64 @@
   // }
   //
   // for($j = 0; $j < count($arreglo); $j++){
-  //   $dni = $arreglo[$j][4];
-  //   $tipoLic = $arreglo[$j][7];
-  //   $fini = explode("-",substr($arreglo[$j][19],0,10));
-  //   $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
-  //   $fter = explode("-",substr($arreglo[$j][19],10,10));
-  //   $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
+  //   $firmado = $arreglo[$j][12];
   //
-  //   $ins = ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic);
-  //   if($ins == "Ok"){
-  //     echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
-  //   }
-  //   else{
-  //     echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+  //   if($arreglo[$j][8] != ""){
+  //     $dni = $arreglo[$j][1];
+  //     $fini = $arreglo[$j][8];
+  //     $fter = $arreglo[$j][9];
+  //
+  //     $ins = ingresaVacacionRexmas($dni,$fini,$fter);
+  //     if($ins == "Ok"){
+  //       echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
+  //     }
+  //     else{
+  //       echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+  //     }
   //   }
   // }
+
+  // Lectura de archivo de cargos
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando licencias") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  $rutaArchivo = $ruta . "descargas/Licencias.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arregloIni = $hojaActual->toArray();
+  $arreglo = [];
+
+  for($i = 2; $i < count($arregloIni); $i++){
+    $fini = explode("-",substr($arregloIni[$i][19],0,10));
+    $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
+
+    $date1 = new DateTime();
+    $date2 = new DateTime($fini);
+    $diff = $date1->diff($date2);
+
+    if($diff->days <= 102){
+      $arreglo[] = $arregloIni[$i];
+    }
+  }
+
+  for($j = 0; $j < count($arreglo); $j++){
+    $dni = $arreglo[$j][4];
+    $tipoLic = $arreglo[$j][7];
+    $fini = explode("-",substr($arreglo[$j][19],0,10));
+    $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
+    $fter = explode("-",substr($arreglo[$j][19],10,10));
+    $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
+
+    $ins = ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic);
+    if($ins == "Ok"){
+      echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
+    }
+    else{
+      echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+    }
+  }
 
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
 
