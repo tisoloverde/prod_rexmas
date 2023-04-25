@@ -472,341 +472,341 @@
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Informes descargados se borrara la cookie para matar la sesion") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  // // unlink($cookie);
-  // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando procesos") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  // for($z = 0; $z < count($periodos); $z++){
-  //   // Lectura de archivo de proceso
-  //   $rutaArchivo = $ruta . "descargas/Resultado_proceso_" . $periodos[$z] . ".xlsx";
-  //
-  //   if(file_exists($rutaArchivo)){
-  //     $documento = IOFactory::load($rutaArchivo);
-  //     $hojaActual = $documento->getSheet(0);
-  //
-  //     $arregloIni = $hojaActual->toArray();
-  //     $arreglo = [];
-  //
-  //     for($i = 2; $i < count($arregloIni); $i++){
-  //       $arreglo[] = $arregloIni[$i];
-  //     }
-  //
-  //     limpiaPeriodoProceso($periodos[$z]);
-  //
-  //     for($j = 0; $j < count($arreglo); $j++){
-  //       if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
-  //         break;
-  //       }
-  //
-  //       $ins = ingresaPeriodoProceso($arreglo[$j][0],$arreglo[$j][1],$arreglo[$j][2],$arreglo[$j][3],$arreglo[$j][4],$arreglo[$j][5],$arreglo[$j][6]);
-  //       if($ins == "Ok"){
-  //         echo "Proceso ingresado: " . $arreglo[$j][0] . "\n";
-  //       }
-  //       else{
-  //         echo "Proceso error: " . $arreglo[$j][0] . "\n";
-  //       }
-  //     }
-  //   }
-  // }
-  //
-  // // Lectura de archivo de centro de costo
-  // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando centro costos") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  //
-  // $rutaArchivo = $ruta . "descargas/Centro_de_costos.xlsx";
-  // $documento = IOFactory::load($rutaArchivo);
-  // $hojaActual = $documento->getSheet(0);
-  //
-  // $arregloIni = $hojaActual->toArray();
-  // $arreglo = [];
-  //
-  // for($i = 2; $i < count($arregloIni); $i++){
-  //   $arreglo[] = $arregloIni[$i];
-  // }
-  //
-  // for($j = 0; $j < count($arreglo); $j++){
-  //   $id = $arreglo[$j][0];
-  //   $lista = $arreglo[$j][1];
-  //   $item = $arreglo[$j][2];
-  //   $nombre = str_replace("'","",$arreglo[$j][3]);
-  //   $valora = $arreglo[$j][4];
-  //   $valorb = $arreglo[$j][5];
-  //   $valorc = $arreglo[$j][6];
-  //   $datoAdic = str_replace("'","",$arreglo[$j][7]);
-  //   $sincronizado_externos = $arreglo[$j][8];
-  //   $habilitado = $arreglo[$j][9];
-  //   $reservado = $arreglo[$j][10];
-  //   $hab_int = 0;
-  //   if($habilitado == true){
-  //     $hab_int = 1;
-  //   }
-  //
-  //   $sel = datoCentroCostoIngresado($item);
-  //   $sel[0]['CANTIDAD'];
-  //
-  //   if($sel[0]['CANTIDAD'] == '0'){
-  //     if($item != ""){
-  //       $ins = ingresaCentroCosto($item,$nombre, $hab_int);
-  //       if($ins == "Ok"){
-  //         echo "Centro de costo ingresado: " . $item . "\n";
-  //       }
-  //       else{
-  //         echo "Centro de costo error: " . $item . "\n";
-  //       }
-  //     }
-  //     else{
-  //       echo "Centro de costo error: " . $item . "\n";
-  //     }
-  //   }
-  //   else{
-  //     $ins = updateCentroCosto($item,$nombre, $hab_int);
-  //     if($ins == "Ok"){
-  //       echo "Centro de costo actualizado: " . $item . "\n";
-  //     }
-  //     else{
-  //       echo "Centro de costo error actuaizacion: " . $item . "\n";
-  //     }
-  //   }
-  // }
-  //
-  // // Lectura de archivo de Empleados
-  // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando personal") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  // $rutaArchivo = $ruta . "descargas/Empleados.xlsx";
-  // $documento = IOFactory::load($rutaArchivo);
-  // $hojaActual = $documento->getSheet(0);
-  //
-  // $arregloIni = $hojaActual->toArray();
-  // $arreglo = [];
-  //
-  // for($i = 2; $i < count($arregloIni); $i++){
-  //   $arreglo[] = $arregloIni[$i];
-  // }
-  //
-  // for($j = 0; $j < count($arreglo); $j++){
-  //   $DNI = $arreglo[$j][0];
-  //   $NOMBRES = ucwords(strtolower($arreglo[$j][1]));
-  //   $APELLIDOS = ucwords(strtolower($arreglo[$j][2] . " " . $arreglo[$j][3]));
-  //   if($arreglo[$j][4] == "M"){
-  //     $SEXO = "Hombre";
-  //   }
-  //   else{
-  //     $SEXO = "Mujer";
-  //   }
-  //   $FECHA_NACIMIENTO = $arreglo[$j][5];
-  //   $NACIONALIDAD = ucwords(strtolower($arreglo[$j][7]));
-  //   $DOMICILIO = ucwords(strtolower($arreglo[$j][8] . ", " . $arreglo[$j][9] . ", " . $arreglo[$j][10]));
-  //   $TELEFONO = $arreglo[$j][11];
-  //   $EMAIL = strtolower($arreglo[$j][12]);
-  //   $BANCO = $arreglo[$j][13];
-  //   $BANCO_CUENTA = $arreglo[$j][14];
-  //   $BANCO_FORMA_PAGO = $arreglo[$j][15];
-  //   $IDAFP = $arreglo[$j][18];
-  //   $IDSALUD = $arreglo[$j][23];
-  //   $EMAIL_PERSONAL = strtolower($arreglo[$j][39]);
-  //
-  //   $sel = personalExistente($DNI);
-  //   $sel[0]['CANTIDAD'];
-  //
-  //   if($sel[0]['CANTIDAD'] == '0'){
-  //     if($DNI != ""){
-  //       $ins = ingresaPersonal($DNI,$NOMBRES,$APELLIDOS,$SEXO,$FECHA_NACIMIENTO,$NACIONALIDAD,$DOMICILIO,$TELEFONO,$EMAIL,$BANCO,$BANCO_CUENTA,$BANCO_FORMA_PAGO,$IDAFP,$IDSALUD,$EMAIL_PERSONAL);
-  //
-  //       if($ins == "Ok"){
-  //         echo "Personal ingresado: " . $DNI . "\n";
-  //       }
-  //       else{
-  //         echo "Personal error: " . $DNI . "\n";
-  //       }
-  //     }
-  //     else{
-  //       echo "Personal error: " . $DNI . "\n";
-  //     }
-  //   }
-  //   else{
-  //     if($DNI != ""){
-  //       $ins = actualizaPersonal($DNI,$NOMBRES,$APELLIDOS,$SEXO,$FECHA_NACIMIENTO,$NACIONALIDAD,$DOMICILIO,$TELEFONO,$EMAIL,$BANCO,$BANCO_CUENTA,$BANCO_FORMA_PAGO,$IDAFP,$IDSALUD,$EMAIL_PERSONAL);
-  //
-  //       if($ins == "Ok"){
-  //         echo "Personal actualizado: " . $DNI . "\n";
-  //       }
-  //       else{
-  //         echo "Personal error: " . $DNI . "\n";
-  //       }
-  //     }
-  //     else{
-  //       echo "Personal error: " . $DNI . "\n";
-  //     }
-  //   }
-  // }
-  //
-  // // Lectura de archivo de cargos
-  // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando cargos") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  // $rutaArchivo = $ruta . "descargas/Cargos.xlsx";
-  // $documento = IOFactory::load($rutaArchivo);
-  // $hojaActual = $documento->getSheet(0);
-  //
-  // $arregloIni = $hojaActual->toArray();
-  // $arreglo = [];
-  //
-  // for($i = 2; $i < count($arregloIni); $i++){
-  //   $arreglo[] = $arregloIni[$i];
-  // }
-  //
-  // for($j = 0; $j < count($arreglo); $j++){
-  //   $id = $arreglo[$j][0];
-  //   $cargo = ucwords(strtolower($arreglo[$j][1]));
-  //
-  //   $sel = cargoExistente($id);
-  //   $sel[0]['CANTIDAD'];
-  //
-  //   if($sel[0]['CANTIDAD'] == '0'){
-  //     if($id != ""){
-  //       $ins = ingresaCargo($id,$cargo);
-  //
-  //       if($ins == "Ok"){
-  //         echo "Cargo ingresado: " . $id . "\n";
-  //       }
-  //       else{
-  //         echo "Cargo error: " . $id . "\n";
-  //       }
-  //     }
-  //     else{
-  //       echo "Cargo error: " . $id . "\n";
-  //     }
-  //   }
-  //   else{
-  //     echo "Cargo error: " . $id . "\n";
-  //   }
-  // }
-  //
-  // // Lectura de archivo de centro de catalogo
-  // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando catalogo") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  // $rutaArchivo = $ruta . "descargas/Catalogo.xlsx";
-  // $documento = IOFactory::load($rutaArchivo);
-  // $hojaActual = $documento->getSheet(0);
-  //
-  // $arregloIni = $hojaActual->toArray();
-  // $arreglo = [];
-  //
-  // for($i = 2; $i < count($arregloIni); $i++){
-  //   $arreglo[] = $arregloIni[$i];
-  // }
-  //
-  // $JEAS = [];
-  // $JEAS[1] = "J";
-  // $JEAS[2] = 'E';
-  // $JEAS[3] = 'A';
-  // $JEAS[4] = 'S';
-  // $JEAS[6] = 'G';
-  //
-  // for($j = 0; $j < count($arreglo); $j++){
-  //   if($arreglo[$j][1] == "lta10"){
-  //     // echo $arreglo[$j][1] . "\n";
-  //     // echo $arreglo[$j][2] . "\n";
-  //     // echo $arreglo[$j][3] . "\n";
-  //     // echo trim(explode("-",explode(")",$arreglo[$j][7])[1])[0]) . "\n";
-  //     // echo $JEAS[trim(explode("-",explode(")",$arreglo[$j][7])[1])[0])] . "\n\n";
-  //
-  //     $codigo = $arreglo[$j][2];
-  //     $nombre = $arreglo[$j][3];
-  //     if($arreglo[$j][7] !== ""){
-  //       $clasificacion = $JEAS[trim(explode("-",explode(")",$arreglo[$j][7])[1])[0])];
-  //     }
-  //     else{
-  //       $clasificacion = "";
-  //     }
-  //     $habilitado = trim($arreglo[$j][9]);
-  //
-  //     $sel = datosCatalogoIngresado($codigo);
-  //     $sel[0]['CANTIDAD'];
-  //
-  //     if($sel[0]['CANTIDAD'] == '0'){
-  //       if($codigo != ""){
-  //         $ins = ingresaCatalogo($codigo,$nombre,$clasificacion, $habilitado);
-  //         if($ins == "Ok"){
-  //           echo "Catalogo ingresado: " . $codigo . "\n";
-  //         }
-  //         else{
-  //           echo "Catalogo error: " . $codigo . "\n";
-  //         }
-  //       }
-  //       else{
-  //         echo "Catalogo error: " . $codigo . "\n";
-  //       }
-  //     }
-  //     else{
-  //       echo "Catalogo error: " . $codigo . "\n";;
-  //     }
-  //   }
-  //
-  //   if($arreglo[$j][1] == "lta9"){
-  //     $codigo = $arreglo[$j][2];
-  //     $nombre = $arreglo[$j][3];
-  //     $detalle = trim($arreglo[$j][7]);
-  //     $habilitado = trim($arreglo[$j][9]);
-  //
-  //     $sel = datosCatalogoReferencia1($codigo);
-  //     $sel[0]['CANTIDAD'];
-  //
-  //     if($sel[0]['CANTIDAD'] == '0'){
-  //       if($codigo != ""){
-  //         $ins = ingresaCatalogoReferencia1($codigo,$nombre,$detalle,$habilitado);
-  //         if($ins == "Ok"){
-  //           echo "Referencia1 ingresado: " . $codigo . "\n";
-  //         }
-  //         else{
-  //           echo "Referencia1 error: " . $codigo . "\n";
-  //         }
-  //       }
-  //       else{
-  //         echo "Referencia1 error: " . $codigo . "\n";
-  //       }
-  //     }
-  //     else{
-  //       echo "Referencia1 error: " . $codigo . "\n";;
-  //     }
-  //   }
-  //
-  //   if($arreglo[$j][1] == "lta4"){
-  //     $codigo = $arreglo[$j][2];
-  //     $nombre = $arreglo[$j][3];
-  //     $detalle = trim($arreglo[$j][7]);
-  //     $habilitado = trim($arreglo[$j][9]);
-  //
-  //     $sel = datosCatalogoReferencia2($codigo);
-  //     $sel[0]['CANTIDAD'];
-  //
-  //     if($sel[0]['CANTIDAD'] == '0'){
-  //       if($codigo != ""){
-  //         $ins = ingresaCatalogoReferencia2($codigo,$nombre,$detalle,$habilitado);
-  //         if($ins == "Ok"){
-  //           echo "Referencia2 ingresado: " . $codigo . "\n";
-  //         }
-  //         else{
-  //           echo "Referencia2 error: " . $codigo . "\n";
-  //         }
-  //       }
-  //       else{
-  //         echo "Referencia2 error: " . $codigo . "\n";
-  //       }
-  //     }
-  //     else{
-  //       echo "Referencia2 error: " . $codigo . "\n";;
-  //     }
-  //   }
-  // }
+  // unlink($cookie);
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando procesos") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  for($z = 0; $z < count($periodos); $z++){
+    // Lectura de archivo de proceso
+    $rutaArchivo = $ruta . "descargas/Resultado_proceso_" . $periodos[$z] . ".xlsx";
+
+    if(file_exists($rutaArchivo)){
+      $documento = IOFactory::load($rutaArchivo);
+      $hojaActual = $documento->getSheet(0);
+
+      $arregloIni = $hojaActual->toArray();
+      $arreglo = [];
+
+      for($i = 2; $i < count($arregloIni); $i++){
+        $arreglo[] = $arregloIni[$i];
+      }
+
+      limpiaPeriodoProceso($periodos[$z]);
+
+      for($j = 0; $j < count($arreglo); $j++){
+        if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
+          break;
+        }
+
+        $ins = ingresaPeriodoProceso($arreglo[$j][0],$arreglo[$j][1],$arreglo[$j][2],$arreglo[$j][3],$arreglo[$j][4],$arreglo[$j][5],$arreglo[$j][6]);
+        if($ins == "Ok"){
+          echo "Proceso ingresado: " . $arreglo[$j][0] . "\n";
+        }
+        else{
+          echo "Proceso error: " . $arreglo[$j][0] . "\n";
+        }
+      }
+    }
+  }
+
+  // Lectura de archivo de centro de costo
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando centro costos") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+
+  $rutaArchivo = $ruta . "descargas/Centro_de_costos.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arregloIni = $hojaActual->toArray();
+  $arreglo = [];
+
+  for($i = 2; $i < count($arregloIni); $i++){
+    $arreglo[] = $arregloIni[$i];
+  }
+
+  for($j = 0; $j < count($arreglo); $j++){
+    $id = $arreglo[$j][0];
+    $lista = $arreglo[$j][1];
+    $item = $arreglo[$j][2];
+    $nombre = str_replace("'","",$arreglo[$j][3]);
+    $valora = $arreglo[$j][4];
+    $valorb = $arreglo[$j][5];
+    $valorc = $arreglo[$j][6];
+    $datoAdic = str_replace("'","",$arreglo[$j][7]);
+    $sincronizado_externos = $arreglo[$j][8];
+    $habilitado = $arreglo[$j][9];
+    $reservado = $arreglo[$j][10];
+    $hab_int = 0;
+    if($habilitado == true){
+      $hab_int = 1;
+    }
+
+    $sel = datoCentroCostoIngresado($item);
+    $sel[0]['CANTIDAD'];
+
+    if($sel[0]['CANTIDAD'] == '0'){
+      if($item != ""){
+        $ins = ingresaCentroCosto($item,$nombre, $hab_int);
+        if($ins == "Ok"){
+          echo "Centro de costo ingresado: " . $item . "\n";
+        }
+        else{
+          echo "Centro de costo error: " . $item . "\n";
+        }
+      }
+      else{
+        echo "Centro de costo error: " . $item . "\n";
+      }
+    }
+    else{
+      $ins = updateCentroCosto($item,$nombre, $hab_int);
+      if($ins == "Ok"){
+        echo "Centro de costo actualizado: " . $item . "\n";
+      }
+      else{
+        echo "Centro de costo error actuaizacion: " . $item . "\n";
+      }
+    }
+  }
+
+  // Lectura de archivo de Empleados
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando personal") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  $rutaArchivo = $ruta . "descargas/Empleados.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arregloIni = $hojaActual->toArray();
+  $arreglo = [];
+
+  for($i = 2; $i < count($arregloIni); $i++){
+    $arreglo[] = $arregloIni[$i];
+  }
+
+  for($j = 0; $j < count($arreglo); $j++){
+    $DNI = $arreglo[$j][0];
+    $NOMBRES = ucwords(strtolower($arreglo[$j][1]));
+    $APELLIDOS = ucwords(strtolower($arreglo[$j][2] . " " . $arreglo[$j][3]));
+    if($arreglo[$j][4] == "M"){
+      $SEXO = "Hombre";
+    }
+    else{
+      $SEXO = "Mujer";
+    }
+    $FECHA_NACIMIENTO = $arreglo[$j][5];
+    $NACIONALIDAD = ucwords(strtolower($arreglo[$j][7]));
+    $DOMICILIO = ucwords(strtolower($arreglo[$j][8] . ", " . $arreglo[$j][9] . ", " . $arreglo[$j][10]));
+    $TELEFONO = $arreglo[$j][11];
+    $EMAIL = strtolower($arreglo[$j][12]);
+    $BANCO = $arreglo[$j][13];
+    $BANCO_CUENTA = $arreglo[$j][14];
+    $BANCO_FORMA_PAGO = $arreglo[$j][15];
+    $IDAFP = $arreglo[$j][18];
+    $IDSALUD = $arreglo[$j][23];
+    $EMAIL_PERSONAL = strtolower($arreglo[$j][39]);
+
+    $sel = personalExistente($DNI);
+    $sel[0]['CANTIDAD'];
+
+    if($sel[0]['CANTIDAD'] == '0'){
+      if($DNI != ""){
+        $ins = ingresaPersonal($DNI,$NOMBRES,$APELLIDOS,$SEXO,$FECHA_NACIMIENTO,$NACIONALIDAD,$DOMICILIO,$TELEFONO,$EMAIL,$BANCO,$BANCO_CUENTA,$BANCO_FORMA_PAGO,$IDAFP,$IDSALUD,$EMAIL_PERSONAL);
+
+        if($ins == "Ok"){
+          echo "Personal ingresado: " . $DNI . "\n";
+        }
+        else{
+          echo "Personal error: " . $DNI . "\n";
+        }
+      }
+      else{
+        echo "Personal error: " . $DNI . "\n";
+      }
+    }
+    else{
+      if($DNI != ""){
+        $ins = actualizaPersonal($DNI,$NOMBRES,$APELLIDOS,$SEXO,$FECHA_NACIMIENTO,$NACIONALIDAD,$DOMICILIO,$TELEFONO,$EMAIL,$BANCO,$BANCO_CUENTA,$BANCO_FORMA_PAGO,$IDAFP,$IDSALUD,$EMAIL_PERSONAL);
+
+        if($ins == "Ok"){
+          echo "Personal actualizado: " . $DNI . "\n";
+        }
+        else{
+          echo "Personal error: " . $DNI . "\n";
+        }
+      }
+      else{
+        echo "Personal error: " . $DNI . "\n";
+      }
+    }
+  }
+
+  // Lectura de archivo de cargos
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando cargos") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  $rutaArchivo = $ruta . "descargas/Cargos.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arregloIni = $hojaActual->toArray();
+  $arreglo = [];
+
+  for($i = 2; $i < count($arregloIni); $i++){
+    $arreglo[] = $arregloIni[$i];
+  }
+
+  for($j = 0; $j < count($arreglo); $j++){
+    $id = $arreglo[$j][0];
+    $cargo = ucwords(strtolower($arreglo[$j][1]));
+
+    $sel = cargoExistente($id);
+    $sel[0]['CANTIDAD'];
+
+    if($sel[0]['CANTIDAD'] == '0'){
+      if($id != ""){
+        $ins = ingresaCargo($id,$cargo);
+
+        if($ins == "Ok"){
+          echo "Cargo ingresado: " . $id . "\n";
+        }
+        else{
+          echo "Cargo error: " . $id . "\n";
+        }
+      }
+      else{
+        echo "Cargo error: " . $id . "\n";
+      }
+    }
+    else{
+      echo "Cargo error: " . $id . "\n";
+    }
+  }
+
+  // Lectura de archivo de centro de catalogo
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando catalogo") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  $rutaArchivo = $ruta . "descargas/Catalogo.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arregloIni = $hojaActual->toArray();
+  $arreglo = [];
+
+  for($i = 2; $i < count($arregloIni); $i++){
+    $arreglo[] = $arregloIni[$i];
+  }
+
+  $JEAS = [];
+  $JEAS[1] = "J";
+  $JEAS[2] = 'E';
+  $JEAS[3] = 'A';
+  $JEAS[4] = 'S';
+  $JEAS[6] = 'G';
+
+  for($j = 0; $j < count($arreglo); $j++){
+    if($arreglo[$j][1] == "lta10"){
+      // echo $arreglo[$j][1] . "\n";
+      // echo $arreglo[$j][2] . "\n";
+      // echo $arreglo[$j][3] . "\n";
+      // echo trim(explode("-",explode(")",$arreglo[$j][7])[1])[0]) . "\n";
+      // echo $JEAS[trim(explode("-",explode(")",$arreglo[$j][7])[1])[0])] . "\n\n";
+
+      $codigo = $arreglo[$j][2];
+      $nombre = $arreglo[$j][3];
+      if($arreglo[$j][7] !== ""){
+        $clasificacion = $JEAS[trim(explode("-",explode(")",$arreglo[$j][7])[1])[0])];
+      }
+      else{
+        $clasificacion = "";
+      }
+      $habilitado = trim($arreglo[$j][9]);
+
+      $sel = datosCatalogoIngresado($codigo);
+      $sel[0]['CANTIDAD'];
+
+      if($sel[0]['CANTIDAD'] == '0'){
+        if($codigo != ""){
+          $ins = ingresaCatalogo($codigo,$nombre,$clasificacion, $habilitado);
+          if($ins == "Ok"){
+            echo "Catalogo ingresado: " . $codigo . "\n";
+          }
+          else{
+            echo "Catalogo error: " . $codigo . "\n";
+          }
+        }
+        else{
+          echo "Catalogo error: " . $codigo . "\n";
+        }
+      }
+      else{
+        echo "Catalogo error: " . $codigo . "\n";;
+      }
+    }
+
+    if($arreglo[$j][1] == "lta9"){
+      $codigo = $arreglo[$j][2];
+      $nombre = $arreglo[$j][3];
+      $detalle = trim($arreglo[$j][7]);
+      $habilitado = trim($arreglo[$j][9]);
+
+      $sel = datosCatalogoReferencia1($codigo);
+      $sel[0]['CANTIDAD'];
+
+      if($sel[0]['CANTIDAD'] == '0'){
+        if($codigo != ""){
+          $ins = ingresaCatalogoReferencia1($codigo,$nombre,$detalle,$habilitado);
+          if($ins == "Ok"){
+            echo "Referencia1 ingresado: " . $codigo . "\n";
+          }
+          else{
+            echo "Referencia1 error: " . $codigo . "\n";
+          }
+        }
+        else{
+          echo "Referencia1 error: " . $codigo . "\n";
+        }
+      }
+      else{
+        echo "Referencia1 error: " . $codigo . "\n";;
+      }
+    }
+
+    if($arreglo[$j][1] == "lta4"){
+      $codigo = $arreglo[$j][2];
+      $nombre = $arreglo[$j][3];
+      $detalle = trim($arreglo[$j][7]);
+      $habilitado = trim($arreglo[$j][9]);
+
+      $sel = datosCatalogoReferencia2($codigo);
+      $sel[0]['CANTIDAD'];
+
+      if($sel[0]['CANTIDAD'] == '0'){
+        if($codigo != ""){
+          $ins = ingresaCatalogoReferencia2($codigo,$nombre,$detalle,$habilitado);
+          if($ins == "Ok"){
+            echo "Referencia2 ingresado: " . $codigo . "\n";
+          }
+          else{
+            echo "Referencia2 error: " . $codigo . "\n";
+          }
+        }
+        else{
+          echo "Referencia2 error: " . $codigo . "\n";
+        }
+      }
+      else{
+        echo "Referencia2 error: " . $codigo . "\n";;
+      }
+    }
+  }
 
   // Lectura de archivo de contratos
   $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
@@ -860,89 +860,89 @@
   actualizaACT();
 
 
-  // // Lectura de archivo de cargos
-  // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando vacaciones") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  // $rutaArchivo = $ruta . "descargas/Vacaciones.xlsx";
-  // $documento = IOFactory::load($rutaArchivo);
-  // $hojaActual = $documento->getSheet(0);
-  //
-  // $arregloIni = $hojaActual->toArray();
-  // $arreglo = [];
-  //
-  // for($i = 2; $i < count($arregloIni); $i++){
-  //   $fini = $arregloIni[$i][8];
-  //
-  //   $date1 = new DateTime();
-  //   $date2 = new DateTime($fini);
-  //   $diff = $date1->diff($date2);
-  //
-  //   if($diff->days <= 30){
-  //     $arreglo[] = $arregloIni[$i];
-  //   }
-  // }
-  //
-  // for($j = 0; $j < count($arreglo); $j++){
-  //   $firmado = $arreglo[$j][12];
-  //
-  //   if($arreglo[$j][8] != ""){
-  //     $dni = $arreglo[$j][1];
-  //     $fini = $arreglo[$j][8];
-  //     $fter = $arreglo[$j][9];
-  //
-  //     $ins = ingresaVacacionRexmas($dni,$fini,$fter);
-  //     if($ins == "Ok"){
-  //       echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
-  //     }
-  //     else{
-  //       echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
-  //     }
-  //   }
-  // }
-  //
-  // // Lectura de archivo de cargos
-  // $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando licencias") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  // $rutaArchivo = $ruta . "descargas/Licencias.xlsx";
-  // $documento = IOFactory::load($rutaArchivo);
-  // $hojaActual = $documento->getSheet(0);
-  //
-  // $arregloIni = $hojaActual->toArray();
-  // $arreglo = [];
-  //
-  // for($i = 2; $i < count($arregloIni); $i++){
-  //   $fini = explode("-",substr($arregloIni[$i][19],0,10));
-  //   $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
-  //
-  //   $date1 = new DateTime();
-  //   $date2 = new DateTime($fini);
-  //   $diff = $date1->diff($date2);
-  //
-  //   if($diff->days <= 30){
-  //     $arreglo[] = $arregloIni[$i];
-  //   }
-  // }
-  //
-  // for($j = 0; $j < count($arreglo); $j++){
-  //   $dni = $arreglo[$j][4];
-  //   $tipoLic = $arreglo[$j][7];
-  //   $fini = explode("-",substr($arreglo[$j][19],0,10));
-  //   $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
-  //   $fter = explode("-",substr($arreglo[$j][19],10,10));
-  //   $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
-  //
-  //   $ins = ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic);
-  //   if($ins == "Ok"){
-  //     echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
-  //   }
-  //   else{
-  //     echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
-  //   }
-  // }
+  // Lectura de archivo de cargos
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando vacaciones") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  $rutaArchivo = $ruta . "descargas/Vacaciones.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arregloIni = $hojaActual->toArray();
+  $arreglo = [];
+
+  for($i = 2; $i < count($arregloIni); $i++){
+    $fini = $arregloIni[$i][8];
+
+    $date1 = new DateTime();
+    $date2 = new DateTime($fini);
+    $diff = $date1->diff($date2);
+
+    if($diff->days <= 30){
+      $arreglo[] = $arregloIni[$i];
+    }
+  }
+
+  for($j = 0; $j < count($arreglo); $j++){
+    $firmado = $arreglo[$j][12];
+
+    if($arreglo[$j][8] != ""){
+      $dni = $arreglo[$j][1];
+      $fini = $arreglo[$j][8];
+      $fter = $arreglo[$j][9];
+
+      $ins = ingresaVacacionRexmas($dni,$fini,$fter);
+      if($ins == "Ok"){
+        echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
+      }
+      else{
+        echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+      }
+    }
+  }
+
+  // Lectura de archivo de cargos
+  $logFile = fopen("/var/www/html/generico/rexmas/log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando licencias") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  $rutaArchivo = $ruta . "descargas/Licencias.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arregloIni = $hojaActual->toArray();
+  $arreglo = [];
+
+  for($i = 2; $i < count($arregloIni); $i++){
+    $fini = explode("-",substr($arregloIni[$i][19],0,10));
+    $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
+
+    $date1 = new DateTime();
+    $date2 = new DateTime($fini);
+    $diff = $date1->diff($date2);
+
+    if($diff->days <= 30){
+      $arreglo[] = $arregloIni[$i];
+    }
+  }
+
+  for($j = 0; $j < count($arreglo); $j++){
+    $dni = $arreglo[$j][4];
+    $tipoLic = $arreglo[$j][7];
+    $fini = explode("-",substr($arreglo[$j][19],0,10));
+    $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
+    $fter = explode("-",substr($arreglo[$j][19],10,10));
+    $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
+
+    $ins = ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic);
+    if($ins == "Ok"){
+      echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
+    }
+    else{
+      echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+    }
+  }
 
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
 
