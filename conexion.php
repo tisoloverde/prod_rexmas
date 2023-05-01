@@ -12,7 +12,7 @@
 		// Producción
 		$user = "AppConnect";
 		$pass = "TCw4etVPjEcqTRkGOqG8";
-		$db = "GENERICA";
+		$db = "SOLO_VERDE";
 		$host = "10.0.0.8";
 
 		mysqli_report(MYSQLI_REPORT_STRICT);
