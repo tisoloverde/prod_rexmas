@@ -219,10 +219,10 @@
   // $periodoAnterior = date("Y-m",strtotime($Actual."-1 month"));
   // $periodoActual = date("Y-m",strtotime($Actual."-0 month"));
   //
-  // $periodos = [];
-  // $periodos[0] = $periodoAnterior2;
-  // $periodos[1] = $periodoAnterior;
-  // $periodos[2] = $periodoActual;
+  $periodos = [];
+  $periodos[0] = $periodoAnterior2;
+  $periodos[1] = $periodoAnterior;
+  $periodos[2] = $periodoActual;
   //
   // for($i = 0; $i < count($informes) ; $i++){
   //   if($i != 8){
