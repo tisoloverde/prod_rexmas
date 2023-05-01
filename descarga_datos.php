@@ -203,22 +203,22 @@
   // }
   //
   //
-  // $informes = [];
-  // $informes[0] = [1122,'Empleados'];
-  // $informes[1] = [1123,'Contratos'];
-  // $informes[2] = [1124,'Empresas'];
-  // $informes[3] = [1125,'Cargos'];
-  // $informes[4] = [1126,'Centro_de_costos'];
-  // $informes[5] = [1127,'Vacaciones'];
-  // $informes[6] = [1128,'Licencias'];
-  // $informes[7] = [1221,'Catalogo'];
-  // $informes[8] = [1254,'Resultado_proceso'];
-  //
-  // $Actual = date("d-m-Y");
-  // $periodoAnterior2 = date("Y-m",strtotime($Actual."-2 month"));
-  // $periodoAnterior = date("Y-m",strtotime($Actual."-1 month"));
-  // $periodoActual = date("Y-m",strtotime($Actual."-0 month"));
-  //
+  $informes = [];
+  $informes[0] = [1122,'Empleados'];
+  $informes[1] = [1123,'Contratos'];
+  $informes[2] = [1124,'Empresas'];
+  $informes[3] = [1125,'Cargos'];
+  $informes[4] = [1126,'Centro_de_costos'];
+  $informes[5] = [1127,'Vacaciones'];
+  $informes[6] = [1128,'Licencias'];
+  $informes[7] = [1221,'Catalogo'];
+  $informes[8] = [1254,'Resultado_proceso'];
+  
+  $Actual = date("d-m-Y");
+  $periodoAnterior2 = date("Y-m",strtotime($Actual."-2 month"));
+  $periodoAnterior = date("Y-m",strtotime($Actual."-1 month"));
+  $periodoActual = date("Y-m",strtotime($Actual."-0 month"));
+
   $periodos = [];
   $periodos[0] = $periodoAnterior2;
   $periodos[1] = $periodoAnterior;
