@@ -896,6 +896,7 @@
       $fter = $arreglo[$j][9];
 
       $ins = ingresaVacacionRexmas($dni,$fini,$fter);
+      var_dump($ins);
       if($ins == "Ok"){
         echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
       }
