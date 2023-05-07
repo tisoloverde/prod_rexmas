@@ -879,36 +879,26 @@
     $diff = $date1->diff($date2);
 
     if($diff->days <= 35){
-      $arreglo[] = $arregloIni[$i];
-      echo "Aplica \n";
+      if($arreglo[$i][8] != ""){
+        $dni = $arregloIni[$i][1];
+        $fini = $arregloIni[$i][8];
+        $fter = $arregloIni[$i][9];
+
+        $ins = ingresaVacacionRexmas($dni,$fini,$fter);
+
+        if($ins == "Ok"){
+          echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
+        }
+        else{
+          echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+        }
+      }
+      else{
+        echo "Vacio: " . $arreglo[$j][8] . "\n";
+      }
     }
     else{
       echo "No aplica \n";
-    }
-  }
-
-  var_dump($arreglo);
-  count($arreglo);
-  
-  for($j = 0; $j < count($arreglo); $j++){
-    $firmado = $arreglo[$j][12];
-
-    if($arreglo[$j][8] != ""){
-      $dni = $arreglo[$j][1];
-      $fini = $arreglo[$j][8];
-      $fter = $arreglo[$j][9];
-
-      $ins = ingresaVacacionRexmas($dni,$fini,$fter);
-      var_dump($ins);
-      if($ins == "Ok"){
-        echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
-      }
-      else{
-        echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
-      }
-    }
-    else{
-      echo "Vacio: " . $arreglo[$j][8] . "\n";
     }
   }
 
