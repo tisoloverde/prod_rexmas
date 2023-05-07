@@ -878,7 +878,7 @@
     $diff = $date1->diff($date2);
 
     if($diff->days <= 35){
-      if($arreglo[$i][8] != ""){
+      if($arregloIni[$i][8] != ""){
         $dni = $arregloIni[$i][1];
         $fini = $arregloIni[$i][8];
         $fter = $arregloIni[$i][9];
@@ -893,7 +893,7 @@
         }
       }
       else{
-        echo "Vacio: " . $arreglo[$i][8] . "\n";
+        echo "Vacio: " . $arregloIni[$i][8] . "\n";
       }
     }
     else{
