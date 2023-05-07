@@ -911,7 +911,6 @@
   $hojaActual = $documento->getSheet(0);
 
   $arregloIni = $hojaActual->toArray();
-  $arreglo = [];
 
   for($i = 2; $i < count($arregloIni); $i++){
     $fini = explode("-",substr($arregloIni[$i][19],0,10));
@@ -922,24 +921,20 @@
     $diff = $date1->diff($date2);
 
     if($diff->days <= 35){
-      $arreglo[] = $arregloIni[$i];
-    }
-  }
+      $dni = $arregloIni[$i][4];
+      $tipoLic = $arregloIni[$i][7];
+      $fini = explode("-",substr($arregloIni[$i][19],0,10));
+      $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
+      $fter = explode("-",substr($arregloIni[$i][19],10,10));
+      $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
 
-  for($j = 0; $j < count($arreglo); $j++){
-    $dni = $arreglo[$j][4];
-    $tipoLic = $arreglo[$j][7];
-    $fini = explode("-",substr($arreglo[$j][19],0,10));
-    $fini = $fini[2] . "-" . $fini[1] . "-" . $fini[0];
-    $fter = explode("-",substr($arreglo[$j][19],10,10));
-    $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
-
-    $ins = ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic);
-    if($ins == "Ok"){
-      echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
-    }
-    else{
-      echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+      $ins = ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic);
+      if($ins == "Ok"){
+        echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
+      }
+      else{
+        echo "Licencia error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+      }
     }
   }
 
