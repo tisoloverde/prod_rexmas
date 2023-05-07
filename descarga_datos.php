@@ -869,7 +869,6 @@
   $hojaActual = $documento->getSheet(0);
 
   $arregloIni = $hojaActual->toArray();
-  $arreglo = [];
 
   for($i = 2; $i < count($arregloIni); $i++){
     $fini = $arregloIni[$i][8];
@@ -894,7 +893,7 @@
         }
       }
       else{
-        echo "Vacio: " . $arreglo[$j][8] . "\n";
+        echo "Vacio: " . $arreglo[$i][8] . "\n";
       }
     }
     else{
