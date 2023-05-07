@@ -880,6 +880,10 @@
 
     if($diff->days <= 35){
       $arreglo[] = $arregloIni[$i];
+      echo "Aplica \n";
+    }
+    else{
+      echo "No aplica \n";
     }
   }
 
