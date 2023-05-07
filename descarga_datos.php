@@ -887,6 +887,8 @@
     }
   }
 
+  var_dump($arreglo);
+
   for($j = 0; $j < count($arreglo); $j++){
     $firmado = $arreglo[$j][12];
 
@@ -903,6 +905,9 @@
       else{
         echo "Vacación error: " . $dni . " | " . $fini . " - " . $fter . "\n";
       }
+    }
+    else{
+      echo "Vacio: " . $arreglo[$j][8] . "\n";
     }
   }
 
