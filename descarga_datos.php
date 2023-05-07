@@ -888,7 +888,8 @@
   }
 
   var_dump($arreglo);
-
+  count($arreglo);
+  
   for($j = 0; $j < count($arreglo); $j++){
     $firmado = $arreglo[$j][12];
 

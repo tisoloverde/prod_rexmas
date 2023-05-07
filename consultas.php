@@ -552,7 +552,7 @@ require('conexion.php');
 	    else{
 	      // return $con->error;
 	      $con->query("ROLLBACK");
-	      return $sql;
+	      return "Error";
 	      // return $sql;
 	    }
 	  }
