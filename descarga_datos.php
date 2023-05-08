@@ -481,7 +481,7 @@
     // Lectura de archivo de proceso
     $rutaArchivo = $ruta . "descargas/Resultado_proceso_" . $periodos[$z] . ".xlsx";
 
-    if(file_exists($rutaArchivo)){
+    if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){
       $documento = IOFactory::load($rutaArchivo);
       $hojaActual = $documento->getSheet(0);
 
