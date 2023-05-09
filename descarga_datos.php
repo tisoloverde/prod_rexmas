@@ -115,7 +115,7 @@
     curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
     curl_setopt($ch, CURLOPT_HEADER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config02"}');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config03"}');
     curl_setopt($ch, CURLOPT_ENCODING,"");
 
     $respuesta = curl_exec($ch);
@@ -387,7 +387,7 @@
     curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
     curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config01"}');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config03"}');
     curl_setopt($ch, CURLOPT_ENCODING,"");
 
     $respuesta = curl_exec($ch);
