@@ -877,7 +877,7 @@
     $date2 = new DateTime($fini);
     $diff = $date1->diff($date2);
 
-    if($diff->days <= 35){
+    if($diff->days <= 100){
       if($arregloIni[$i][8] != ""){
         $dni = $arregloIni[$i][1];
         $fini = $arregloIni[$i][8];
@@ -920,7 +920,7 @@
     $date2 = new DateTime($fini);
     $diff = $date1->diff($date2);
 
-    if($diff->days <= 35){
+    if($diff->days <= 100){
       $dni = $arregloIni[$i][4];
       $tipoLic = $arregloIni[$i][7];
       $fini = explode("-",substr($arregloIni[$i][19],0,10));
