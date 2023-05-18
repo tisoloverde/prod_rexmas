@@ -215,14 +215,20 @@
   $informes[8] = [1254,'Resultado_proceso'];
 
   $Actual = date("d-m-Y");
+  $periodoAnterior5 = date("Y-m",strtotime($Actual."-5 month"));
+  $periodoAnterior4 = date("Y-m",strtotime($Actual."-4 month"));
+  $periodoAnterior3 = date("Y-m",strtotime($Actual."-3 month"));
   $periodoAnterior2 = date("Y-m",strtotime($Actual."-2 month"));
   $periodoAnterior = date("Y-m",strtotime($Actual."-1 month"));
   $periodoActual = date("Y-m",strtotime($Actual."-0 month"));
 
   $periodos = [];
-  $periodos[0] = $periodoAnterior2;
-  $periodos[1] = $periodoAnterior;
-  $periodos[2] = $periodoActual;
+  $periodos[0] = $periodoAnterior5;
+  $periodos[1] = $periodoAnterior4;
+  $periodos[2] = $periodoAnterior3;
+  $periodos[3] = $periodoAnterior2;
+  $periodos[4] = $periodoAnterior;
+  $periodos[5] = $periodoActual;
 
   for($i = 0; $i < count($informes) ; $i++){
     if($i != 8){
