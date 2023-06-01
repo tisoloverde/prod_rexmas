@@ -605,7 +605,7 @@
     }
     $FECHA_NACIMIENTO = $arreglo[$j][5];
     $NACIONALIDAD = ucwords(strtolower($arreglo[$j][7]));
-    $DOMICILIO = ucwords(strtolower($arreglo[$j][8] . ", " . $arreglo[$j][9] . ", " . $arreglo[$j][10]));
+    $DOMICILIO = ucwords(strtolower(str_replace("'","",$arreglo[$j][8]) . ", " . str_replace("'","",$arreglo[$j][9]) . ", " . $arreglo[$j][10]));
     $TELEFONO = $arreglo[$j][11];
     $EMAIL = strtolower($arreglo[$j][12]);
     $BANCO = $arreglo[$j][13];
