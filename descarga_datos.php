@@ -949,6 +949,8 @@
     }
   }
 
+  eliminarVacLicBorradasRexmas();
+
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
 
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");

@@ -820,4 +820,26 @@ require('conexion.php');
 	    return "Error";
 	  }
 	}
+
+	function eliminarVacLicBorradasRexmas(){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "CALL ELIMINA_VAC_LIC_BORRADAS_REXMAS();";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      return $con->error;
+	      $con->query("ROLLBACK");
+	      // return $sql;
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
 ?>
