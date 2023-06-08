@@ -885,11 +885,12 @@
 
     if($diff->days <= 100){
       if($arregloIni[$i][8] != ""){
+        $idRexmas = $arregloIni[$i][0];
         $dni = $arregloIni[$i][1];
         $fini = $arregloIni[$i][8];
         $fter = $arregloIni[$i][9];
 
-        $ins = ingresaVacacionRexmas($dni,$fini,$fter);
+        $ins = ingresaVacacionRexmas($dni,$fini,$fter,$idRexmas);
 
         if($ins == "Ok"){
           echo "Vacación ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
@@ -927,6 +928,7 @@
     $diff = $date1->diff($date2);
 
     if($diff->days <= 100){
+      $idRexmas = $arregloIni[$i][0];
       $dni = $arregloIni[$i][4];
       $tipoLic = $arregloIni[$i][7];
       $fini = explode("-",substr($arregloIni[$i][19],0,10));
@@ -934,7 +936,7 @@
       $fter = explode("-",substr($arregloIni[$i][19],10,10));
       $fter = $fter[2] . "-" . $fter[1] . "-" . $fter[0];
 
-      $ins = ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic);
+      $ins = ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic,$idRexmas);
       if($ins == "Ok"){
         echo "Licencia ingresada: " . $dni . " | " . $fini . " - " . $fter . "\n";
       }

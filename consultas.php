@@ -540,11 +540,11 @@ require('conexion.php');
 	  }
 	}
 
-	function ingresaVacacionRexmas($dni,$fini,$fter){
+	function ingresaVacacionRexmas($dni,$fini,$fter,$idRexmas){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
-	    $sql = "CALL INSERTAR_VACACIONES_RANGO('{$dni}','{$fini}','{$fter}')";
+	    $sql = "CALL INSERTAR_VACACIONES_RANGO('{$dni}','{$fini}','{$fter}','{$idRexmas}')";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
 	      return "Ok";
@@ -562,11 +562,11 @@ require('conexion.php');
 	  }
 	}
 
-	function ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic){
+	function ingresaLicenciaRexmas($dni,$fini,$fter,$tipoLic,$idRexmas){
 	  $con = conectar();
 	  $con->query("START TRANSACTION");
 	  if($con != 'No conectado'){
-	    $sql = "CALL INSERTAR_LICENCIA_RANGO('{$dni}','{$fini}','{$fter}','{$tipoLic}')";
+	    $sql = "CALL INSERTAR_LICENCIA_RANGO('{$dni}','{$fini}','{$fter}','{$tipoLic}','{$idRexmas}')";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
 	      return "Ok";
