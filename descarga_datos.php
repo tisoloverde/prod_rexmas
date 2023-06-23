@@ -9,7 +9,7 @@
   use PhpOffice\PhpSpreadsheet\IOFactory;
 
   // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
-  $ruta = '/var/www/html/generico/rexmas/';
+  $ruta = '/var/www/html/generico/rexmas/descargas/';
 
   echo "Hora de inicio: " . date('Y-m-d H:i:s') . "\n\n";
 
