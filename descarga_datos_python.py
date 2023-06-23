@@ -110,7 +110,7 @@ for i in range(len(informes)):
             response = driver.requests[-1].response
 
             nombre_archivo = informes[i][1] + '_' + periodos[j] + '.xlsx'
-            ruta_destino = downloads_path + '\\' + nombre_archivo
+            ruta_destino = downloads_path + '/' + nombre_archivo
             with open(ruta_destino, 'wb') as archivo:
                 archivo.write(response.body)
 

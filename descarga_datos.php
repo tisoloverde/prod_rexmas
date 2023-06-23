@@ -50,7 +50,7 @@
 
   for($z = 0; $z < count($periodos); $z++){
     // Lectura de archivo de proceso
-    $rutaArchivo = $ruta . "consulta_ct09_resultados_x_proceso" . $periodos[$z] . ".xlsx";
+    $rutaArchivo = $ruta . "consulta_ct09_resultados_x_proceso_" . $periodos[$z] . ".xlsx";
 
     if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){
       $documento = IOFactory::load($rutaArchivo);
