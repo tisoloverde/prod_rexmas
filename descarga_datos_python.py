@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
+from datetime import datetime, timedelta
 from pathlib import Path
 import pandas as pd
 import time
@@ -25,7 +26,9 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 
 driver.get("https://soloverde.rexmas.cl/remuneraciones/es-CL/login")
 
-time.sleep(2)
+print("Iniciando login")
+
+time.sleep(10)
 
 user = driver.find_element("id","username")
 user.send_keys("Consultas")
@@ -35,20 +38,73 @@ con = driver.find_element("id","password")
 con.send_keys("Config03")
 con.send_keys(Keys.RETURN)
 
-time.sleep(2)
+time.sleep(10)
 
-driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/1122/ejecutar')
 
-time.sleep(5)
+informes = [];
+informes.append([1122,'consulta_ct01_empleados'])
+informes.append([1123,'consulta_ct02_contratos'])
+informes.append([1124,'consulta_ct03_empresas'])
+informes.append([1125,'consulta_ct04_cargos'])
+informes.append([1126,'consulta_ct05_centros_de_costo'])
+informes.append([1127,'consulta_ct06_vacaciones'])
+informes.append([1128,'consulta_ct07_licencias'])
+informes.append([1221,'consulta_ct08_catalogos'])
+informes.append([1254,'consulta_ct09_resultados_x_proceso'])
 
-print("Descargando informe 1")
+actual = datetime.datetime.now().strftime("%d-%m-%Y")
+periodo_anterior5 = (datetime.datetime.now() - timedelta(days=5*30)).strftime("%Y-%m")
+periodo_anterior4 = (datetime.datetime.now() - timedelta(days=4*30)).strftime("%Y-%m")
+periodo_anterior3 = (datetime.datetime.now() - timedelta(days=3*30)).strftime("%Y-%m")
+periodo_anterior2 = (datetime.datetime.now() - timedelta(days=2*30)).strftime("%Y-%m")
+periodo_anterior = (datetime.datetime.now() - timedelta(days=30)).strftime("%Y-%m")
+periodo_actual = datetime.datetime.now().strftime("%Y-%m")
 
-wait = WebDriverWait(driver, 20)
-button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
-button.click()
+periodos = []
+periodos.append(periodo_anterior5)
+periodos.append(periodo_anterior4)
+periodos.append(periodo_anterior3)
+periodos.append(periodo_anterior2)
+periodos.append(periodo_anterior)
+periodos.append(periodo_actual)
 
-time.sleep(20)
+for i in range(len(informes)):
+    if i != 0:
+        print("Descargando informe: " + informes[i][1])
 
-print("Informe descargado")
+        driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' + str(informes[i][0]) + '/ejecutar')
 
-time.sleep(2)
+        time.sleep(5)
+
+        wait = WebDriverWait(driver, 20)
+        button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
+        button.click()
+
+        time.sleep(20)
+
+        print("Informe descargado: " + informes[i][1])
+
+        time.sleep(2)
+    else:
+        for j in range(len(periodos)):
+            print("Descargando informe: " + informes[i][1] + ", Periodo: " + periodos[j])
+
+            driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' + str(informes[i][0]) + '/ejecutar')
+
+            time.sleep(5)
+
+            parametros = driver.find_element("id","id_parametros")
+            parametros.clear()
+            parametros.send_keys("'" + periodos[j] + "'")
+
+            time.sleep(2)
+
+            wait = WebDriverWait(driver, 20)
+            button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
+            button.click()
+
+            time.sleep(20)
+
+            print("Informe descargado: " + informes[i][1])
+
+            time.sleep(2)

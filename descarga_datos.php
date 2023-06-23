@@ -10,7 +10,6 @@
 
   // $ruta = 'C:\\xampp\\htdocs\\Git\\rexmas\\';
   $ruta = '/var/www/html/generico/rexmas/';
-  $cookie = $ruta . 'descargas/cookieRR.txt';
 
   echo "Hora de inicio: " . date('Y-m-d H:i:s') . "\n\n";
 
@@ -21,519 +20,6 @@
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Hora de inicio") or die("Error escribiendo en el archivo");
   fclose($logFile);
-
-  echo "Seteando estructura y cookie\n";
-
-  $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
-  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Seteando estructura y cookie") or die("Error escribiendo en el archivo");
-  fclose($logFile);
-
-  $ciclos = 0;
-
-  start:
-  $ciclos++;
-  echo "Ciclos de lectura: " . $ciclos . "\n";
-
-  echo "Abriendo primer sitio\n";
-
-  try {
-    // Pagina 1
-    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/login');
-    curl_setopt ($ch, CURLOPT_POST, false);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
-
-    $respuesta = curl_exec($ch);
-
-    curl_close($ch);
-
-    sleep(5);
-
-    $linea = "";
-
-    echo "Obteniendo token\n";
-
-    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
-    while (!feof($fp)){
-        $linea = fgets($fp);
-        if(strpos($linea, "csrftoken"))
-        {
-            // echo $linea;
-            break;
-        }
-    }
-    fclose($fp);
-
-    $array = explode("csrftoken",$linea);
-
-    $csrftoken = trim($array[1]);
-
-    echo "Token1: " . $csrftoken . "\n";
-
-    echo "Logueandonos en sistema\n";
-
-    $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
-    fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Logueandonos en sistema") or die("Error escribiendo en el archivo");
-    fclose($logFile);
-
-    // Pagina 2
-    $request = [];
-
-    // $request[] = 'POST /remuneraciones/es-CL/login HTTP/1.1';
-    // $request[] = 'Host: soloverde.rexmas.cl';
-    // $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
-    // $request[] = 'Accept: application/json, text/plain, */*';
-    // $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
-    // $request[] = 'Accept-Encoding: gzip, deflate, br';
-    $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/login';
-    $request[] = 'Content-Type: application/json';
-    $request[] = 'X-XSRF-TOKEN: ' . $csrftoken;
-    $request[] = 'X-CSRFTOKEN: ' . $csrftoken;
-    // $request[] = 'Content-Length: 46';
-    // $request[] = 'Origin: https://soloverde.rexmas.cl';
-    // $request[] = 'DNT: 1';
-    // $request[] = 'Connection: keep-alive';
-    // $request[] = 'Cookie: csrftoken=' . $csrftoken;
-    // $request[] = 'Sec-Fetch-Dest: empty';
-    // $request[] = 'Sec-Fetch-Mode: cors';
-    // $request[] = 'Sec-Fetch-Site: same-origin';
-    // $request[] = 'Pragma: no-cache';
-    // $request[] = 'Cache-Control: no-cache';
-
-    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/login');
-
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
-    curl_setopt($ch, CURLOPT_HEADER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config03"}');
-    curl_setopt($ch, CURLOPT_ENCODING,"");
-
-    $respuesta = curl_exec($ch);
-
-    $file = fopen($ruta . 'login.html', 'w+');
-    fwrite($file, $respuesta);
-    fclose($file);
-
-    curl_close($ch);
-
-    sleep(5);
-
-    echo "Obteniendo token e identificador de sesion\n";
-
-    $linea = "";
-
-    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
-    while (!feof($fp)){
-        $linea = fgets($fp);
-        if(strpos($linea, "csrftoken"))
-        {
-            // echo $linea;
-            break;
-        }
-    }
-    fclose($fp);
-
-    $array = explode("csrftoken",$linea);
-
-    $csrftoken = trim($array[1]);
-
-    echo "Token2: " . $csrftoken . "\n";
-
-    $linea = "";
-
-    $fp = fopen($ruta . 'login.html', "r");
-    while (!feof($fp)){
-        $linea = fgets($fp);
-        if(strpos($linea, "sessionid"))
-        {
-            // echo $linea;
-            break;
-        }
-    }
-    fclose($fp);
-
-    $array = explode("sessionid=",$linea);
-    $array2 = explode(";",$array[1]);
-
-    // var_dump($array);
-
-    $sessionid = trim($array2[0]);
-
-    echo "Sessionid1_login: " . $sessionid . "\n";
-
-    if($sessionid == ""){
-      $linea = "";
-
-      $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
-      while (!feof($fp)){
-          $linea = fgets($fp);
-          if(strpos($linea, "sessionid"))
-          {
-              // echo $linea;
-              break;
-          }
-      }
-      fclose($fp);
-
-      $array = explode("sessionid",$linea);
-
-      // var_dump($array);
-
-      $sessionid = trim($array[1]);
-    }
-
-    echo "Sessionid1_cookie: " . $sessionid . "\n";
-  }
-  catch (\Exception $e) {
-    echo 'Error: ' . $e->getMessage();
-
-    echo "Error de captura de sesion id\n";
-
-    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
-    curl_setopt ($ch, CURLOPT_POST, false);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
-
-    $respuesta = curl_exec($ch);
-
-    curl_close($ch);
-
-    goto start;
-  }
-  catch (\Error $e) {
-    echo 'Error2: ' . $e->getMessage();
-
-    echo "Error de captura de sesion id\n";
-
-    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
-    curl_setopt ($ch, CURLOPT_POST, false);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
-
-    $respuesta = curl_exec($ch);
-
-    curl_close($ch);
-
-    goto start;
-  }
-
-
-  $informes = [];
-  $informes[0] = [1122,'Empleados'];
-  $informes[1] = [1123,'Contratos'];
-  $informes[2] = [1124,'Empresas'];
-  $informes[3] = [1125,'Cargos'];
-  $informes[4] = [1126,'Centro_de_costos'];
-  $informes[5] = [1127,'Vacaciones'];
-  $informes[6] = [1128,'Licencias'];
-  $informes[7] = [1221,'Catalogo'];
-  $informes[8] = [1254,'Resultado_proceso'];
-
-  $Actual = date("d-m-Y");
-  $periodoAnterior5 = date("Y-m",strtotime($Actual."-5 month"));
-  $periodoAnterior4 = date("Y-m",strtotime($Actual."-4 month"));
-  $periodoAnterior3 = date("Y-m",strtotime($Actual."-3 month"));
-  $periodoAnterior2 = date("Y-m",strtotime($Actual."-2 month"));
-  $periodoAnterior = date("Y-m",strtotime($Actual."-1 month"));
-  $periodoActual = date("Y-m",strtotime($Actual."-0 month"));
-
-  $periodos = [];
-  $periodos[0] = $periodoAnterior5;
-  $periodos[1] = $periodoAnterior4;
-  $periodos[2] = $periodoAnterior3;
-  $periodos[3] = $periodoAnterior2;
-  $periodos[4] = $periodoAnterior;
-  $periodos[5] = $periodoActual;
-
-  for($i = 0; $i < count($informes) ; $i++){
-    if($i != 8){
-      echo "TokenDescarga: " . $csrftoken . "\n";
-
-      echo "Descargando informe de {$informes[$i][1]} \n";
-
-      $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
-      fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Descargando informe de {$informes[$i][1]}") or die("Error escribiendo en el archivo");
-      fclose($logFile);
-
-      $request = [];
-
-      $request[] = 'POST /remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar HTTP/1.1';
-      $request[] = 'Host: soloverde.rexmas.cl';
-      $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
-      $request[] = 'Accept: application/json, text/plain, */*';
-      $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
-      $request[] = 'Accept-Encoding: gzip, deflate, br';
-      $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar';
-      $request[] = 'Content-Type: application/json;charset=utf-8';
-      $request[] = 'X-CSRFToken: ' . $csrftoken;
-      $request[] = 'Content-Length: 17';
-      $request[] = 'Origin: https://soloverde.rexmas.cl';
-      $request[] = 'DNT: 1';
-      $request[] = 'Connection: keep-alive';
-      $request[] = 'Cookie: csrftoken=' . $csrftoken . '; sessionid=' . $sessionid;
-      $request[] = 'Sec-Fetch-Dest: empty';
-      $request[] = 'Sec-Fetch-Mode: cors';
-      $request[] = 'Sec-Fetch-Site: same-origin';
-      $request[] = 'Pragma: no-cache';
-      $request[] = 'Cache-Control: no-cache';
-
-      $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar');
-
-      curl_setopt($ch, CURLOPT_POST, true);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-      curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-      curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-      curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
-      curl_setopt($ch, CURLOPT_HEADER, false);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, '{"parametros":""}');
-      curl_setopt($ch, CURLOPT_ENCODING,"");
-
-      $respuesta = curl_exec($ch);
-
-      curl_close($ch);
-
-      sleep(5);
-
-      $file = fopen($ruta . "descargas/" . $informes[$i][1] . '.xlsx', 'w+');
-      fwrite($file, $respuesta);
-      fclose($file);
-
-      sleep(5);
-
-      echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . ".xlsx\n";
-      echo filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') . "\n";
-      if(filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') < 2000){
-
-        $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
-        curl_setopt ($ch, CURLOPT_POST, false);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-        curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-        curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-        curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
-
-        $respuesta = curl_exec($ch);
-
-        curl_close($ch);
-
-        goto start;
-      }
-    }
-    else{
-      echo "Descargando informe de {$informes[$i][1]} \n";
-
-      $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
-      fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Descargando informe de {$informes[$i][1]}") or die("Error escribiendo en el archivo");
-      fclose($logFile);
-
-      for($j = 0; $j < count($periodos); $j++){
-        // Informe Empleados
-        $request = [];
-
-        $request[] = 'POST /remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar HTTP/1.1';
-        $request[] = 'Host: soloverde.rexmas.cl';
-        $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
-        $request[] = 'Accept: application/json, text/plain, */*';
-        $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
-        $request[] = 'Accept-Encoding: gzip, deflate, br';
-        $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar';
-        $request[] = 'Content-Type: application/json;charset=utf-8';
-        $request[] = 'X-CSRFToken: ' . $csrftoken;
-        $request[] = 'Content-Length: 26';
-        $request[] = 'Origin: https://soloverde.rexmas.cl';
-        $request[] = 'DNT: 1';
-        $request[] = 'Connection: keep-alive';
-        $request[] = 'Cookie: csrftoken=' . $csrftoken . '; sessionid=' . $sessionid;
-        $request[] = 'Sec-Fetch-Dest: empty';
-        $request[] = 'Sec-Fetch-Mode: cors';
-        $request[] = 'Sec-Fetch-Site: same-origin';
-        $request[] = 'Pragma: no-cache';
-        $request[] = 'Cache-Control: no-cache';
-
-        $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar');
-
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-        curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-        curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,  "{\"parametros\":\"'" . $periodos[$j] . "'\"}");
-        curl_setopt($ch, CURLOPT_ENCODING,"");
-
-        $respuesta = curl_exec($ch);
-
-        curl_close($ch);
-
-        sleep(5);
-
-        $file = fopen($ruta . "descargas/" . $informes[$i][1] . '_' . $periodos[$j] . '.xlsx', 'w+');
-        fwrite($file, $respuesta);
-        fclose($file);
-
-        sleep(5);
-
-        echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . "_" . $periodos[$j] . ".xlsx\n";
-
-        if(filesize($ruta . "descargas/" . $informes[$i][1] . '_' . $periodos[$j] . '.xlsx') < 1040){
-          unlink($ruta . "descargas/" . $informes[$i][1] . '_' . $periodos[$j] . '.xlsx');
-        }
-      }
-    }
-
-    // Re Login
-
-    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
-    curl_setopt ($ch, CURLOPT_POST, false);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
-
-    $respuesta = curl_exec($ch);
-
-    curl_close($ch);
-
-    $request = [];
-
-    // $request[] = 'POST /remuneraciones/es-CL/login HTTP/1.1';
-    // $request[] = 'Host: soloverde.rexmas.cl';
-    // $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
-    // $request[] = 'Accept: application/json, text/plain, */*';
-    // $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
-    // $request[] = 'Accept-Encoding: gzip, deflate, br';
-    $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/login';
-    $request[] = 'Content-Type: application/json';
-    $request[] = 'X-XSRF-TOKEN: ' . $csrftoken;
-    $request[] = 'X-CSRFTOKEN: ' . $csrftoken;
-    // $request[] = 'Content-Length: 46';
-    // $request[] = 'Origin: https://soloverde.rexmas.cl';
-    // $request[] = 'DNT: 1';
-    // $request[] = 'Connection: keep-alive';
-    // $request[] = 'Cookie: csrftoken=' . $csrftoken;
-    // $request[] = 'Sec-Fetch-Dest: empty';
-    // $request[] = 'Sec-Fetch-Mode: cors';
-    // $request[] = 'Sec-Fetch-Site: same-origin';
-    // $request[] = 'Pragma: no-cache';
-    // $request[] = 'Cache-Control: no-cache';
-
-    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/login');
-
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
-    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-    curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
-    curl_setopt($ch, CURLOPT_HEADER, false);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $request);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, '{"username":"Consultas","password":"Config03"}');
-    curl_setopt($ch, CURLOPT_ENCODING,"");
-
-    $respuesta = curl_exec($ch);
-
-    $file = fopen($ruta . 'login.html', 'w+');
-    fwrite($file, $respuesta);
-    fclose($file);
-
-    curl_close($ch);
-
-    sleep(5);
-
-    echo "Obteniendo token e identificador de sesion\n";
-
-    $linea = "";
-
-    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
-    while (!feof($fp)){
-        $linea = fgets($fp);
-        if(strpos($linea, "csrftoken"))
-        {
-            // echo $linea;
-            break;
-        }
-    }
-    fclose($fp);
-
-    $array = explode("csrftoken",$linea);
-
-    $csrftoken = trim($array[1]);
-
-    echo "Token2: " . $csrftoken . "\n";
-
-    $linea = "";
-
-    $fp = fopen($ruta . 'login.html', "r");
-    while (!feof($fp)){
-        $linea = fgets($fp);
-        if(strpos($linea, "sessionid"))
-        {
-            // echo $linea;
-            break;
-        }
-    }
-    fclose($fp);
-
-    $array = explode("sessionid=",$linea);
-    $array2 = explode(";",$array[1]);
-
-    // var_dump($array);
-
-    $sessionid = trim($array2[0]);
-
-    echo "Sessionid1_login: " . $sessionid . "\n";
-
-    if($sessionid == ""){
-      $linea = "";
-
-      $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
-      while (!feof($fp)){
-          $linea = fgets($fp);
-          if(strpos($linea, "sessionid"))
-          {
-              // echo $linea;
-              break;
-          }
-      }
-      fclose($fp);
-
-      $array = explode("sessionid",$linea);
-
-      $sessionid = trim($array[1]);
-    }
-
-    echo "Sessionid1_cookie: " . $sessionid . "\n";
-
-    sleep(20);
-  }
 
   echo "Informe descargado se borrara la cookie para matar la sesion\n\n";
 
@@ -546,9 +32,24 @@
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando procesos") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
+  $periodoAnterior5 = '';
+  $periodoAnterior4 = ' (1)';
+  $periodoAnterior3 = ' (2)';
+  $periodoAnterior2 = ' (3)';
+  $periodoAnterior = ' (4)';
+  $periodoActual = ' (5)';
+
+  $periodos = [];
+  $periodos[0] = $periodoAnterior5;
+  $periodos[1] = $periodoAnterior4;
+  $periodos[2] = $periodoAnterior3;
+  $periodos[3] = $periodoAnterior2;
+  $periodos[4] = $periodoAnterior;
+  $periodos[5] = $periodoActual;
+
   for($z = 0; $z < count($periodos); $z++){
     // Lectura de archivo de proceso
-    $rutaArchivo = $ruta . "descargas/Resultado_proceso_" . $periodos[$z] . ".xlsx";
+    $rutaArchivo = $ruta . "consulta_ct09_resultados_x_proceso" . $periodos[$z] . ".xlsx";
 
     if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){
       $documento = IOFactory::load($rutaArchivo);
@@ -585,7 +86,7 @@
   fclose($logFile);
 
 
-  $rutaArchivo = $ruta . "descargas/Centro_de_costos.xlsx";
+  $rutaArchivo = $ruta . "consulta_ct05_centros_de_costo.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
@@ -645,7 +146,7 @@
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando personal") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  $rutaArchivo = $ruta . "descargas/Empleados.xlsx";
+  $rutaArchivo = $ruta . "consulta_ct01_empleados.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
@@ -718,7 +219,7 @@
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando cargos") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  $rutaArchivo = $ruta . "descargas/Cargos.xlsx";
+  $rutaArchivo = $ruta . "consulta_ct04_cargos.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
@@ -761,7 +262,7 @@
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando catalogo") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  $rutaArchivo = $ruta . "descargas/Catalogo.xlsx";
+  $rutaArchivo = $ruta . "consulta_ct08_catalogos.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
@@ -881,7 +382,7 @@
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando contratos") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  $rutaArchivo = $ruta . "descargas/Contratos.xlsx";
+  $rutaArchivo = $ruta . "consulta_ct02_contratos.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
@@ -933,7 +434,7 @@
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando vacaciones") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  $rutaArchivo = $ruta . "descargas/Vacaciones.xlsx";
+  $rutaArchivo = $ruta . "consulta_ct06_vacaciones.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
@@ -976,7 +477,7 @@
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando licencias") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  $rutaArchivo = $ruta . "descargas/Licencias.xlsx";
+  $rutaArchivo = $ruta . "consulta_ct07_licencias.xlsx";
   $documento = IOFactory::load($rutaArchivo);
   $hojaActual = $documento->getSheet(0);
 
@@ -1013,6 +514,21 @@
   }
 
   eliminarVacLicBorradasRexmas();
+
+  unlink($ruta . "consulta_ct01_empleados.xlsx");
+  unlink($ruta . "consulta_ct02_contratos.xlsx");
+  unlink($ruta . "consulta_ct03_empresas.xlsx");
+  unlink($ruta . "consulta_ct04_cargos.xlsx");
+  unlink($ruta . "consulta_ct05_centros_de_costo.xlsx");
+  unlink($ruta . "consulta_ct06_vacaciones.xlsx");
+  unlink($ruta . "consulta_ct07_licencias.xlsx");
+  unlink($ruta . "consulta_ct08_catalogos.xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso.xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso (1).xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso (2).xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso (3).xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso (4).xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso (5).xlsx");
 
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
 
