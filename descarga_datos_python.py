@@ -10,7 +10,6 @@ from pathlib import Path
 import pandas as pd
 import time
 import os
-import pyodbc
 import datetime
 
 options = webdriver.ChromeOptions()
