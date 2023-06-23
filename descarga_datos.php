@@ -147,9 +147,10 @@
 
     $csrftoken = trim($array[1]);
 
+
     $linea = "";
 
-    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
+    $fp = fopen($ruta . 'login.html', "r");
     while (!feof($fp)){
         $linea = fgets($fp);
         if(strpos($linea, "sessionid"))
@@ -160,19 +161,20 @@
     }
     fclose($fp);
 
-    $array = explode("sessionid",$linea);
+    $array = explode("sessionid=",$linea);
+    $array2 = explode(";",$array);
 
     // var_dump($array);
 
-    $sessionid = trim($array[1]);
+    $sessionid = trim($array2[0]);
 
     echo "Token2: " . $csrftoken . "\n";
-    echo "Sessionid1: " . $sessionid . "\n";
+    echo "Sessionid1_login: " . $sessionid . "\n";
 
     if($sessionid == ""){
       $linea = "";
 
-      $fp = fopen($ruta . 'login.html', "r");
+      $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
       while (!feof($fp)){
           $linea = fgets($fp);
           if(strpos($linea, "sessionid"))
@@ -183,15 +185,14 @@
       }
       fclose($fp);
 
-      $array = explode("sessionid=",$linea);
-      $array2 = explode(";",$array);
+      $array = explode("sessionid",$linea);
 
       // var_dump($array);
 
-      $sessionid = trim($array2[0]);
+      $sessionid = trim($array[1]);
     }
 
-    echo "Sessionid1_head: " . $sessionid . "\n";
+    echo "Sessionid1_cookie: " . $sessionid . "\n";
   }
   catch (\Exception $e) {
     echo "Error de captura de sesion id\n";
@@ -482,7 +483,7 @@
 
     $linea = "";
 
-    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
+    $fp = fopen($ruta . 'login.html', "r");
     while (!feof($fp)){
         $linea = fgets($fp);
         if(strpos($linea, "sessionid"))
@@ -493,17 +494,20 @@
     }
     fclose($fp);
 
-    $array = explode("sessionid",$linea);
+    $array = explode("sessionid=",$linea);
+    $array2 = explode(";",$array);
 
-    $sessionid = trim($array[1]);
+    // var_dump($array);
+
+    $sessionid = trim($array2[0]);
 
     echo "Token2: " . $csrftoken . "\n";
-    echo "Sessionid1: " . $sessionid . "\n";
+    echo "Sessionid1_login: " . $sessionid . "\n";
 
     if($sessionid == ""){
       $linea = "";
 
-      $fp = fopen($ruta . 'login.html', "r");
+      $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
       while (!feof($fp)){
           $linea = fgets($fp);
           if(strpos($linea, "sessionid"))
@@ -514,15 +518,12 @@
       }
       fclose($fp);
 
-      $array = explode("sessionid=",$linea);
-      $array2 = explode(";",$array);
+      $array = explode("sessionid",$linea);
 
-      // var_dump($array);
-
-      $sessionid = trim($array2[0]);
+      $sessionid = trim($array[1]);
     }
 
-    echo "Sessionid1_head: " . $sessionid . "\n";
+    echo "Sessionid1_cookie: " . $sessionid . "\n";
 
     sleep(20);
   }
