@@ -156,13 +156,16 @@
         $linea = fgets($fp);
         if(strpos($linea, "sessionid"))
         {
-            // echo $linea;
+            echo $linea;
             break;
         }
     }
     fclose($fp);
 
     $array = explode("sessionid=",$linea);
+
+    var_dump($array);
+
     $array2 = explode(";",$array);
 
     // var_dump($array);
