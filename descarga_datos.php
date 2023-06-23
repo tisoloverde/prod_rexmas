@@ -147,6 +147,7 @@
 
     $csrftoken = trim($array[1]);
 
+    echo "Token2: " . $csrftoken . "\n";
 
     $linea = "";
 
@@ -168,7 +169,6 @@
 
     $sessionid = trim($array2[0]);
 
-    echo "Token2: " . $csrftoken . "\n";
     echo "Sessionid1_login: " . $sessionid . "\n";
 
     if($sessionid == ""){
@@ -481,6 +481,8 @@
 
     $csrftoken = trim($array[1]);
 
+    echo "Token2: " . $csrftoken . "\n";
+
     $linea = "";
 
     $fp = fopen($ruta . 'login.html', "r");
@@ -501,7 +503,6 @@
 
     $sessionid = trim($array2[0]);
 
-    echo "Token2: " . $csrftoken . "\n";
     echo "Sessionid1_login: " . $sessionid . "\n";
 
     if($sessionid == ""){
