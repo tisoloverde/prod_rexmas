@@ -14,7 +14,7 @@ import os
 import datetime
 
 options = webdriver.ChromeOptions()
-options.headless = True
+options.headless = False
 
 # Set the download directory path
 downloads_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'descargas')
@@ -78,11 +78,11 @@ for i in range(len(informes)):
 
         time.sleep(40)
 
-        wait = WebDriverWait(driver, 40)
+        wait = WebDriverWait(driver, 10)
         button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
         button.click()
 
-        time.sleep(50)
+        time.sleep(60)
 
         print("Informe descargado: " + informes[i][1])
 
@@ -101,11 +101,11 @@ for i in range(len(informes)):
 
             time.sleep(5)
 
-            wait = WebDriverWait(driver, 40)
+            wait = WebDriverWait(driver, 10)
             button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
             button.click()
 
-            time.sleep(50)
+            time.sleep(60)
 
             print("Informe descargado: " + informes[i][1])
 
