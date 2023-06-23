@@ -193,6 +193,38 @@
     }
 
     echo "Sessionid1_cookie: " . $sessionid . "\n";
+
+    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/inicio');
+    curl_setopt ($ch, CURLOPT_POST, false);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
+
+    $respuesta = curl_exec($ch);
+
+    curl_close($ch);
+
+    $linea = "";
+
+    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
+    while (!feof($fp)){
+        $linea = fgets($fp);
+        if(strpos($linea, "csrftoken"))
+        {
+            // echo $linea;
+            break;
+        }
+    }
+    fclose($fp);
+
+    $array = explode("csrftoken",$linea);
+
+    $csrftoken = trim($array[1]);
+
+    echo "Token3: " . $csrftoken . "\n";
   }
   catch (\Exception $e) {
     echo 'Error: ' . $e->getMessage();
@@ -531,6 +563,38 @@
     }
 
     echo "Sessionid1_cookie: " . $sessionid . "\n";
+
+    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/inicio');
+    curl_setopt ($ch, CURLOPT_POST, false);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    curl_setopt($ch, CURLOPT_USERAGENT, "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0");
+
+    $respuesta = curl_exec($ch);
+
+    curl_close($ch);
+
+    $linea = "";
+
+    $fp = fopen($ruta . 'descargas/cookieRR.txt', "r");
+    while (!feof($fp)){
+        $linea = fgets($fp);
+        if(strpos($linea, "csrftoken"))
+        {
+            // echo $linea;
+            break;
+        }
+    }
+    fclose($fp);
+
+    $array = explode("csrftoken",$linea);
+
+    $csrftoken = trim($array[1]);
+
+    echo "Token3: " . $csrftoken . "\n";
 
     sleep(20);
   }
