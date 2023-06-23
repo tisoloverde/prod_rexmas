@@ -14,7 +14,7 @@ import pyodbc
 import datetime
 
 options = webdriver.ChromeOptions()
-options.headless = False
+options.headless = True
 
 # Set the download directory path
 downloads_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'descargas')
