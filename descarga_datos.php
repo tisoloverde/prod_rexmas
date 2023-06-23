@@ -265,6 +265,8 @@
 
   for($i = 0; $i < count($informes) ; $i++){
     if($i != 8){
+      echo "TokenDescarga: " . $csrftoken . "\n";
+
       echo "Descargando informe de {$informes[$i][1]} \n";
 
       $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
