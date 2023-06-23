@@ -195,6 +195,8 @@
     echo "Sessionid1_cookie: " . $sessionid . "\n";
   }
   catch (\Exception $e) {
+    echo 'Error: ' . $e->getMessage();
+
     echo "Error de captura de sesion id\n";
 
     $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
@@ -213,6 +215,8 @@
     goto start;
   }
   catch (\Error $e) {
+    echo 'Error2: ' . $e->getMessage();
+
     echo "Error de captura de sesion id\n";
 
     $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
