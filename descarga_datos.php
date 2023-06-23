@@ -305,25 +305,25 @@
 
       $request = [];
 
-      $request[] = 'POST /remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar HTTP/1.1';
-      $request[] = 'Host: soloverde.rexmas.cl';
-      $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
-      $request[] = 'Accept: application/json, text/plain, */*';
-      $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
-      $request[] = 'Accept-Encoding: gzip, deflate, br';
+      // $request[] = 'POST /remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar HTTP/1.1';
+      // $request[] = 'Host: soloverde.rexmas.cl';
+      // $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
+      // $request[] = 'Accept: application/json, text/plain, */*';
+      // $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
+      // $request[] = 'Accept-Encoding: gzip, deflate, br';
       $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar';
       $request[] = 'Content-Type: application/json;charset=utf-8';
       $request[] = 'X-CSRFToken: ' . $csrftoken;
       $request[] = 'Content-Length: 17';
       $request[] = 'Origin: https://soloverde.rexmas.cl';
-      $request[] = 'DNT: 1';
-      $request[] = 'Connection: keep-alive';
-      $request[] = 'Cookie: csrftoken=' . $csrftoken . '; sessionid=' . $sessionid;
-      $request[] = 'Sec-Fetch-Dest: empty';
-      $request[] = 'Sec-Fetch-Mode: cors';
-      $request[] = 'Sec-Fetch-Site: same-origin';
-      $request[] = 'Pragma: no-cache';
-      $request[] = 'Cache-Control: no-cache';
+      // $request[] = 'DNT: 1';
+      // $request[] = 'Connection: keep-alive';
+      // $request[] = 'Cookie: csrftoken=' . $csrftoken . '; sessionid=' . $sessionid;
+      // $request[] = 'Sec-Fetch-Dest: empty';
+      // $request[] = 'Sec-Fetch-Mode: cors';
+      // $request[] = 'Sec-Fetch-Site: same-origin';
+      // $request[] = 'Pragma: no-cache';
+      // $request[] = 'Cache-Control: no-cache';
 
       $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar');
 
@@ -382,25 +382,25 @@
         // Informe Empleados
         $request = [];
 
-        $request[] = 'POST /remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar HTTP/1.1';
-        $request[] = 'Host: soloverde.rexmas.cl';
-        $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
-        $request[] = 'Accept: application/json, text/plain, */*';
-        $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
-        $request[] = 'Accept-Encoding: gzip, deflate, br';
+        // $request[] = 'POST /remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar HTTP/1.1';
+        // $request[] = 'Host: soloverde.rexmas.cl';
+        // $request[] = 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0';
+        // $request[] = 'Accept: application/json, text/plain, */*';
+        // $request[] = 'Accept-Language: es-CL,es;q=0.8,en-US;q=0.5,en;q=0.3';
+        // $request[] = 'Accept-Encoding: gzip, deflate, br';
         $request[] = 'Referer: https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar';
         $request[] = 'Content-Type: application/json;charset=utf-8';
         $request[] = 'X-CSRFToken: ' . $csrftoken;
         $request[] = 'Content-Length: 26';
         $request[] = 'Origin: https://soloverde.rexmas.cl';
-        $request[] = 'DNT: 1';
-        $request[] = 'Connection: keep-alive';
-        $request[] = 'Cookie: csrftoken=' . $csrftoken . '; sessionid=' . $sessionid;
-        $request[] = 'Sec-Fetch-Dest: empty';
-        $request[] = 'Sec-Fetch-Mode: cors';
-        $request[] = 'Sec-Fetch-Site: same-origin';
-        $request[] = 'Pragma: no-cache';
-        $request[] = 'Cache-Control: no-cache';
+        // $request[] = 'DNT: 1';
+        // $request[] = 'Connection: keep-alive';
+        // $request[] = 'Cookie: csrftoken=' . $csrftoken . '; sessionid=' . $sessionid;
+        // $request[] = 'Sec-Fetch-Dest: empty';
+        // $request[] = 'Sec-Fetch-Mode: cors';
+        // $request[] = 'Sec-Fetch-Site: same-origin';
+        // $request[] = 'Pragma: no-cache';
+        // $request[] = 'Cache-Control: no-cache';
 
         $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' . $informes[$i][0] . '/ejecutar');
 
