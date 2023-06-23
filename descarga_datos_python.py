@@ -22,12 +22,6 @@ print(downloads_path)
 options.add_experimental_option("prefs", {"download.default_directory": downloads_path})
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-# driver = webdriver.Chrome(chrome_options=options)
-driver.get('chrome://settings/clearBrowserData')
-# user32 = ctypes.WinDLL('user32')
-# SW_MAXIMISE = 3
-# hWnd = user32.GetForegroundWindow()
-# user32.ShowWindow(hWnd, SW_MAXIMISE)
 
 driver.get("https://soloverde.rexmas.cl/remuneraciones/es-CL/login")
 
@@ -47,8 +41,12 @@ driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/1122/e
 
 time.sleep(5)
 
+print("Descargando informe 1")
+
 wait = WebDriverWait(driver, 20)
 button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
 button.click()
 
-time.sleep(100)
+print("Informe descargado")
+
+time.sleep(2)
