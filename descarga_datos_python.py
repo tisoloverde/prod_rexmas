@@ -80,7 +80,7 @@ for i in range(len(informes)):
         button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
         button.click()
 
-        time.sleep(20)
+        time.sleep(30)
 
         print("Informe descargado: " + informes[i][1])
 
@@ -103,7 +103,7 @@ for i in range(len(informes)):
             button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
             button.click()
 
-            time.sleep(20)
+            time.sleep(30)
 
             print("Informe descargado: " + informes[i][1])
 
