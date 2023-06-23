@@ -156,17 +156,14 @@
         $linea = fgets($fp);
         if(strpos($linea, "sessionid"))
         {
-            echo $linea;
+            // echo $linea;
             break;
         }
     }
     fclose($fp);
 
     $array = explode("sessionid=",$linea);
-
-    var_dump($array);
-
-    $array2 = explode(";",$array);
+    $array2 = explode(";",$array[1]);
 
     // var_dump($array);
 
@@ -504,7 +501,7 @@
     fclose($fp);
 
     $array = explode("sessionid=",$linea);
-    $array2 = explode(";",$array);
+    $array2 = explode(";",$array[1]);
 
     // var_dump($array);
 
