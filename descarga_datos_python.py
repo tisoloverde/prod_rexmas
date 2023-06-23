@@ -44,14 +44,14 @@ time.sleep(10)
 
 
 informes = [];
-informes.append([1122,'consulta_ct01_empleados'])
-informes.append([1123,'consulta_ct02_contratos'])
-informes.append([1124,'consulta_ct03_empresas'])
-informes.append([1125,'consulta_ct04_cargos'])
-informes.append([1126,'consulta_ct05_centros_de_costo'])
-informes.append([1127,'consulta_ct06_vacaciones'])
-informes.append([1128,'consulta_ct07_licencias'])
-informes.append([1221,'consulta_ct08_catalogos'])
+# informes.append([1122,'consulta_ct01_empleados'])
+# informes.append([1123,'consulta_ct02_contratos'])
+# informes.append([1124,'consulta_ct03_empresas'])
+# informes.append([1125,'consulta_ct04_cargos'])
+# informes.append([1126,'consulta_ct05_centros_de_costo'])
+# informes.append([1127,'consulta_ct06_vacaciones'])
+# informes.append([1128,'consulta_ct07_licencias'])
+# informes.append([1221,'consulta_ct08_catalogos'])
 informes.append([1254,'consulta_ct09_resultados_x_proceso'])
 
 actual = datetime.datetime.now().strftime("%d-%m-%Y")
@@ -71,7 +71,7 @@ periodos.append(periodo_anterior)
 periodos.append(periodo_actual)
 
 for i in range(len(informes)):
-    if i != 8:
+    if i != 0:
         print("Descargando informe: " + informes[i][1])
 
         driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' + str(informes[i][0]) + '/ejecutar')
@@ -106,6 +106,15 @@ for i in range(len(informes)):
             button.click()
 
             time.sleep(60)
+
+            response = driver.requests[-1].response
+
+            nombre_archivo = informes[i][1] + '_' + periodos[j] + '.xlsx'
+            ruta_destino = downloads_path + '\\' + nombre_archivo
+            with open(ruta_destino, 'wb') as archivo:
+                archivo.write(response.body)
+
+            time.sleep(2)
 
             print("Informe descargado: " + informes[i][1])
 

@@ -32,12 +32,13 @@
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando procesos") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
-  $periodoAnterior5 = '';
-  $periodoAnterior4 = ' (1)';
-  $periodoAnterior3 = ' (2)';
-  $periodoAnterior2 = ' (3)';
-  $periodoAnterior = ' (4)';
-  $periodoActual = ' (5)';
+  $Actual = date("d-m-Y");
+  $periodoAnterior5 = date("Y-m",strtotime($Actual."-5 month"));
+  $periodoAnterior4 = date("Y-m",strtotime($Actual."-4 month"));
+  $periodoAnterior3 = date("Y-m",strtotime($Actual."-3 month"));
+  $periodoAnterior2 = date("Y-m",strtotime($Actual."-2 month"));
+  $periodoAnterior = date("Y-m",strtotime($Actual."-1 month"));
+  $periodoActual = date("Y-m",strtotime($Actual."-0 month"));
 
   $periodos = [];
   $periodos[0] = $periodoAnterior5;
@@ -523,13 +524,12 @@
   unlink($ruta . "consulta_ct06_vacaciones.xlsx");
   unlink($ruta . "consulta_ct07_licencias.xlsx");
   unlink($ruta . "consulta_ct08_catalogos.xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso.xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso (1).xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso (2).xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso (3).xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso (4).xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso (5).xlsx");
-
+  unlink($ruta . "consulta_ct09_resultados_x_proceso_" + $periodoAnterior5 + ".xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso_" + $periodoAnterior4 + ".xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso_" + $periodoAnterior3 + ".xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso_" + $periodoAnterior2 + ".xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso_" + $periodoAnterior + ".xlsx");
+  unlink($ruta . "consulta_ct09_resultados_x_proceso_" + $periodoActual + ".xlsx");
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
 
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
