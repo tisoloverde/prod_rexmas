@@ -195,10 +195,38 @@
   }
   catch (\Exception $e) {
     echo "Error de captura de sesion id\n";
+
+    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
+    curl_setopt ($ch, CURLOPT_POST, false);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+
+    $respuesta = curl_exec($ch);
+
+    curl_close($ch);
+
     goto start;
   }
   catch (\Error $e) {
     echo "Error de captura de sesion id\n";
+
+    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
+    curl_setopt ($ch, CURLOPT_POST, false);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+
+    $respuesta = curl_exec($ch);
+
+    curl_close($ch);
+
     goto start;
   }
 
@@ -289,6 +317,20 @@
       echo "Ruta de informe: " . $ruta . "descargas/" . $informes[$i][1] . ".xlsx\n";
       echo filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') . "\n";
       if(filesize($ruta . "descargas/" . $informes[$i][1] . '.xlsx') < 2000){
+
+        $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
+        curl_setopt ($ch, CURLOPT_POST, false);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+        curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+
+        $respuesta = curl_exec($ch);
+
+        curl_close($ch);
+
         goto start;
       }
     }
@@ -358,6 +400,19 @@
     }
 
     // Re Login
+
+    $ch = curl_init('https://soloverde.rexmas.cl/remuneraciones/es-CL/logout');
+    curl_setopt ($ch, CURLOPT_POST, false);
+    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)");
+
+    $respuesta = curl_exec($ch);
+
+    curl_close($ch);
 
     $request = [];
 
