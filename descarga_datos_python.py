@@ -47,6 +47,8 @@ wait = WebDriverWait(driver, 20)
 button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
 button.click()
 
+time.sleep(20)
+
 print("Informe descargado")
 
 time.sleep(2)
