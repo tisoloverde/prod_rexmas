@@ -24,6 +24,8 @@ options.add_experimental_option("prefs", {"download.default_directory": download
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
+driver.get('chrome://settings/clearBrowserData')
+
 driver.get("https://soloverde.rexmas.cl/remuneraciones/es-CL/login")
 
 print("Iniciando login")
@@ -74,9 +76,9 @@ for i in range(len(informes)):
 
         driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' + str(informes[i][0]) + '/ejecutar')
 
-        time.sleep(30)
+        time.sleep(40)
 
-        wait = WebDriverWait(driver, 20)
+        wait = WebDriverWait(driver, 40)
         button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
         button.click()
 
@@ -91,7 +93,7 @@ for i in range(len(informes)):
 
             driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' + str(informes[i][0]) + '/ejecutar')
 
-            time.sleep(30)
+            time.sleep(40)
 
             parametros = driver.find_element("id","id_parametros")
             parametros.clear()
@@ -99,7 +101,7 @@ for i in range(len(informes)):
 
             time.sleep(5)
 
-            wait = WebDriverWait(driver, 20)
+            wait = WebDriverWait(driver, 40)
             button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
             button.click()
 
