@@ -76,14 +76,14 @@ for i in range(len(informes)):
 
         driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' + str(informes[i][0]) + '/ejecutar')
 
-        time.sleep(120)
+        driver.implicitly_wait(30)
 
-        wait = WebDriverWait(driver, 70)
+        wait = WebDriverWait(driver, 30)
         # button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
         button = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "button-submit")))
         button.click()
 
-        time.sleep(150)
+        time.sleep(60)
 
         response = driver.requests[-1].response
 
@@ -109,13 +109,13 @@ for i in range(len(informes)):
             parametros.clear()
             parametros.send_keys("'" + periodos[j] + "'")
 
-            time.sleep(5)
+            driver.implicitly_wait(30)
 
             wait = WebDriverWait(driver, 70)
             button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
             button.click()
 
-            time.sleep(150)
+            time.sleep(60)
 
             response = driver.requests[-1].response
 
