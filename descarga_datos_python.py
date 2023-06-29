@@ -79,7 +79,8 @@ for i in range(len(informes)):
         time.sleep(60)
 
         wait = WebDriverWait(driver, 30)
-        button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
+        # button = wait.until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[1]/div[3]/div[2]/div[2]/form/div[2]/div/input")))
+        button = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "button-submit"))
         button.click()
 
         time.sleep(90)
