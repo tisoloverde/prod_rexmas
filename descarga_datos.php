@@ -49,35 +49,39 @@
   $periodos[5] = $periodoActual;
 
   for($z = 0; $z < count($periodos); $z++){
-    // Lectura de archivo de proceso
-    $rutaArchivo = $ruta . "consulta_ct09_resultados_x_proceso_" . $periodos[$z] . ".xlsx";
+    try {
+      // Lectura de archivo de proceso
+      $rutaArchivo = $ruta . "consulta_ct09_resultados_x_proceso_" . $periodos[$z] . ".xlsx";
 
-    if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){
-      $documento = IOFactory::load($rutaArchivo);
-      $hojaActual = $documento->getSheet(0);
+      if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){
+        $documento = IOFactory::load($rutaArchivo);
+        $hojaActual = $documento->getSheet(0);
 
-      $arregloIni = $hojaActual->toArray();
-      $arreglo = [];
+        $arregloIni = $hojaActual->toArray();
+        $arreglo = [];
 
-      for($i = 2; $i < count($arregloIni); $i++){
-        $arreglo[] = $arregloIni[$i];
+        for($i = 2; $i < count($arregloIni); $i++){
+          $arreglo[] = $arregloIni[$i];
+        }
+
+        limpiaPeriodoProceso($periodos[$z]);
+
+        for($j = 0; $j < count($arreglo); $j++){
+          if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
+            break;
+          }
+
+          $ins = ingresaPeriodoProceso($arreglo[$j][0],$arreglo[$j][1],$arreglo[$j][2],$arreglo[$j][3],$arreglo[$j][4],$arreglo[$j][5],$arreglo[$j][6]);
+          if($ins == "Ok"){
+            echo "Proceso ingresado: " . $arreglo[$j][0] . "\n";
+          }
+          else{
+            echo "Proceso error: " . $arreglo[$j][0] . "\n";
+          }
+        }
       }
-
-      limpiaPeriodoProceso($periodos[$z]);
-
-      for($j = 0; $j < count($arreglo); $j++){
-        if($arreglo[$j][0] == 'Más información disponible si se establece DEBUG=True.'){
-          break;
-        }
-
-        $ins = ingresaPeriodoProceso($arreglo[$j][0],$arreglo[$j][1],$arreglo[$j][2],$arreglo[$j][3],$arreglo[$j][4],$arreglo[$j][5],$arreglo[$j][6]);
-        if($ins == "Ok"){
-          echo "Proceso ingresado: " . $arreglo[$j][0] . "\n";
-        }
-        else{
-          echo "Proceso error: " . $arreglo[$j][0] . "\n";
-        }
-      }
+    } catch (Exception $e) {
+        echo "Se produjo un error: " . $e->getMessage() . "\n";
     }
   }
 
