@@ -391,15 +391,10 @@
       $fecha = $ano . '-' . $mes . '-' . $dia;
       $habilitado = trim($arreglo[$j][9]);
 
-      if($sel[0]['CANTIDAD'] == '0'){
-        if($codigo != ""){
-          $ins = ingresaCatalogoFeriado($fecha,'feriados',$habilitado);
-          if($ins == "Ok"){
-            echo "Fecha ingresada: " . $codigo . "\n";
-          }
-          else{
-            echo "Fecha error: " . $codigo . "\n";
-          }
+      if($codigo != ""){
+        $ins = ingresaCatalogoFeriado($fecha,'feriados',$habilitado);
+        if($ins == "Ok"){
+          echo "Fecha ingresada: " . $codigo . "\n";
         }
         else{
           echo "Fecha error: " . $codigo . "\n";
@@ -418,15 +413,10 @@
       $fecha = $ano . '-' . $mes . '-' . $dia;
       $habilitado = trim($arreglo[$j][9]);
 
-      if($sel[0]['CANTIDAD'] == '0'){
-        if($codigo != ""){
-          $ins = ingresaCatalogoFeriado($fecha,'feriadosMovi',$habilitado);
-          if($ins == "Ok"){
-            echo "Fecha Movi ingresada: " . $codigo . "\n";
-          }
-          else{
-            echo "Fecha Movi error: " . $codigo . "\n";
-          }
+      if($codigo != ""){
+        $ins = ingresaCatalogoFeriado($fecha,'feriadosMovi',$habilitado);
+        if($ins == "Ok"){
+          echo "Fecha Movi ingresada: " . $codigo . "\n";
         }
         else{
           echo "Fecha Movi error: " . $codigo . "\n";
