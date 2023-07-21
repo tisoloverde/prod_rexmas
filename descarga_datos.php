@@ -261,7 +261,7 @@
   //     echo "Cargo error: " . $id . "\n";
   //   }
   // }
-  
+
   // Lectura de archivo de centro de catalogo
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando catalogo") or die("Error escribiendo en el archivo");
@@ -413,8 +413,8 @@
     if($arreglo[$j][1] == "feriadosMovi"){
       $codigo = $arreglo[$j][2];
       $dia = substr($codigo, 0, 2);
-      $mes = substr($numero, 2, 2);
-      $ano = substr($numero, 4, 2);
+      $mes = substr($codigo, 2, 2);
+      $ano = substr($codigo, 4, 2);
       $fecha = $ano . '-' . $mes . '-' . $dia;
       $habilitado = trim($arreglo[$j][9]);
 
