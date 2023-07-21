@@ -861,13 +861,13 @@ require('conexion.php');
 							)";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
-	      return $sql;
+	      return "Ok";
 	    }
 	    else{
 	      // return $con->error;
 	      $con->query("ROLLBACK");
-	      // return "Error";
-	      return $sql;
+	      return "Error";
+	      // return $sql;
 	    }
 	  }
 	  else{

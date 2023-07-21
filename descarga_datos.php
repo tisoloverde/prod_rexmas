@@ -285,6 +285,8 @@
   $JEAS[4] = 'S';
   $JEAS[6] = 'G';
 
+  limpiarFeriados();
+
   for($j = 0; $j < count($arreglo); $j++){
     // if($arreglo[$j][1] == "lta10"){
     //   // echo $arreglo[$j][1] . "\n";
@@ -381,8 +383,6 @@
     //   }
     // }
 
-    // limpiarFeriados();
-
     if($arreglo[$j][1] == "feriados"){
       $codigo = $arreglo[$j][2];
       $dia = substr($codigo, 0, 2);
@@ -397,11 +397,11 @@
           echo "Fecha ingresada: " . $codigo . "\n";
         }
         else{
-          echo "Fecha error: " . $ins . "\n";
+          echo "Fecha error: " . $codigo . "\n";
         }
       }
       else{
-        echo "Fecha error: " . $ins . "\n";
+        echo "Fecha error: " . $codigo . "\n";
       }
     }
 
@@ -419,11 +419,11 @@
           echo "Fecha Movi ingresada: " . $codigo . "\n";
         }
         else{
-          echo "Fecha Movi error: " . $ins . "\n";
+          echo "Fecha Movi error: " . $codigo . "\n";
         }
       }
       else{
-        echo "Fecha Movi error: " . $ins . "\n";
+        echo "Fecha Movi error: " . $codigo . "\n";
       }
     }
   }
