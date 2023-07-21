@@ -576,20 +576,20 @@
   //
   // eliminarVacLicBorradasRexmas();
 
-  unlink($ruta . "consulta_ct01_empleados.xlsx");
-  unlink($ruta . "consulta_ct02_contratos.xlsx");
-  unlink($ruta . "consulta_ct03_empresas.xlsx");
-  unlink($ruta . "consulta_ct04_cargos.xlsx");
-  unlink($ruta . "consulta_ct05_centros_de_costo.xlsx");
-  unlink($ruta . "consulta_ct06_vacaciones.xlsx");
-  unlink($ruta . "consulta_ct07_licencias.xlsx");
-  unlink($ruta . "consulta_ct08_catalogos.xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior5 . ".xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior4 . ".xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior3 . ".xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior2 . ".xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior . ".xlsx");
-  unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoActual . ".xlsx");
+  // unlink($ruta . "consulta_ct01_empleados.xlsx");
+  // unlink($ruta . "consulta_ct02_contratos.xlsx");
+  // unlink($ruta . "consulta_ct03_empresas.xlsx");
+  // unlink($ruta . "consulta_ct04_cargos.xlsx");
+  // unlink($ruta . "consulta_ct05_centros_de_costo.xlsx");
+  // unlink($ruta . "consulta_ct06_vacaciones.xlsx");
+  // unlink($ruta . "consulta_ct07_licencias.xlsx");
+  // unlink($ruta . "consulta_ct08_catalogos.xlsx");
+  // unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior5 . ".xlsx");
+  // unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior4 . ".xlsx");
+  // unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior3 . ".xlsx");
+  // unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior2 . ".xlsx");
+  // unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior . ".xlsx");
+  // unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoActual . ".xlsx");
   echo "Hora de termino: " . date('Y-m-d H:i:s') . "\n";
 
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
