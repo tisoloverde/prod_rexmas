@@ -397,11 +397,11 @@
           echo "Fecha ingresada: " . $codigo . "\n";
         }
         else{
-          echo "Fecha error: " . $codigo . "\n";
+          echo "Fecha error: " . $ins . "\n";
         }
       }
       else{
-        echo "Fecha error: " . $codigo . "\n";
+        echo "Fecha error: " . $ins . "\n";
       }
     }
 
@@ -419,11 +419,11 @@
           echo "Fecha Movi ingresada: " . $codigo . "\n";
         }
         else{
-          echo "Fecha Movi error: " . $codigo . "\n";
+          echo "Fecha Movi error: " . $ins . "\n";
         }
       }
       else{
-        echo "Fecha Movi error: " . $codigo . "\n";
+        echo "Fecha Movi error: " . $ins . "\n";
       }
     }
   }
