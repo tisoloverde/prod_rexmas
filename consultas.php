@@ -842,4 +842,59 @@ require('conexion.php');
 	    return "Error";
 	  }
 	}
+
+	function ingresaCatalogoFeriado($fecha,$tipo,$habilitado){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "INSERT INTO FERIADOS_REXMAS
+							(
+								FECHA,
+								TIPO,
+								ESTADO
+							)
+							VALUES
+							(
+								'{$fecha}',
+								'{$tipo}',
+								'{$habilitado}'
+							)";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      // return $con->error;
+	      $con->query("ROLLBACK");
+	      return "Error";
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
+
+	function limpiarFeriados(){
+	  $con = conectar();
+	  $con->query("START TRANSACTION");
+	  if($con != 'No conectado'){
+	    $sql = "DELETE FROM FERIADOS_REXMAS";
+	    if ($con->query($sql)) {
+	      $con->query("COMMIT");
+	      return "Ok";
+	    }
+	    else{
+	      return $con->error;
+	      $con->query("ROLLBACK");
+	      // return $sql;
+	      // return $sql;
+	    }
+	  }
+	  else{
+	    $con->query("ROLLBACK");
+	    return "Error";
+	  }
+	}
 ?>
