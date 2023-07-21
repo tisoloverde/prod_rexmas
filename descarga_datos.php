@@ -480,7 +480,7 @@
   actualizaACT();
 
 
-  // Lectura de archivo de cargos
+  // Lectura de archivo de vacaciones
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando vacaciones") or die("Error escribiendo en el archivo");
   fclose($logFile);
@@ -523,7 +523,7 @@
     }
   }
 
-  // Lectura de archivo de cargos
+  // Lectura de archivo de licencias
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando licencias") or die("Error escribiendo en el archivo");
   fclose($logFile);
@@ -564,6 +564,48 @@
     }
   }
 
+  // Lectura de archivo de permisos administrativos
+  $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando permisos administrativos") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  $rutaArchivo = $ruta . "consulta_ct010_permisos_administrativos.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arregloIni = $hojaActual->toArray();
+
+  for($i = 2; $i < count($arregloIni); $i++){
+    $fini = $arregloIni[$i][2];
+
+    $date1 = new DateTime();
+    $date2 = new DateTime($fini);
+    $diff = $date1->diff($date2);
+
+    if($diff->days <= 370){
+      if($arregloIni[$i][2] != ""){
+        $dni = $arregloIni[$i][0];
+        $fini = $arregloIni[$i][2];
+        $fter = $arregloIni[$i][3];
+
+        $ins = ingresaPermisoAdministrativoRexmas($dni,$fini,$fter);
+
+        if($ins == "Ok"){
+          echo "Permiso administrativo ingresado: " . $dni . " | " . $fini . " - " . $fter . "\n";
+        }
+        else{
+          echo "Permiso administrativo error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+        }
+      }
+      else{
+        echo "Vacio: " . $arregloIni[$i][2] . "\n";
+      }
+    }
+    else{
+      echo "No aplica \n";
+    }
+  }
+
   eliminarVacLicBorradasRexmas();
 
   unlink($ruta . "consulta_ct01_empleados.xlsx");
@@ -574,6 +616,7 @@
   unlink($ruta . "consulta_ct06_vacaciones.xlsx");
   unlink($ruta . "consulta_ct07_licencias.xlsx");
   unlink($ruta . "consulta_ct08_catalogos.xlsx");
+  unlink($ruta . "consulta_ct010_permisos_administrativos.xlsx");
   unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior5 . ".xlsx");
   unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior4 . ".xlsx");
   unlink($ruta . "consulta_ct09_resultados_x_proceso_" . $periodoAnterior3 . ".xlsx");

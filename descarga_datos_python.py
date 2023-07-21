@@ -53,6 +53,8 @@ informes.append([1127,'consulta_ct06_vacaciones'])
 informes.append([1128,'consulta_ct07_licencias'])
 informes.append([1221,'consulta_ct08_catalogos'])
 informes.append([1254,'consulta_ct09_resultados_x_proceso'])
+informes.append([1386,'consulta_ct010_permisos_administrativos'])
+# informes.append([1419,'consulta_ct010_permisos_administrativos'])
 
 actual = datetime.datetime.now().strftime("%d-%m-%Y")
 periodo_anterior5 = (datetime.datetime.now() - timedelta(days=5*30)).strftime("%Y-%m")
