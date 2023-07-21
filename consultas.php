@@ -861,7 +861,7 @@ require('conexion.php');
 							)";
 	    if ($con->query($sql)) {
 	      $con->query("COMMIT");
-	      return "Ok";
+	      return $sql;
 	    }
 	    else{
 	      // return $con->error;
