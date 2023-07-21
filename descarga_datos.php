@@ -261,29 +261,29 @@
   //     echo "Cargo error: " . $id . "\n";
   //   }
   // }
-  //
-  // // Lectura de archivo de centro de catalogo
-  // $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
-  // fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando catalogo") or die("Error escribiendo en el archivo");
-  // fclose($logFile);
-  //
-  // $rutaArchivo = $ruta . "consulta_ct08_catalogos.xlsx";
-  // $documento = IOFactory::load($rutaArchivo);
-  // $hojaActual = $documento->getSheet(0);
-  //
-  // $arregloIni = $hojaActual->toArray();
-  // $arreglo = [];
-  //
-  // for($i = 2; $i < count($arregloIni); $i++){
-  //   $arreglo[] = $arregloIni[$i];
-  // }
-  //
-  // $JEAS = [];
-  // $JEAS[1] = "J";
-  // $JEAS[2] = 'E';
-  // $JEAS[3] = 'A';
-  // $JEAS[4] = 'S';
-  // $JEAS[6] = 'G';
+  
+  // Lectura de archivo de centro de catalogo
+  $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
+  fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando catalogo") or die("Error escribiendo en el archivo");
+  fclose($logFile);
+
+  $rutaArchivo = $ruta . "consulta_ct08_catalogos.xlsx";
+  $documento = IOFactory::load($rutaArchivo);
+  $hojaActual = $documento->getSheet(0);
+
+  $arregloIni = $hojaActual->toArray();
+  $arreglo = [];
+
+  for($i = 2; $i < count($arregloIni); $i++){
+    $arreglo[] = $arregloIni[$i];
+  }
+
+  $JEAS = [];
+  $JEAS[1] = "J";
+  $JEAS[2] = 'E';
+  $JEAS[3] = 'A';
+  $JEAS[4] = 'S';
+  $JEAS[6] = 'G';
 
   for($j = 0; $j < count($arreglo); $j++){
     // if($arreglo[$j][1] == "lta10"){
