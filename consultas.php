@@ -864,9 +864,9 @@ require('conexion.php');
 	      return "Ok";
 	    }
 	    else{
-	      return $con->error;
+	      // return $con->error;
 	      $con->query("ROLLBACK");
-	      // return "Error";
+	      return "Error";
 	      // return $sql;
 	    }
 	  }
