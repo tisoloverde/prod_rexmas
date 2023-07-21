@@ -381,7 +381,7 @@
     //   }
     // }
 
-    limpiarFeriados();
+    // limpiarFeriados();
 
     if($arreglo[$j][1] == "feriados"){
       $codigo = $arreglo[$j][2];
