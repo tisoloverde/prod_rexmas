@@ -44,15 +44,15 @@ time.sleep(10)
 
 
 informes = [];
-# informes.append([1122,'consulta_ct01_empleados'])
-# informes.append([1123,'consulta_ct02_contratos'])
-# informes.append([1124,'consulta_ct03_empresas'])
-# informes.append([1125,'consulta_ct04_cargos'])
-# informes.append([1126,'consulta_ct05_centros_de_costo'])
+informes.append([1122,'consulta_ct01_empleados'])
+informes.append([1123,'consulta_ct02_contratos'])
+informes.append([1124,'consulta_ct03_empresas'])
+informes.append([1125,'consulta_ct04_cargos'])
+informes.append([1126,'consulta_ct05_centros_de_costo'])
 informes.append([1127,'consulta_ct06_vacaciones'])
 informes.append([1128,'consulta_ct07_licencias'])
-# informes.append([1221,'consulta_ct08_catalogos'])
-# informes.append([1254,'consulta_ct09_resultados_x_proceso'])
+informes.append([1221,'consulta_ct08_catalogos'])
+informes.append([1254,'consulta_ct09_resultados_x_proceso'])
 informes.append([1386,'consulta_ct010_permisos_administrativos'])
 informes.append([1419,'consulta_ct12_permisos_en_espera_de_licencia'])
 
