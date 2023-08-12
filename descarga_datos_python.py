@@ -37,7 +37,7 @@ user.send_keys("Consultas")
 
 #insertamos los datos de la contraseña por ID
 con = driver.find_element("id","password")
-con.send_keys("Config03")
+con.send_keys("Config04")
 con.send_keys(Keys.RETURN)
 
 time.sleep(10)
