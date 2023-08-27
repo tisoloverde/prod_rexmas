@@ -16,12 +16,6 @@ import datetime
 options = webdriver.ChromeOptions()
 options.headless = True
 
-# Set the download directory path
-downloads_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'descargas')
-print(downloads_path)
-
-options.add_experimental_option("prefs", {"download.default_directory": downloads_path})
-
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 driver.get('chrome://settings/clearBrowserData')
@@ -88,12 +82,12 @@ for i in range(len(informes)):
 
         time.sleep(60)
 
-        response = driver.requests[-1].response
+        # response = driver.requests[-1].response
 
-        nombre_archivo = informes[i][1] + '.xlsx'
-        ruta_destino = downloads_path + '/' + nombre_archivo
-        with open(ruta_destino, 'wb') as archivo:
-            archivo.write(response.body)
+        # nombre_archivo = informes[i][1] + '.xlsx'
+        # ruta_destino = downloads_path + '/' + nombre_archivo
+        # with open(ruta_destino, 'wb') as archivo:
+        #     archivo.write(response.body)
 
         time.sleep(2)
 
@@ -121,12 +115,12 @@ for i in range(len(informes)):
 
             time.sleep(60)
 
-            response = driver.requests[-1].response
+            # response = driver.requests[-1].response
 
-            nombre_archivo = informes[i][1] + '_' + periodos[j] + '.xlsx'
-            ruta_destino = downloads_path + '/' + nombre_archivo
-            with open(ruta_destino, 'wb') as archivo:
-                archivo.write(response.body)
+            # nombre_archivo = informes[i][1] + '_' + periodos[j] + '.xlsx'
+            # ruta_destino = downloads_path + '/' + nombre_archivo
+            # with open(ruta_destino, 'wb') as archivo:
+            #     archivo.write(response.body)
 
             time.sleep(2)
 
