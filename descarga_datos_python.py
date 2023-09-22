@@ -16,6 +16,13 @@ import datetime
 options = webdriver.ChromeOptions()
 options.headless = True
 
+# Set the download directory path
+downloads_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'descargas')
+print(downloads_path)
+
+options.add_experimental_option("prefs", {"download.default_directory": downloads_path})
+
+
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 driver.get('chrome://settings/clearBrowserData')
@@ -46,9 +53,9 @@ informes.append([1126,'consulta_ct05_centros_de_costo'])
 informes.append([1127,'consulta_ct06_vacaciones'])
 informes.append([1128,'consulta_ct07_licencias'])
 informes.append([1221,'consulta_ct08_catalogos'])
-informes.append([1254,'consulta_ct09_resultados_x_proceso'])
 informes.append([1386,'consulta_ct010_permisos_administrativos'])
 informes.append([1419,'consulta_ct12_permisos_en_espera_de_licencia'])
+informes.append([1254,'consulta_ct09_resultados_x_proceso'])
 
 actual = datetime.datetime.now().strftime("%d-%m-%Y")
 periodo_anterior5 = (datetime.datetime.now() - timedelta(days=5*30)).strftime("%Y-%m")
@@ -67,7 +74,7 @@ periodos.append(periodo_anterior)
 periodos.append(periodo_actual)
 
 for i in range(len(informes)):
-    if i != 8:
+    if i != 10:
         print("Descargando informe: " + informes[i][1])
 
         driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' + str(informes[i][0]) + '/ejecutar')
@@ -115,12 +122,12 @@ for i in range(len(informes)):
 
             time.sleep(60)
 
-            # response = driver.requests[-1].response
+            response = driver.requests[-1].response
 
-            # nombre_archivo = informes[i][1] + '_' + periodos[j] + '.xlsx'
-            # ruta_destino = downloads_path + '/' + nombre_archivo
-            # with open(ruta_destino, 'wb') as archivo:
-            #     archivo.write(response.body)
+            nombre_archivo = informes[i][1] + '_' + periodos[j] + '.xlsx'
+            ruta_destino = downloads_path + '/' + nombre_archivo
+            with open(ruta_destino, 'wb') as archivo:
+                 archivo.write(response.body)
 
             time.sleep(2)
 
