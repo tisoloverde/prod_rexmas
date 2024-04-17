@@ -49,6 +49,7 @@
   $periodos[5] = $periodoActual;
 
   for($z = 0; $z < count($periodos); $z++){
+    echo $z;
     try {
       // Lectura de archivo de proceso
       $rutaArchivo = $ruta . "consulta_ct09_resultados_x_proceso_" . $periodos[$z] . ".xlsx";
