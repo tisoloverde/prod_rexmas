@@ -49,16 +49,16 @@
   $periodos[5] = $periodoActual;
 
   for($z = 0; $z < count($periodos); $z++){
-    echo $z;
+    //echo $z;
     try {
       // Lectura de archivo de proceso
       $rutaArchivo = $ruta . "consulta_ct09_resultados_x_proceso_" . $periodos[$z] . ".xlsx";
-      echo file_exists($rutaArchivo);
-      echo filesize($rutaArchivo);
+      //echo file_exists($rutaArchivo);
+      //echo filesize($rutaArchivo);
 
       if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){        
         $documento = IOFactory::load($rutaArchivo);
-        echo $documento;
+        echo $rutaArchivo;
         $hojaActual = $documento->getSheet(0);
 
         $arregloIni = $hojaActual->toArray();
