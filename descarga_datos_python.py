@@ -100,7 +100,7 @@ for i in range(len(informes)):
 
     #    print("Informe descargado: " + informes[i][1])
     #
-    #    time.sleep(2)
+       time.sleep(2)
     #else:
         for j in range(len(periodos)):
             print("Descargando informe: " + informes[i][1] + ", Periodo: " + periodos[j])
