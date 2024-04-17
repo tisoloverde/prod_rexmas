@@ -53,7 +53,8 @@
     try {
       // Lectura de archivo de proceso
       $rutaArchivo = $ruta . "consulta_ct09_resultados_x_proceso_" . $periodos[$z] . ".xlsx";
-      echo $rutaArchivo;
+      echo file_exists($rutaArchivo);
+      echo filesize($rutaArchivo);
 
       if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){        
         $documento = IOFactory::load($rutaArchivo);
