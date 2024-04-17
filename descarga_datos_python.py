@@ -74,7 +74,7 @@ periodos.append(periodo_anterior)
 periodos.append(periodo_actual)
 
 for i in range(len(informes)):
-    #if i != 10:
+    if i != 10:
     #    print("Descargando informe: " + informes[i][1])
     #
     #    driver.get('https://soloverde.rexmas.cl/remuneraciones/es-CL/rexisa/gecos/' + str(informes[i][0]) + '/ejecutar')
@@ -101,7 +101,7 @@ for i in range(len(informes)):
     #    print("Informe descargado: " + informes[i][1])
     #
        time.sleep(2)
-    #else:
+    else:
         for j in range(len(periodos)):
             print("Descargando informe: " + informes[i][1] + ", Periodo: " + periodos[j])
 
