@@ -55,8 +55,9 @@
       $rutaArchivo = $ruta . "consulta_ct09_resultados_x_proceso_" . $periodos[$z] . ".xlsx";
       echo $rutaArchivo;
 
-      if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){
+      if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){        
         $documento = IOFactory::load($rutaArchivo);
+        echo $documento;
         $hojaActual = $documento->getSheet(0);
 
         $arregloIni = $hojaActual->toArray();
