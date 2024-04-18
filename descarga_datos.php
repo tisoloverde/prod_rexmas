@@ -58,7 +58,7 @@
 
       if(file_exists($rutaArchivo) && filesize($rutaArchivo) > 2000){        
         $documento = IOFactory::load($rutaArchivo);
-        echo $rutaArchivo;
+        // echo $rutaArchivo;
         $hojaActual = $documento->getSheet(0);
 
         $arregloIni = $hojaActual->toArray();
@@ -88,7 +88,7 @@
         echo "Se produjo un error: " . $e->getMessage() . "\n";
     }
   }
-die;
+
   // Lectura de archivo de centro de costo
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando centro costos") or die("Error escribiendo en el archivo");
