@@ -31,7 +31,7 @@ driver.get("https://soloverde.rexmas.cl/remuneraciones/es-CL/login")
 
 print("Iniciando login")
 
-time.sleep(10)
+time.sleep(5)
 
 user = driver.find_element("id","username")
 user.send_keys("Consultas")
@@ -41,7 +41,7 @@ con = driver.find_element("id","password")
 con.send_keys("Config06")
 con.send_keys(Keys.RETURN)
 
-time.sleep(10)
+time.sleep(5)
 
 
 informes = [];
@@ -123,9 +123,12 @@ for i in range(len(informes)):
             time.sleep(30)
 
             response = driver.requests[-1].response
+            print(response.body)
 
             nombre_archivo = informes[i][1] + '_' + periodos[j] + '.xlsx'
+            print(nombre_archivo)
             ruta_destino = downloads_path + '/' + nombre_archivo
+            print(ruta_destino)
             with open(ruta_destino, 'wb') as archivo:
                  archivo.write(response.body)
 
