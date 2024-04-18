@@ -120,7 +120,7 @@ for i in range(len(informes)):
             button = driver.find_elements(By.CLASS_NAME, "button-submit")
             button[0].click()
 
-            time.sleep(120)
+            time.sleep(30)
 
             response = driver.requests[-1].response
 
