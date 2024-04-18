@@ -12,6 +12,7 @@ import pandas as pd
 import time
 import os
 import datetime
+import shutil
 
 options = webdriver.ChromeOptions()
 options.headless = True
@@ -31,7 +32,7 @@ driver.get("https://soloverde.rexmas.cl/remuneraciones/es-CL/login")
 
 print("Iniciando login")
 
-time.sleep(5)
+time.sleep(3)
 
 user = driver.find_element("id","username")
 user.send_keys("Consultas")
@@ -41,7 +42,7 @@ con = driver.find_element("id","password")
 con.send_keys("Config06")
 con.send_keys(Keys.RETURN)
 
-time.sleep(5)
+time.sleep(3)
 
 
 informes = [];
@@ -120,17 +121,17 @@ for i in range(len(informes)):
             button = driver.find_elements(By.CLASS_NAME, "button-submit")
             button[0].click()
 
-            time.sleep(30)
+            time.sleep(20)
 
             response = driver.requests[-1].response
-            print(response.body)
-
+            
             nombre_archivo = informes[i][1] + '_' + periodos[j] + '.xlsx'
             print(nombre_archivo)
             ruta_destino = downloads_path + '/' + nombre_archivo
             print(ruta_destino)
-            with open(ruta_destino, 'wb') as archivo:
-                 archivo.write(response.body)
+            #with open(ruta_destino, 'wb') as archivo:
+            #     archivo.write(response.body)
+            shutil.copy (informes[i][1] + '.xlsx',nombre_archivo)
 
             time.sleep(2)
 
