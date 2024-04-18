@@ -84,6 +84,9 @@
           }
         }
       }
+      else{
+        echo "Error en archivo Procesos = ". $rutaArchivo;
+      }
     } catch (Exception $e) {
         echo "Se produjo un error: " . $e->getMessage() . "\n";
     }
