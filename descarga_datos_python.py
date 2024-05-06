@@ -131,7 +131,7 @@ for i in range(len(informes)):
             print(ruta_destino)
             #with open(ruta_destino, 'wb') as archivo:
             #     archivo.write(response.body)
-            shutil.copy (informes[i][1] + '.xlsx',nombre_archivo)
+            shutil.move (informes[i][1] + '.xlsx',nombre_archivo)
 
             time.sleep(2)
 
