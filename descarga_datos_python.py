@@ -129,9 +129,9 @@ for i in range(len(informes)):
             print(nombre_archivo)
             ruta_destino = downloads_path + '/' + nombre_archivo
             print(ruta_destino)
-            with open(ruta_destino, 'wb') as archivo:
-                 archivo.write(response.body)
-            #shutil.move (informes[i][1] + '.xlsx',nombre_archivo)
+            #with open(ruta_destino, 'wb') as archivo:
+            #     archivo.write(response.body)
+            shutil.move (informes[i][1] + '.xlsx',nombre_archivo)
 
             time.sleep(2)
 
