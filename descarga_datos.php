@@ -3,6 +3,7 @@
   ini_set('display_errors', 'On');
   set_time_limit(3600);
 
+
   require('consultas.php');
   require('phpSpreadsheet/vendor/autoload.php');
 
@@ -573,6 +574,8 @@
 
   // Lectura de archivo de permisos administrativos
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
+  $logFile2 = fopen($ruta . "logdetalle.txt", 'a') or die("Error creando archivo");
+  
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando permisos administrativos") or die("Error escribiendo en el archivo");
   fclose($logFile);
 
@@ -599,21 +602,26 @@
 
         if($ins == "Ok"){
           echo "Permiso administrativo ingresado: " . $dni . " | " . $fini . " - " . $fter . "\n";
+          fwrite($logFile2, "Permiso administrativo ingresado: " . $dni . " | " . $fini . " - " . $fter . PHP_EOL);
         }
         else{
           echo "Permiso administrativo error: " . $dni . " | " . $fini . " - " . $fter . "\n";
+          fwrite($logFile2, "Permiso administrativo error: " . $dni . " | " . $fini . " - " . $fter  . PHP_EOL);
         }
       }
       else{
         echo "Vacio: " . $arregloIni[$i][2] . "\n";
+        fwrite($logFile2, "Vacio: " . $arregloIni[$i][2] . PHP_EOL);
       }
     }
     else{
       echo "No aplica \n";
+      fwrite($logFile2, "No aplica: " . $dni . " | " . $fini . " - " . $fter  . PHP_EOL);
     }
   }
+  fclose($logFile2);
 
-  // Lectura de archivo de permisos administrativos
+  // Lectura de archivo de permisos espera licencia
   $logFile = fopen($ruta . "log.txt", 'a') or die("Error creando archivo");
   fwrite($logFile, "\n" . date("d/m/Y H:i:s")." - Ingresando permisos espera licencia") or die("Error escribiendo en el archivo");
   fclose($logFile);
